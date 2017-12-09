@@ -79,12 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="一、概念  Java内存模型（Java Memory Model）的可见性描述的是Java程序中线程共享的变量的访问规则，以及在JVM中将变量存储到内存以及从内存中读取变量的底层细节。 二、Java共享变量的可见性  Java中的共享变量需要被其他线程访问的时候，该变量会拷贝一份变量副本到访问该线程的工作内存中，如下图所示：    从上图我们可以看到以下两点:   1、线程对于共享变量的操作规定只">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java内存模型">
+<meta property="og:url" content="http://yoursite.com/2017/12/10/JavaMemoryModel/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、概念  Java内存模型（Java Memory Model）的可见性描述的是Java程序中线程共享的变量的访问规则，以及在JVM中将变量存储到内存以及从内存中读取变量的底层细节。 二、Java共享变量的可见性  Java中的共享变量需要被其他线程访问的时候，该变量会拷贝一份变量副本到访问该线程的工作内存中，如下图所示：    从上图我们可以看到以下两点:   1、线程对于共享变量的操作规定只">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1428117-c8e6162921dcc842.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-09T16:04:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Java内存模型">
+<meta name="twitter:description" content="一、概念  Java内存模型（Java Memory Model）的可见性描述的是Java程序中线程共享的变量的访问规则，以及在JVM中将变量存储到内存以及从内存中读取变量的底层细节。 二、Java共享变量的可见性  Java中的共享变量需要被其他线程访问的时候，该变量会拷贝一份变量副本到访问该线程的工作内存中，如下图所示：    从上图我们可以看到以下两点:   1、线程对于共享变量的操作规定只">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1428117-c8e6162921dcc842.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -114,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/10/JavaMemoryModel/"/>
 
 
 
 
 
-  <title>Hexo</title>
+  <title>Java内存模型 | Hexo</title>
   
 
 
@@ -139,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -213,9 +218,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -245,9 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/10/JavaMemoryModel/" itemprop="url">Java内存模型</a></h1>
+          <h1 class="post-title" itemprop="name headline">Java内存模型</h1>
         
 
         <div class="post-meta">
@@ -297,9 +300,7 @@
       
 
       
-        
-          
-            <h5 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h5><p>  Java内存模型（Java Memory Model）的可见性描述的是Java程序中线程共享的变量的访问规则，以及在JVM中将变量存储到内存以及从内存中读取变量的底层细节。</p>
+        <h5 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h5><p>  Java内存模型（Java Memory Model）的可见性描述的是Java程序中线程共享的变量的访问规则，以及在JVM中将变量存储到内存以及从内存中读取变量的底层细节。</p>
 <h5 id="二、Java共享变量的可见性"><a href="#二、Java共享变量的可见性" class="headerlink" title="二、Java共享变量的可见性"></a>二、Java共享变量的可见性</h5><p>  Java中的共享变量需要被<strong>其他线程</strong>访问的时候，该变量会拷贝一份<strong>变量副本</strong>到访问该线程的<strong>工作内存</strong>中，如下图所示：<br>  <img src="http://upload-images.jianshu.io/upload_images/1428117-c8e6162921dcc842.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Java多线程变量访问规则"><br>  从上图我们可以看到以下两点:</p>
 <p>  1、线程对于共享变量的操作规定只能在该线程的工作内存中进行，而不能直接从主内存中进行读写操作.</p>
 <p>  2、 不同线程之间彼此的工作内存中的变量是不能直接被访问的，每个线程对自己的工作内存负责，而线程之间变量值的传递需要通过<strong>主内存</strong>这个中心枢纽来完成。</p>
@@ -340,8 +341,6 @@
 <li>synchronized是通过加锁的方式进行保证可见性以及原子性的，所以会阻塞线程。但是使用场景更加广泛。  </li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -358,12 +357,12 @@
       
 
       
+      
+      
 
       
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -373,10 +372,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -384,6 +384,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -404,8 +408,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -463,6 +476,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、概念"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x6982;&#x5FF5;" class="headerlink" title="&#x4E00;&#x3001;&#x6982;&#x5FF5;"></a>&#x4E00;&#x3001;&#x6982;&#x5FF5;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、Java共享变量的可见性"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;Java&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x7684;&#x53EF;&#x89C1;&#x6027;" class="headerlink" title="&#x4E8C;&#x3001;Java&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x7684;&#x53EF;&#x89C1;&#x6027;"></a>&#x4E8C;&#x3001;Java&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x7684;&#x53EF;&#x89C1;&#x6027;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、共享变量可见性的原理实现"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x53EF;&#x89C1;&#x6027;&#x7684;&#x539F;&#x7406;&#x5B9E;&#x73B0;" class="headerlink" title="&#x4E09;&#x3001;&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x53EF;&#x89C1;&#x6027;&#x7684;&#x539F;&#x7406;&#x5B9E;&#x73B0;"></a>&#x4E09;&#x3001;&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x53EF;&#x89C1;&#x6027;&#x7684;&#x539F;&#x7406;&#x5B9E;&#x73B0;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、synchronized与volatile比较"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;synchronized&#x4E0E;volatile&#x6BD4;&#x8F83;" class="headerlink" title="&#x56DB;&#x3001;synchronized&#x4E0E;volatile&#x6BD4;&#x8F83;"></a>&#x56DB;&#x3001;synchronized&#x4E0E;volatile&#x6BD4;&#x8F83;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -596,6 +625,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
