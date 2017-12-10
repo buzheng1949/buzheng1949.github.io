@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="如何实现免密码登录服务器源代码如果打不开请直接访问https://github.com/buzheng1949/Athena/tree/master/FreeServer 首先介绍脚本背景，我司查看服务器的时候，需要经过登录堡垒机，输入查看的服务器的IP地址，输入命令对服务器进行操作的流程，为此学习了Python之后，鼓捣了一个Python版本的免密码登录服务器的脚本 一、需求分析 登录堡垒机 登">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实现ssh免密码登录+自定义命令操作服务器">
+<meta property="og:url" content="http://yoursite.com/2017/12/09/Python免密码登陆服务器/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="如何实现免密码登录服务器源代码如果打不开请直接访问https://github.com/buzheng1949/Athena/tree/master/FreeServer 首先介绍脚本背景，我司查看服务器的时候，需要经过登录堡垒机，输入查看的服务器的IP地址，输入命令对服务器进行操作的流程，为此学习了Python之后，鼓捣了一个Python版本的免密码登录服务器的脚本 一、需求分析 登录堡垒机 登">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/29/160087aca701041f?w=1134&h=246&f=png&s=41990">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/29/160087aca74a656f?w=1122&h=384&f=png&s=37024">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/29/160087aca83148d7?w=1642&h=592&f=png&s=175542">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/29/160087acac4f4fee?w=988&h=150&f=png&s=32438">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/29/160087acabd7e208?w=1350&h=542&f=png&s=69030">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/29/160087aca4fb03e1?w=1376&h=962&f=png&s=99007">
+<meta property="og:updated_time" content="2017-12-10T15:59:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实现ssh免密码登录+自定义命令操作服务器">
+<meta name="twitter:description" content="如何实现免密码登录服务器源代码如果打不开请直接访问https://github.com/buzheng1949/Athena/tree/master/FreeServer 首先介绍脚本背景，我司查看服务器的时候，需要经过登录堡垒机，输入查看的服务器的IP地址，输入命令对服务器进行操作的流程，为此学习了Python之后，鼓捣了一个Python版本的免密码登录服务器的脚本 一、需求分析 登录堡垒机 登">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/11/29/160087aca701041f?w=1134&h=246&f=png&s=41990">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/09/Python免密码登陆服务器/"/>
+
+
+
+
+
+  <title>Python实现ssh免密码登录+自定义命令操作服务器 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-所有文章">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            所有文章
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/09/Python免密码登陆服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="不正">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python实现ssh免密码登录+自定义命令操作服务器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-09T13:57:38+08:00">
+                2017-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="如何实现免密码登录服务器"><a href="#如何实现免密码登录服务器" class="headerlink" title="如何实现免密码登录服务器"></a>如何实现免密码登录服务器</h4><p><a href="https://github.com/buzheng1949/Athena/tree/master/FreeServer" target="_blank" rel="noopener">源代码</a><br>如果打不开请直接访问<strong><a href="https://github.com/buzheng1949/Athena/tree/master/FreeServer" target="_blank" rel="noopener">https://github.com/buzheng1949/Athena/tree/master/FreeServer</a></strong></p>
+<p>首先介绍脚本背景，我司查看服务器的时候，需要经过<strong>登录堡垒机，输入查看的服务器的IP地址，输入命令对服务器进行操作的流程</strong>，为此学习了Python之后，鼓捣了一个Python版本的免密码登录服务器的脚本</p>
+<h4 id="一、需求分析"><a href="#一、需求分析" class="headerlink" title="一、需求分析"></a>一、需求分析</h4><ul>
+<li>登录堡垒机</li>
+<li>登录服务器</li>
+<li>输入命令</li>
+</ul>
+<h4 id="二、方案选择"><a href="#二、方案选择" class="headerlink" title="二、方案选择"></a>二、方案选择</h4><p>首先我们考虑的是Linux下是可以用expect进行ssh交互的，强大如Python当然也有这个能力，于是我们就自然想到了Python的pexpect库。<br>如果对pexpect库不熟悉的可以看下面的文章进行学习：<a href="http://www.jianshu.com/p/cfd163200d12" target="_blank" rel="noopener">pexpect学习教程</a></p>
+<h4 id="三、方案实现"><a href="#三、方案实现" class="headerlink" title="三、方案实现"></a>三、方案实现</h4><ul>
+<li>第一步，使用pexpect跟堡垒机打声招呼,以我司的登录堡垒机的命令为例子，<strong>ssh -pxxx username@server_ip</strong>，我们首先向服务器打声招呼。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">child = pexpect.spawn(&apos;ssh -pxxxxx %s@%s&apos;%(user_name,fortresses_ip))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>得到服务器的回应后，对我进行了密码输入的请求，如下图：<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087aca701041f?w=1134&amp;h=246&amp;f=png&amp;s=41990" alt="输入密码图片"></p>
+<ul>
+<li>第二步，okay，既然期待的是我输入密码，那么使用pexpect的另外一个大招，匹配返回的操作句柄，并进行密码发送。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ret_login = child.expect([&apos;%s@%s\&apos;s password:&apos;%(user_name,fortresses_ip),pexpect.TIMEOUT])</span><br><span class="line">child.sendline(password)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>从上面的两行代码我们可以看到，第一行代码使用了pexpect的expect方法，表示上一步返回的内容中是否包含expect里面的列表的关键字。第二行代码表示包含到了我们设想的关键字之后，我们可以模拟发送密码给远端。</p>
+<ul>
+<li>第三步，发送完密码之后，我们已经实现了登录堡垒机的功能，如下图所示:<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087aca74a656f?w=1122&amp;h=384&amp;f=png&amp;s=37024" alt="登录堡垒机"><br>接下来就是输入我们需要登录的服务器的IP地址，然后再次输入密码，只需要调用两次pexpect的sendline方法即可完成服务器的交互。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ret_watch_server = child.expect([watch_server_ip,pexpect.TIMEOUT])</span><br><span class="line">            if ret_watch_server != 0:</span><br><span class="line">                print (&apos;the password is correct,but the server ip maybe you have no perssion,please apply it&apos;)</span><br><span class="line">                return</span><br><span class="line">            else:</span><br><span class="line">                child.sendline(watch_server_ip)</span><br><span class="line">                child.expect(&apos;password&apos;)</span><br><span class="line">                child.sendline(password)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>第四步，但是即使进行免密码登录之后，我们还是很困扰，因为我们有两个问题还没解决，第一个问题是如何当我们想要登录查看的机器很多的时候，难道我每次都去改脚本的服务器的IP地址么？第二个问题是，难道我每次都需要去执行python xxx.py的方式去执行我们的脚本么？</p>
+<ul>
+<li>第一个问题的解决方式：我们可以使用docopt库进行在命令行执行Python命令的同时带上你想登录的服务器的IP地址。如下所示：<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087aca83148d7?w=1642&amp;h=592&amp;f=png&amp;s=175542" alt="server"><br>这样我们就可以在执行Python命令的时候，按照usage的方式输入然后解析watch_server_ip字段的方式进行自定义查看服务器而无需改脚本的方式。如下图所示，在入口进行简单的判断：<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087acac4f4fee?w=988&amp;h=150&amp;f=png&amp;s=32438" alt="server4"></li>
+<li><p>第二个问题的解决方式：我们可以使用setuptools搞事情，代码如下所示：<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087acabd7e208?w=1350&amp;h=542&amp;f=png&amp;s=69030" alt="setup"><br>从上面我们可以看到，我们定义了一个脚本，自定义了一个命令叫<strong>freeserver</strong>，然后调用freeserver脚本的时候，调用脚本的main方法。<br>编写完以上代码之后，我们执行<strong>python3 setup.py install</strong> 方法，就可以完成自定义命令行的方式输入而无需执行Python xxx.py xxxx_ip的麻烦的方式了。</p>
+</li>
+<li><p>第五步，让我们来看看效果吧,虽然都打了马赛克，但是红红绿绿的可以看到我们的脚本确实成功了。<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087aca4fb03e1?w=1376&amp;h=962&amp;f=png&amp;s=99007" alt="success"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="果不其然的源代码分享"><a href="#果不其然的源代码分享" class="headerlink" title="果不其然的源代码分享"></a>果不其然的源代码分享</h4><ul>
+<li>freeserver.py代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;免密码登录远端服务器</span><br><span class="line">Usage:</span><br><span class="line">    freeserver &lt;watch_server_ip&gt;</span><br><span class="line"></span><br><span class="line">Examples:</span><br><span class="line">    freeserver xxxxxxx</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import pexpect</span><br><span class="line">import os </span><br><span class="line">import getpass</span><br><span class="line">from docopt import docopt</span><br><span class="line"># 实现免密码登录方法</span><br><span class="line">def login(fortresses_ip,user_name,password,watch_server_ip,command):</span><br><span class="line">    child = pexpect.spawn(&apos;ssh -pxxx %s@%s&apos;%(user_name,fortresses_ip))</span><br><span class="line">    ret_login = child.expect([&apos;%s@%s\&apos;s password:&apos;%(user_name,fortresses_ip),pexpect.TIMEOUT])</span><br><span class="line">    if ret_login == 1:</span><br><span class="line">        print (&apos;login the remote server ip is timeout&apos;)</span><br><span class="line">        return</span><br><span class="line">    else:</span><br><span class="line">        child.sendline(password)</span><br><span class="line">        ret_password = child.expect([&apos;This is a beta version. If you find bugs, please contact @Securit&apos;,pexpect.TIMEOUT])</span><br><span class="line">        if ret_password == 1:</span><br><span class="line">            print (&apos;the password is wrong,please check the password&apos;)</span><br><span class="line">            return</span><br><span class="line">        else:</span><br><span class="line">            child.sendline(&apos;p&apos;)</span><br><span class="line">            ret_watch_server = child.expect([watch_server_ip,pexpect.TIMEOUT])</span><br><span class="line">            if ret_watch_server != 0:</span><br><span class="line">                print (&apos;the password is correct,but the server ip maybe you have no perssion,please apply it&apos;)</span><br><span class="line">                return</span><br><span class="line">            else:</span><br><span class="line">                child.sendline(watch_server_ip)</span><br><span class="line">                child.expect(&apos;password&apos;)</span><br><span class="line">                child.sendline(password)</span><br><span class="line">                child.expect(&apos;Powered&apos;)</span><br><span class="line">                if command is not None:</span><br><span class="line">                    child.sendline(command)</span><br><span class="line">                child.sendline(&apos;tailf web.log&apos;)</span><br><span class="line">                child.interact()</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    arguments = docopt(__doc__)</span><br><span class="line">    watch_server_ip = arguments.get(&apos;&lt;watch_server_ip&gt;&apos;)</span><br><span class="line">    user_name = &apos;your user name&apos;</span><br><span class="line">    password = &apos;your password&apos;</span><br><span class="line">    fortresses_ip = &apos;fortresses_ip&apos;</span><br><span class="line">    command = &apos;your command when your want success enter the ip server&apos;</span><br><span class="line">    login(fortresses_ip,user_name,password,watch_server_ip,command)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>setup.py</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from setuptools import setup </span><br><span class="line">setup( </span><br><span class="line">    name=&apos;freeserver&apos;,</span><br><span class="line">    py_modules=[&apos;__inti__&apos;, &apos;freeserver&apos;], </span><br><span class="line">    install_requires=[&apos;pexpect&apos;], </span><br><span class="line">    entry_points=&#123; </span><br><span class="line">        &apos;console_scripts&apos;: [&apos;freeserver=freeserver:main&apos;] </span><br><span class="line">        &#125; </span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/10/JavaMemoryModel/" rel="prev" title="Java内存模型">
+                Java内存模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">不正</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/buzheng1949" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yupeibiao@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何实现免密码登录服务器"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x514D;&#x5BC6;&#x7801;&#x767B;&#x5F55;&#x670D;&#x52A1;&#x5668;" class="headerlink" title="&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x514D;&#x5BC6;&#x7801;&#x767B;&#x5F55;&#x670D;&#x52A1;&#x5668;"></a>&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x514D;&#x5BC6;&#x7801;&#x767B;&#x5F55;&#x670D;&#x52A1;&#x5668;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、需求分析"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x9700;&#x6C42;&#x5206;&#x6790;" class="headerlink" title="&#x4E00;&#x3001;&#x9700;&#x6C42;&#x5206;&#x6790;"></a>&#x4E00;&#x3001;&#x9700;&#x6C42;&#x5206;&#x6790;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、方案选择"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x65B9;&#x6848;&#x9009;&#x62E9;" class="headerlink" title="&#x4E8C;&#x3001;&#x65B9;&#x6848;&#x9009;&#x62E9;"></a>&#x4E8C;&#x3001;&#x65B9;&#x6848;&#x9009;&#x62E9;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、方案实现"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x65B9;&#x6848;&#x5B9E;&#x73B0;" class="headerlink" title="&#x4E09;&#x3001;&#x65B9;&#x6848;&#x5B9E;&#x73B0;"></a>&#x4E09;&#x3001;&#x65B9;&#x6848;&#x5B9E;&#x73B0;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#果不其然的源代码分享"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x679C;&#x4E0D;&#x5176;&#x7136;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x5206;&#x4EAB;" class="headerlink" title="&#x679C;&#x4E0D;&#x5176;&#x7136;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x5206;&#x4EAB;"></a>&#x679C;&#x4E0D;&#x5176;&#x7136;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x5206;&#x4EAB;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不正</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
