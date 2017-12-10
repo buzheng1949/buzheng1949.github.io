@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,21 +79,16 @@
 
 
 
-<meta name="description" content="一、什么是泛型开发中，经常会用到泛型，泛型是在JDK5之后的一个新特性，允许定义类、接口等的是实用类型参数。 泛型的出现，使得从需要在代码里面增加判断以及类型转化的事情交给编译器去解决，如下代码所示，当没有泛型的时候,代码如下： 12345678910List nonGenerics = new ArrayList();       nonGenerics.add(&amp;quot;buzheng&amp;qu">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="关于Java中的泛型">
-<meta property="og:url" content="http://yoursite.com/2017/12/10/Java-泛型/index.html">
+<meta name="description" content="Never Say Goodbye">
+<meta property="og:type" content="website">
+<meta property="og:title" content="不正的博客小屋">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="不正的博客小屋">
-<meta property="og:description" content="一、什么是泛型开发中，经常会用到泛型，泛型是在JDK5之后的一个新特性，允许定义类、接口等的是实用类型参数。 泛型的出现，使得从需要在代码里面增加判断以及类型转化的事情交给编译器去解决，如下代码所示，当没有泛型的时候,代码如下： 12345678910List nonGenerics = new ArrayList();       nonGenerics.add(&amp;quot;buzheng&amp;qu">
+<meta property="og:description" content="Never Say Goodbye">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/8/1603647b17589664?w=1163&h=300&f=png&s=26802">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/8/1603647b1ba1f223?w=1106&h=708&f=png&s=60177">
-<meta property="og:updated_time" content="2017-12-10T15:45:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Java中的泛型">
-<meta name="twitter:description" content="一、什么是泛型开发中，经常会用到泛型，泛型是在JDK5之后的一个新特性，允许定义类、接口等的是实用类型参数。 泛型的出现，使得从需要在代码里面增加判断以及类型转化的事情交给编译器去解决，如下代码所示，当没有泛型的时候,代码如下： 12345678910List nonGenerics = new ArrayList();       nonGenerics.add(&amp;quot;buzheng&amp;qu">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/8/1603647b17589664?w=1163&h=300&f=png&s=26802">
+<meta name="twitter:title" content="不正的博客小屋">
+<meta name="twitter:description" content="Never Say Goodbye">
 
 
 
@@ -123,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/10/Java-泛型/"/>
+  <link rel="canonical" href="http://yoursite.com/page/4/"/>
 
 
 
 
 
-  <title>关于Java中的泛型 | 不正的博客小屋</title>
+  <title>不正的博客小屋</title>
   
 
 
@@ -148,7 +143,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -241,9 +237,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -273,7 +269,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于Java中的泛型</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/10/Java-泛型/" itemprop="url">关于Java中的泛型</a></h1>
         
 
         <div class="post-meta">
@@ -323,7 +321,9 @@
       
 
       
-        <h4 id="一、什么是泛型"><a href="#一、什么是泛型" class="headerlink" title="一、什么是泛型"></a>一、什么是泛型</h4><p>开发中，经常会用到泛型，泛型是在JDK5之后的一个新特性，允许定义类、接口等的是实用类型参数。</p>
+        
+          
+            <h4 id="一、什么是泛型"><a href="#一、什么是泛型" class="headerlink" title="一、什么是泛型"></a>一、什么是泛型</h4><p>开发中，经常会用到泛型，泛型是在JDK5之后的一个新特性，允许定义类、接口等的是实用类型参数。</p>
 <p>泛型的出现，使得从需要在代码里面增加判断以及类型转化的事情交给编译器去解决，如下代码所示，当没有泛型的时候,代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List nonGenerics = new ArrayList();</span><br><span class="line">       nonGenerics.add(&quot;buzheng&quot;);</span><br><span class="line">       Object nonGenericsObject = nonGenerics.get(0);</span><br><span class="line">       if (nonGenericsObject != null) &#123;</span><br><span class="line">           //进行类型判断</span><br><span class="line">           if (nonGenericsObject instanceof String) &#123;</span><br><span class="line">               //进行类型转换</span><br><span class="line">               String s = (String) nonGenericsObject;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 <p>而当使用泛型的时候，可以看到的是我们的代码更加简洁：</p>
@@ -364,6 +364,8 @@
 <li>最后将找到的替换类替换掉泛型，生成信息或者桥接方法在字节码文件中</li>
 </ul>
 
+          
+        
       
     </div>
     
@@ -373,74 +375,19 @@
     
 
     
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="不正1949 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="不正1949 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
 
     
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/12/10/Java-ThreadLocal/" rel="next" title="Java-关于ThreadLocal的那点事">
-                <i class="fa fa-chevron-left"></i> Java-关于ThreadLocal的那点事
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/10/Java-ClassLoader/" rel="prev" title="Java-关于类加载器">
-                Java-关于类加载器 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -450,11 +397,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -462,10 +412,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -486,17 +432,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -572,22 +509,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、什么是泛型"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6CDB;&#x578B;" class="headerlink" title="&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6CDB;&#x578B;"></a>&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6CDB;&#x578B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、泛型到底怎么玩的"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x6CDB;&#x578B;&#x5230;&#x5E95;&#x600E;&#x4E48;&#x73A9;&#x7684;" class="headerlink" title="&#x4E8C;&#x3001;&#x6CDB;&#x578B;&#x5230;&#x5E95;&#x600E;&#x4E48;&#x73A9;&#x7684;"></a>&#x4E8C;&#x3001;&#x6CDB;&#x578B;&#x5230;&#x5E95;&#x600E;&#x4E48;&#x73A9;&#x7684;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、最后的最后，类型擦除的过程是怎么样的优先级？"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x6700;&#x540E;&#x7684;&#x6700;&#x540E;&#xFF0C;&#x7C7B;&#x578B;&#x64E6;&#x9664;&#x7684;&#x8FC7;&#x7A0B;&#x662F;&#x600E;&#x4E48;&#x6837;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#xFF1F;" class="headerlink" title="&#x4E09;&#x3001;&#x6700;&#x540E;&#x7684;&#x6700;&#x540E;&#xFF0C;&#x7C7B;&#x578B;&#x64E6;&#x9664;&#x7684;&#x8FC7;&#x7A0B;&#x662F;&#x600E;&#x4E48;&#x6837;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#xFF1F;"></a>&#x4E09;&#x3001;&#x6700;&#x540E;&#x7684;&#x6700;&#x540E;&#xFF0C;&#x7C7B;&#x578B;&#x64E6;&#x9664;&#x7684;&#x8FC7;&#x7A0B;&#x662F;&#x600E;&#x4E48;&#x6837;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#xFF1F;</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -728,10 +649,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
-
-
 
   
 
