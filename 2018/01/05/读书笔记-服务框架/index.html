@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_3d2leg0e15d5j9dd2jf383a02aa77_1088x328.png">
 <meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_8gb9acd5lddh504000fci924d01ig_1034x414.png">
 <meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_6dfkd7082h86dihi6a79a5b348hlj_1286x496.png">
-<meta property="og:updated_time" content="2018-01-05T07:46:14.000Z">
+<meta property="og:updated_time" content="2018-01-05T15:49:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="应用服务化-服务框架">
 <meta name="twitter:description" content="一、困境在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护">
@@ -346,8 +346,8 @@
       
 
       
-        <h5 id="一、困境"><a href="#一、困境" class="headerlink" title="一、困境"></a>一、困境</h5><p>在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护性，难度都比较大。</p>
-<h5 id="二、应用拆分与服务化带来的问题"><a href="#二、应用拆分与服务化带来的问题" class="headerlink" title="二、应用拆分与服务化带来的问题"></a>二、应用拆分与服务化带来的问题</h5><ul>
+        <h3 id="一、困境"><a href="#一、困境" class="headerlink" title="一、困境"></a>一、困境</h3><p>在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护性，难度都比较大。</p>
+<h3 id="二、应用拆分与服务化带来的问题"><a href="#二、应用拆分与服务化带来的问题" class="headerlink" title="二、应用拆分与服务化带来的问题"></a>二、应用拆分与服务化带来的问题</h3><ul>
 <li><p>应用拆分</p>
 <p>因为所有的业务都耦合在单个应用里，所以可以按照业务为维度进行垂直拆分，比如一个系统里面的不同业务，交易、订单、用户等等都是一个单独的业务模块可以进行单业务单应用的拆分。进行拆分之后，如下图。<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180105_3d2leg0e15d5j9dd2jf383a02aa77_1088x328.png" alt="根据功能拆分应用"></p>
 <p>在上图中，尽管业务的耦合度降低，但是还存在一个新的问题，就是不同的业务还是存在耦合性，存在一些重复的代码。这样会给不同应用的维护带来困难，会造成一致性的问题。比如不同的应用存在相同的代码，A应用改了这部分代码而B应用没同步更改，那么很容易出现问题，为此还需要进行应用拆分的服务化处理。</p>
@@ -355,7 +355,7 @@
 <p><img src="https://s3.mogucdn.com/mlcdn/c45406/180105_8gb9acd5lddh504000fci924d01ig_1034x414.png" alt="服务化方案"></p>
 </li>
 </ul>
-<h5 id="三、服务框架总览"><a href="#三、服务框架总览" class="headerlink" title="三、服务框架总览"></a>三、服务框架总览</h5><p>  当系统进行服务化之后，很多的调用都会从本地调用变成远端调用。</p>
+<h3 id="三、服务框架总览"><a href="#三、服务框架总览" class="headerlink" title="三、服务框架总览"></a>三、服务框架总览</h3><p>  当系统进行服务化之后，很多的调用都会从本地调用变成远端调用。</p>
 <p>  而远端调用的大体流程应该如下：</p>
 <ul>
 <li>获取可提供服务列表、确定需要调用的服务机器</li>
@@ -372,7 +372,7 @@
 <p>发送方式：因为是RPC调用，分布式系统上不同机器之间是通过网络连接的，所以可以通过Socket进行发送。</p>
 <p><strong>C、解析请求返回结果</strong></p>
 <p>当发送到服务提供者机器之后，服务提供者进行反序列化并进行处理返回。</p>
-<h5 id="四、服务框架细节"><a href="#四、服务框架细节" class="headerlink" title="四、服务框架细节"></a>四、服务框架细节</h5><ul>
+<h3 id="四、服务框架细节"><a href="#四、服务框架细节" class="headerlink" title="四、服务框架细节"></a>四、服务框架细节</h3><ul>
 <li><p>远端通信遇到的问题</p>
 <p>当请求方与服务提供方在集群上的不同节点的时候，假设此时集群上请求方以及服务提供方都是一台计算机，那么通过Socket通信，只需要进行固定的IP访问即可，但是实际情况是服务提供方节点背后也是一个集群，那么这个时候如何确定要连接的服务提供方的一台机器呢？</p>
 <p>此时自然可以想到的方案就是在请求方跟服务方之间增加一层LVS或者负载均衡设备的方案，但是如果负载均衡设备挂了的话，整个跨进程调用就会出现问题，因此可以采用第二个方案，就是名称服务方案。如下图所示：<img src="https://s3.mogucdn.com/mlcdn/c45406/180105_6dfkd7082h86dihi6a79a5b348hlj_1286x496.png" alt="名称服务方案"></p>
@@ -610,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、困境"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x56F0;&#x5883;" class="headerlink" title="&#x4E00;&#x3001;&#x56F0;&#x5883;"></a>&#x4E00;&#x3001;&#x56F0;&#x5883;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、应用拆分与服务化带来的问题"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;" class="headerlink" title="&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;"></a>&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、服务框架总览"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;" class="headerlink" title="&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;"></a>&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、服务框架细节"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;" class="headerlink" title="&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;"></a>&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、困境"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x56F0;&#x5883;" class="headerlink" title="&#x4E00;&#x3001;&#x56F0;&#x5883;"></a>&#x4E00;&#x3001;&#x56F0;&#x5883;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、应用拆分与服务化带来的问题"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;" class="headerlink" title="&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;"></a>&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、服务框架总览"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;" class="headerlink" title="&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;"></a>&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、服务框架细节"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;" class="headerlink" title="&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;"></a>&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;</span></a></li></ol></div>
             
 
           </div>

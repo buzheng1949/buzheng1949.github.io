@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_0fh1ie54c91gkkg98ah99l83h3875_1070x426.png">
 <meta property="og:image" content="https://s11.mogucdn.com/mlcdn/c45406/180105_7g0j24362e464g77hh4a9h3bljeh1_1092x470.png">
 <meta property="og:image" content="https://s11.mogucdn.com/mlcdn/c45406/180105_24b7ch927f661jc21gjecdb3e87bl_1034x492.png">
-<meta property="og:updated_time" content="2018-01-05T15:41:38.000Z">
+<meta property="og:updated_time" content="2018-01-05T15:49:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记-消息中间件">
 <meta name="twitter:description" content="一、什么是消息中间件 在分布式系统中，网络上的不同节点之间可以通过服务框架进行互相调用，但是会在不同的应用之间造成耦合。而消息中间件就是能够使得不同的节点通过消息进行互相关联而又不存在耦合。 二、为什么需要消息中间件  假设有一个交易管理系统，用户登录的时候，短信服务中心需要发送短信给用户进行验证，风控系统需要进行用户的登录环境核实，如果没有消息中间件，那么需要在用户登录的管理系统中主动调用不同应">
@@ -347,10 +347,10 @@
       
 
       
-        <h5 id="一、什么是消息中间件"><a href="#一、什么是消息中间件" class="headerlink" title="一、什么是消息中间件"></a>一、什么是消息中间件</h5><p> 在分布式系统中，网络上的不同节点之间可以通过服务框架进行互相调用，但是会在不同的应用之间造成耦合。而消息中间件就是能够使得不同的节点通过消息进行互相关联而又不存在耦合。</p>
-<h5 id="二、为什么需要消息中间件"><a href="#二、为什么需要消息中间件" class="headerlink" title="二、为什么需要消息中间件"></a>二、为什么需要消息中间件</h5><p>  假设有一个交易管理系统，用户登录的时候，短信服务中心需要发送短信给用户进行验证，风控系统需要进行用户的登录环境核实，如果没有消息中间件，那么需要在用户登录的管理系统中主动调用不同应用的服务，而实际上用户登录模块只需要完成自己校验密码正确与否的工作即可，那么就会造成一个登录操作耦合不同的服务中心的情况。</p>
+        <h3 id="一、什么是消息中间件"><a href="#一、什么是消息中间件" class="headerlink" title="一、什么是消息中间件"></a>一、什么是消息中间件</h3><p> 在分布式系统中，网络上的不同节点之间可以通过服务框架进行互相调用，但是会在不同的应用之间造成耦合。而消息中间件就是能够使得不同的节点通过消息进行互相关联而又不存在耦合。</p>
+<h3 id="二、为什么需要消息中间件"><a href="#二、为什么需要消息中间件" class="headerlink" title="二、为什么需要消息中间件"></a>二、为什么需要消息中间件</h3><p>  假设有一个交易管理系统，用户登录的时候，短信服务中心需要发送短信给用户进行验证，风控系统需要进行用户的登录环境核实，如果没有消息中间件，那么需要在用户登录的管理系统中主动调用不同应用的服务，而实际上用户登录模块只需要完成自己校验密码正确与否的工作即可，那么就会造成一个登录操作耦合不同的服务中心的情况。</p>
 <p>  而消息中间件的出现可以解决以上的耦合情况。当出现了消息中间件之后，以上需要主动去调用服务的情况就变成了其他的应用去订阅用户登录的消息，当其他应用收到消息的时候自己去处理逻辑，而登录模块就不需要关心什么服务需要监听用户登录的情况，代码就解耦了。</p>
-<h5 id="三、JMS"><a href="#三、JMS" class="headerlink" title="三、JMS"></a>三、JMS</h5><ul>
+<h3 id="三、JMS"><a href="#三、JMS" class="headerlink" title="三、JMS"></a>三、JMS</h3><ul>
 <li>JMS规范的组成<ul>
 <li>Destination:消息的通道，定义消息从发送到接收的通道。</li>
 <li>ConnectionFactory:用于创建消息连接的对象，属于管理类。</li>
@@ -377,7 +377,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="四、消息中间件"><a href="#四、消息中间件" class="headerlink" title="四、消息中间件"></a>四、消息中间件</h5><p><strong>A、消息发送端保证可靠性</strong></p>
+<h3 id="四、消息中间件"><a href="#四、消息中间件" class="headerlink" title="四、消息中间件"></a>四、消息中间件</h3><p><strong>A、消息发送端保证可靠性</strong></p>
 <p>   消息的一致性指的是当消息的发送应该是应用的操作成功或者失败，有明确具体的返回结果之后消息进行发送，而当应用未进行操作的时候，消息不能被发送，当应用进行操作之后，消息必须被发送，这个称之为消息的一致性。</p>
 <p>   而当我们使用应用与消息中间件进行交互的时候，消息的一致性就变得尤其重要了，消息如果不一致容易造成业务的数据出现问题。</p>
 <p>   如何保证消息的发送的一致性，找到一个通用的消息一致性模型是非常重要。按照TopSky的书里的图如下：</p>
@@ -411,7 +411,7 @@
 <p>消息发送的可靠性也就是消息的一致性，如上文所讲的内容。</p>
 </li>
 </ul>
-<h5 id="五、消息的重复性问题"><a href="#五、消息的重复性问题" class="headerlink" title="五、消息的重复性问题"></a>五、消息的重复性问题</h5><p>在消息的情景中，最常见的是订阅了消息，然而消息会重复进行发送消费的情况。导致消息重复发送的情况有很多种，第一种是应用重复发送消息，当应用将消息存入消息中间件的时候，消息已经存入中间件而应用未得到已经存入消息中间件的返回结果的时候。第二种是消息中间件发送消息但是未得到发送成功的返回的时候，会以为发送失败，则会尝试再次发送消息等等情况。</p>
+<h3 id="五、消息的重复性问题"><a href="#五、消息的重复性问题" class="headerlink" title="五、消息的重复性问题"></a>五、消息的重复性问题</h3><p>在消息的情景中，最常见的是订阅了消息，然而消息会重复进行发送消费的情况。导致消息重复发送的情况有很多种，第一种是应用重复发送消息，当应用将消息存入消息中间件的时候，消息已经存入中间件而应用未得到已经存入消息中间件的返回结果的时候。第二种是消息中间件发送消息但是未得到发送成功的返回的时候，会以为发送失败，则会尝试再次发送消息等等情况。</p>
 <p>而在消息订阅者的角度，为了防止消息重复消费，应该增加一层幂等校验。</p>
 <p>举一个例子:当我们需要监听一个订单更新的消息的时候，因为订单的状态很多种，比如创建订单、取消订单、订单付款等等状态，因为消息的重复发送我们如果不做幂等校验会导致插入多条数据，而消息的先后顺序会造成数据的丢失以及错乱等等。</p>
 <p>做幂等校验有许多的方式：例如增加缓存，判断该消息是否已经消息过了。或者在进行CRUD操作的时候先判断该状态是否已经存在等等的方式做幂等。防止因为消息的重复性问题导致数据的错乱。 </p>
@@ -630,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、什么是消息中间件"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;" class="headerlink" title="&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;"></a>&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、为什么需要消息中间件"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;" class="headerlink" title="&#x4E8C;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;"></a>&#x4E8C;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、JMS"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;JMS" class="headerlink" title="&#x4E09;&#x3001;JMS"></a>&#x4E09;&#x3001;JMS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、消息中间件"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;" class="headerlink" title="&#x56DB;&#x3001;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;"></a>&#x56DB;&#x3001;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#五、消息的重复性问题"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x4E94;&#x3001;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x6027;&#x95EE;&#x9898;" class="headerlink" title="&#x4E94;&#x3001;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x6027;&#x95EE;&#x9898;"></a>&#x4E94;&#x3001;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x6027;&#x95EE;&#x9898;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是消息中间件"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;" class="headerlink" title="&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;"></a>&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、为什么需要消息中间件"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;" class="headerlink" title="&#x4E8C;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;"></a>&#x4E8C;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、JMS"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;JMS" class="headerlink" title="&#x4E09;&#x3001;JMS"></a>&#x4E09;&#x3001;JMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、消息中间件"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;" class="headerlink" title="&#x56DB;&#x3001;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;"></a>&#x56DB;&#x3001;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、消息的重复性问题"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x4E94;&#x3001;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x6027;&#x95EE;&#x9898;" class="headerlink" title="&#x4E94;&#x3001;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x6027;&#x95EE;&#x9898;"></a>&#x4E94;&#x3001;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x6027;&#x95EE;&#x9898;</span></a></li></ol></div>
             
 
           </div>
