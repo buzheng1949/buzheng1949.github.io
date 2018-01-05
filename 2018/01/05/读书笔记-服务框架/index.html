@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="读书笔记," />
 
 
 
@@ -79,16 +79,22 @@
 
 
 
-<meta name="description" content="Never Say Goodbye">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不正的博客小屋">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="一、困境在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护">
+<meta name="keywords" content="读书笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应用服务化-服务框架">
+<meta property="og:url" content="http://yoursite.com/2018/01/05/读书笔记-服务框架/index.html">
 <meta property="og:site_name" content="不正的博客小屋">
-<meta property="og:description" content="Never Say Goodbye">
+<meta property="og:description" content="一、困境在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_3d2leg0e15d5j9dd2jf383a02aa77_1088x328.png">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_8gb9acd5lddh504000fci924d01ig_1034x414.png">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_6dfkd7082h86dihi6a79a5b348hlj_1286x496.png">
+<meta property="og:updated_time" content="2018-01-05T07:46:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不正的博客小屋">
-<meta name="twitter:description" content="Never Say Goodbye">
+<meta name="twitter:title" content="应用服务化-服务框架">
+<meta name="twitter:description" content="一、困境在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护">
+<meta name="twitter:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_3d2leg0e15d5j9dd2jf383a02aa77_1088x328.png">
 
 
 
@@ -118,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/05/读书笔记-服务框架/"/>
 
 
 
 
 
-  <title>不正的博客小屋</title>
+  <title>应用服务化-服务框架 | 不正的博客小屋</title>
   
 
 
@@ -143,8 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,9 +242,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -269,9 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/05/读书笔记-服务框架/" itemprop="url">应用服务化-服务框架</a></h1>
+          <h1 class="post-title" itemprop="name headline">应用服务化-服务框架</h1>
         
 
         <div class="post-meta">
@@ -343,9 +346,7 @@
       
 
       
-        
-          
-            <h5 id="一、困境"><a href="#一、困境" class="headerlink" title="一、困境"></a>一、困境</h5><p>在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护性，难度都比较大。</p>
+        <h5 id="一、困境"><a href="#一、困境" class="headerlink" title="一、困境"></a>一、困境</h5><p>在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护性，难度都比较大。</p>
 <h5 id="二、应用拆分与服务化带来的问题"><a href="#二、应用拆分与服务化带来的问题" class="headerlink" title="二、应用拆分与服务化带来的问题"></a>二、应用拆分与服务化带来的问题</h5><ul>
 <li><p>应用拆分</p>
 <p>因为所有的业务都耦合在单个应用里，所以可以按照业务为维度进行垂直拆分，比如一个系统里面的不同业务，交易、订单、用户等等都是一个单独的业务模块可以进行单业务单应用的拆分。进行拆分之后，如下图。<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180105_3d2leg0e15d5j9dd2jf383a02aa77_1088x328.png" alt="根据功能拆分应用"></p>
@@ -391,8 +392,6 @@
 </li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -402,19 +401,70 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="不正1949 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="不正1949 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/28/读书笔记-大型网站系统演进/" rel="next" title="大型网站系统演进流程">
+                <i class="fa fa-chevron-left"></i> 大型网站系统演进流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -424,14 +474,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -439,6 +486,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -459,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -536,6 +596,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、困境"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x56F0;&#x5883;" class="headerlink" title="&#x4E00;&#x3001;&#x56F0;&#x5883;"></a>&#x4E00;&#x3001;&#x56F0;&#x5883;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、应用拆分与服务化带来的问题"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;" class="headerlink" title="&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;"></a>&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、服务框架总览"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;" class="headerlink" title="&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;"></a>&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、服务框架细节"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;" class="headerlink" title="&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;"></a>&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -676,6 +752,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
