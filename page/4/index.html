@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/10/Java-注解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/读书笔记-大型网站系统演进/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不正1949">
@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/10/Java-注解/" itemprop="url">关于Java中的注解</a></h1>
+                <a class="post-title-link" href="/2017/12/28/读书笔记-大型网站系统演进/" itemprop="url">大型网站系统演进流程</a></h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T23:38:14+08:00">
-                2017-12-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T23:37:20+08:00">
+                2017-12-28
               </time>
             
 
@@ -306,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
                   </a>
                 </span>
 
@@ -345,92 +345,98 @@
       
         
           
-            <h4 id="一、注解是什么"><a href="#一、注解是什么" class="headerlink" title="一、注解是什么"></a>一、注解是什么</h4><ul>
+            <h3 id="一、分布式系统概述"><a href="#一、分布式系统概述" class="headerlink" title="一、分布式系统概述"></a>一、分布式系统概述</h3><h5 id="一、什么是分布式系统"><a href="#一、什么是分布式系统" class="headerlink" title="一、什么是分布式系统"></a>一、什么是分布式系统</h5><ul>
+<li>组件分布在网络计算机上</li>
+<li>不同的组件之间通过消息进行通信</li>
+</ul>
+<p>简单理解就是一张蜘蛛网，不同的蜘蛛通过网络连接，并通过呼喊进行通信的方式叫做分布式网络。</p>
+<h5 id="二、为什么需要分布式系统"><a href="#二、为什么需要分布式系统" class="headerlink" title="二、为什么需要分布式系统"></a>二、为什么需要分布式系统</h5><ul>
+<li>单纯提高单机处理能力性价比低</li>
+<li>单机处理能力存在瓶颈</li>
+<li>单机处理如果一旦机器挂了会影响所有的组件服务</li>
+</ul>
+<h5 id="三、线程与进程"><a href="#三、线程与进程" class="headerlink" title="三、线程与进程"></a>三、线程与进程</h5><ul>
+<li>多线程：互不相互干扰的多线程、共享内存的多线程</li>
+<li>多进程（涉及数据共享问题）</li>
+</ul>
+<h5 id="四、网络IO实现过程"><a href="#四、网络IO实现过程" class="headerlink" title="四、网络IO实现过程"></a>四、网络IO实现过程</h5><ul>
+<li>BIO 阻塞式 一个请求一个线程处理</li>
+<li>NIO 非阻塞式 多个请求被Reactor代理并中转给Handler处理，派发给不同的线程</li>
+</ul>
+<h5 id="五、如何将单机拓展到分布式"><a href="#五、如何将单机拓展到分布式" class="headerlink" title="五、如何将单机拓展到分布式"></a>五、如何将单机拓展到分布式</h5><p> 计算机的组成分为输入设备、内存、控制器、运算器、输出设备</p>
+<p> 对于用户而言，一个请求发送，背后是一个庞大的分布式网络去处理，其实站在用户的角度，这也是一个计算机。</p>
+<h5 id="六、分布式系统跟单机的区别"><a href="#六、分布式系统跟单机的区别" class="headerlink" title="六、分布式系统跟单机的区别"></a>六、分布式系统跟单机的区别</h5><p>  1、输入设备：在庞大的分布式集群上面，每个能接受请求、消息的设备都可以称为输入设备</p>
+<p> 2、输出设备：能向分布式网络中的节点发送消息的节点都可以看成输出设备</p>
+<p> 3、控制器：对于单机而言，控制器就是CPU中的控制器，而在由许多节点通过网络相互连接，通过消息传递进行协调的分布式系统上，控制器实际上是不同的节点之间的一个桥梁，作用是用于控制或者调解不同节点之间的动作或者行为。例如在请求发起方以及请求处理方增加一个负载均衡设备，负载均衡设备能确定请求的处理机器的位置并且将请求发送给处理机器。也可以使用名称服务的方式，在这样的方式下，名称服务能维护一份请求处理方的状态信息，当请求处理方上下线的时候能进行感知并将服务提供方的信息更新到请求方，由请求方跟服务方进行直连。</p>
+<p> 4、运算器</p>
+<p> 5、存储</p>
+<h5 id="七、分布式系统的问题"><a href="#七、分布式系统的问题" class="headerlink" title="七、分布式系统的问题"></a>七、分布式系统的问题</h5><h3 id="二、大型网站及其架构演进"><a href="#二、大型网站及其架构演进" class="headerlink" title="二、大型网站及其架构演进"></a>二、大型网站及其架构演进</h3><h5 id="一、-单机系统存在的问题"><a href="#一、-单机系统存在的问题" class="headerlink" title="一、 单机系统存在的问题"></a>一、 单机系统存在的问题</h5><ul>
+<li>单机系统上，服务端以及数据库都部署在同一台机器上面，当访问量增大，机器的load持续升高。</li>
+</ul>
+<h5 id="二、演进"><a href="#二、演进" class="headerlink" title="二、演进"></a>二、演进</h5><p> 1、数据库与应用分离。</p>
+<p> 在最开始的设计上，应用跟数据库处于同一台机器，在load升高的时候，可以采用数据库应用分离的策略。<br>   <img src="https://s3.mogucdn.com/mlcdn/c45406/180104_061i6il31afel9e70iil0bh4k2je1_1612x730.png" alt="数据库应用分离"></p>
+<p> 2、单机变成集群。</p>
+<p> 当单机变成集群之后，有2个问题需要解决。</p>
+<ul>
+<li><p>请求过来哪台机器进行处理：增加负载均衡。<br><img src="https://s11.mogucdn.com/mlcdn/c45406/180104_6h4gij6dde0d12gj1dh51243k9bdd_1448x754.png" alt="引入负载均衡"></p>
+</li>
+<li><p>session问题。当用户请求的时候，因为session存储于单机服务器上，而负载均衡解析请求并把请求转发给的机器上不一定是刚刚访问并存在session的机器。比如一个用户登录完，请求打到了其他的机器，该机器没有session，用户又得重新登录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、SessionSticky </span><br><span class="line">  </span><br><span class="line">在负载均衡上，将同样的session请求都发送到同一台服务器上。</span><br><span class="line"></span><br><span class="line">2、SessionReplication</span><br><span class="line"></span><br><span class="line">集群上的服务器的所有session进行同步。</span><br><span class="line"></span><br><span class="line">3、Session数据集中存储</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>  3、读写分离</p>
+<p>  前面已经能够解决一部分应用服务器压力大的问题，但是请求打到DB，DB的压力还是存在的。</p>
+<ul>
+<li><p>读写分离</p>
+<ul>
+<li>假如我们做一个秒杀业务，实际上对于DB而言，是存在读多写少的情况的，那么针对这种情况，可以做读写分离。简单的说就是将原来的单DB换成读DB+写DB的组成。但是这样会带来几个问题：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、数据同步问题</span><br><span class="line">因为从写库到读库的同步需要一点时间，故会存在一定的时间窗口。MySql自带复制功能，可以直接进行使用。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>在使用中，经常使用引擎进行数据存储，因为检索速度快的原因，DB经常是作为打底数据使用。从这个角度看，搜索引擎也是一个读库。<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180104_57e9e9d3j6931a0628l4j07b9h5ee_1462x776.png" alt="搜索引擎"></p>
+</li>
+<li><p>缓存<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180104_3cdic6i8dhkdl6iaa45hjb0i49cjb_1464x712.png" alt="缓存"></p>
+</li>
+</ul>
+<p>4、数据库垂直与水平拆分</p>
+<p> 当读写分离以及引入分布式存储之后，对于主库的压力大大减少，但是当系统变得更加复杂的时候，我们单一的主库也会开始扛不住压力。</p>
+<ul>
+<li><p>数据库垂直拆分</p>
+<p>垂直拆分指的是以业务为维度进行数据库的拆分，比如一个交易管理系统有用户、订单、交易等等的业务，每个业务都放在同一个数据库中进行维护，当业务复杂之后，单DB会开始抗不住压力，此时我们可以按照业务的维度增加DB。比如用户DB,订单BD，交易DB等等，减轻所有的业务都存在一个DB的情况。</p>
+</li>
+<li><p>数据库水平拆分</p>
+<p>当按照业务的维度划分后，可能存在两个问题，第一个是业务的复杂度继续加深，单表无法支撑更多的查询或者写入的请求，耗时更长，此时针对单一业务的DB可以进行水平拆分。</p>
+<p>水平拆分的意思是按照某个维度拆分到更多的库中，在库中由原先的一张表变成多张表。比如用户表，可以根据用户的ID进行sharding，将单表改变成多表的形式进行优化。</p>
+</li>
+</ul>
+<p>5、数据压力减小、应用服务压力增大</p>
+<ul>
+<li><p>应用拆分</p>
+<p>随着业务的复杂度提升，原先在一个系统中的交易、订单、购物车等等的应用会加入更多的模块，业务的模块增多，虽然我们已经如前面一样，在水平方向上做集群，但是如何让应用部再继续臃肿，是需要考虑的问题。</p>
+<p>就像分库分表一样，可以对臃肿的应用进行分家，比如交易分出去作为单一的应用，订单分出去作为单一的应用等等。</p>
+<p>垂直拆分之后，应用如下图：</p>
+<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180104_13gl565bkl8gaga5k146bic6ec4dd_1450x556.png" alt="垂直拆分应用"></p>
+</li>
+<li><p>服务化</p>
+<p>应用拆分会带来另外的问题，就是这些拆分出去的应用本来是在同一个应用里的，它们存在一些公共的服务，这个时候可以通过服务化的方式进行解决。</p>
+<p>比如有交易管理系统的订单、优惠券、活动等都需要跟用户打交道，此时用户应用可以作为中间层，也就是服务层对上述的前端应用进行服务。</p>
+<p>如此一来，整体的流程都会进行改变。</p>
+<ul>
+<li>原先的单机调用一部分变成了RPC调用。</li>
+<li>散落在不同应用的代码都存放在服务中心中。</li>
+<li>数据库的工作更多的放在了服务中心中。</li>
+</ul>
+</li>
+</ul>
+<h5 id="三、消息中间件"><a href="#三、消息中间件" class="headerlink" title="三、消息中间件"></a>三、消息中间件</h5><p>上面可以知道，分布式系统是位于网络不同节点之间，不同节点通过消息进行协调工作的系统。而上面也解决了应用以及数据库的压力问题，此时消息中间件就非常重要了。</p>
+<ul>
 <li><p>概念</p>
-<p>注解是一种元数据，一种用于描述数据的数据。如下面的代码所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Self &#123;</span><br><span class="line">      @Override</span><br><span class="line">      public String toString() &#123;</span><br><span class="line">          return super.toString();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>Self类重写了toString()方法，该方法上有Override注解表明该方法是复写了父类的方法，如果我们写错了方法名，编译器会报错，这就是注解能帮我们做的事情。<strong>从上面的例子我们可以看到注解就是用于描述数据的一种方式</strong></p>
+<p>消息中间件：在分布式系统中，完成消息的发送与接收的基础软件，称之为消息中间件。简单来说，在分布式系统的不同节点上，不同节点向外发送消息的时候，消息需要先存入消息中间件中并由消息中间件进行转发的操作。</p>
 </li>
-<li><p>注解分类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.SOURCE)</span><br><span class="line">public @interface Override &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从上面的Override注解我们可以看到上面有一个@Retention的元注解，@Retention元注解表示该注解的保留期限。我们看下源代码如何定义@Retention。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Documented</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(ElementType.ANNOTATION_TYPE)</span><br><span class="line">public @interface Retention &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Returns the retention policy.</span><br><span class="line">     * @return the retention policy</span><br><span class="line">     */</span><br><span class="line">    RetentionPolicy value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到注解的有效期限是根据RetentionPolicy这个枚举去确定的，我们可以看下RetentionPolicy是如何定义的。</p>
-</li>
-</ul>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public enum RetentionPolicy &#123;</span><br><span class="line">   /**</span><br><span class="line">    * Annotations are to be discarded by the compiler.</span><br><span class="line">    */</span><br><span class="line">   SOURCE,</span><br><span class="line"></span><br><span class="line">   /**</span><br><span class="line">    * Annotations are to be recorded in the class file by the compiler</span><br><span class="line">    * but need not be retained by the VM at run time.  This is the default</span><br><span class="line">    * behavior.</span><br><span class="line">    */</span><br><span class="line">   CLASS,</span><br><span class="line"></span><br><span class="line">   /**</span><br><span class="line">    * Annotations are to be recorded in the class file by the compiler and</span><br><span class="line">    * retained by the VM at run time, so they may be read reflectively.</span><br><span class="line">    *</span><br><span class="line">    * @see java.lang.reflect.AnnotatedElement</span><br><span class="line">    */</span><br><span class="line">   RUNTIME</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre><p>我们可以看到共3个有效时间，第一个是Source源码时保存、第二个CLASS表示会在class文件保存但是不会在VM或者运行期保存、第三个是RUNTIME表示从编译成class文件、VM或者RUNTIME时间都会进行保存。于是可以简单的将注解分为以下几类：<br>    1、源码注解<br>    2、编译注解<br>    3、运行注解</p>
-<h4 id="二、注解的元注解解析"><a href="#二、注解的元注解解析" class="headerlink" title="二、注解的元注解解析"></a>二、注解的元注解解析</h4><p>我们注意到注解经常出现的四个元注解,如下代码所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by buzheng on 17/12/5.</span><br><span class="line"> */</span><br><span class="line">@Inherited</span><br><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface PersonMessage &#123;</span><br><span class="line"></span><br><span class="line">    int age() default 18;</span><br><span class="line"></span><br><span class="line">    String name() default &quot;buzheng&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Inherited 注解可否被继承</li>
-<li><p>Target 表示注解可以使用的目标位置，比较常见的是FIELD作用于字段，TYPE作用于类、接口、枚举等等，METHOD作用于方法等等，具体的如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> public enum ElementType &#123;</span><br><span class="line">    /** Class, interface (including annotation type), or enum declaration */</span><br><span class="line">    TYPE,</span><br><span class="line"></span><br><span class="line">    /** Field declaration (includes enum constants) */</span><br><span class="line">    FIELD,</span><br><span class="line"></span><br><span class="line">    /** Method declaration */</span><br><span class="line">    METHOD,</span><br><span class="line"></span><br><span class="line">    /** Formal parameter declaration */</span><br><span class="line">    PARAMETER,</span><br><span class="line"></span><br><span class="line">    /** Constructor declaration */</span><br><span class="line">    CONSTRUCTOR,</span><br><span class="line"></span><br><span class="line">    /** Local variable declaration */</span><br><span class="line">    LOCAL_VARIABLE,</span><br><span class="line"></span><br><span class="line">    /** Annotation type declaration */</span><br><span class="line">    ANNOTATION_TYPE,</span><br><span class="line"></span><br><span class="line">    /** Package declaration */</span><br><span class="line">    PACKAGE,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Type parameter declaration</span><br><span class="line">     *</span><br><span class="line">     * @since 1.8</span><br><span class="line">     */</span><br><span class="line">    TYPE_PARAMETER,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Use of a type</span><br><span class="line">     *</span><br><span class="line">     * @since 1.8</span><br><span class="line">     */</span><br><span class="line">    TYPE_USE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Documented 注解可以生成文档</p>
-</li>
-<li>Retention 表示注解的有效持续时间，前面已经讲到了，可以分为以下三种<ul>
-<li>SOURCE 源码保留注解</li>
-<li>CLASS 编译生成的class文件保留注解</li>
-<li>RUNTIME 运行期保留注解</li>
-</ul>
-</li>
-</ul>
-<h4 id="三、如何写一个注解"><a href="#三、如何写一个注解" class="headerlink" title="三、如何写一个注解"></a>三、如何写一个注解</h4><ul>
-<li><p>注解用@interface关键字标识是一个注解</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public @interface PersonMessage &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>给注解加入元注解，一般加入上面我们说的四个元注解</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Inherited</span><br><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface PersonMessage &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>给注解定义字段</p>
-<ul>
-<li>注解支持多种字段类型，除了常用的基本数据类型外，还支持枚举、注解等等。</li>
-<li>注解字段默认值可加可不加</li>
-<li><p>如果注解只有一个字段，字段名必须为value</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Inherited</span><br><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface PersonMessage &#123;</span><br><span class="line"></span><br><span class="line">    int age() default 18;</span><br><span class="line"></span><br><span class="line">    String name() default &quot;buzheng&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="四、如何使用并解析注解"><a href="#四、如何使用并解析注解" class="headerlink" title="四、如何使用并解析注解"></a>四、如何使用并解析注解</h4><p>假如我们定义了两个注解，一个是作用在类上面的，一个是作用在方法上面的，在运行的时候，我们需要取解析他们，代码如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">package com.buzheng.annotation;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Annotation;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by buzheng on 17/12/5.</span><br><span class="line"> */</span><br><span class="line">@TestAnnotation(name = &quot;AnotationTest in class&quot;)</span><br><span class="line">public class AnnotationTest &#123;</span><br><span class="line"></span><br><span class="line">    @PersonMessage(name = &quot;yupeibiao&quot;, age = 23)</span><br><span class="line">    private String getPersonMessage() &#123;</span><br><span class="line">        return &quot;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        AnnotationTest anotationTest = new AnnotationTest();</span><br><span class="line">        Class c = anotationTest.getClass();</span><br><span class="line">        //判断是否是这个注解</span><br><span class="line">        boolean isAnotation = c.isAnnotationPresent(TestAnnotation.class);</span><br><span class="line">        if (isAnotation) &#123;</span><br><span class="line">            //将类上的注解拿出来</span><br><span class="line">            TestAnnotation testAnotation = (TestAnnotation) c.getAnnotation(TestAnnotation.class);</span><br><span class="line">            //输出注解信息</span><br><span class="line">            System.out.println(testAnotation.name());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Method[] methods = c.getDeclaredMethods();</span><br><span class="line">        for (Method method : methods) &#123;</span><br><span class="line">            PersonMessage message = method.getAnnotation(PersonMessage.class);</span><br><span class="line">            if (message == null) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(message.age());</span><br><span class="line">            System.out.println(message.name());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (Method method : methods) &#123;</span><br><span class="line">            Annotation[] annotations = method.getAnnotations();</span><br><span class="line">            for (Annotation annotation : annotations) &#123;</span><br><span class="line">                if (annotation instanceof PersonMessage) &#123;</span><br><span class="line">                    PersonMessage message = (PersonMessage) annotation;</span><br><span class="line">                    System.out.println(message.age() + &quot;  &quot;);</span><br><span class="line">                    System.out.println(message.name());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以看到，无论是拿类上面的注解信息或者是方法上面的注解信息，我们都是通过反射的方法进行获取的，流程大概如下：</p>
-<ul>
-<li>通过反射获取需要解析的类</li>
-<li>如果需要获取类上面的注解，先判断类上面是否有注解c.isAnnotationPresent(YourAnnotation.class);</li>
-<li>获取类上的注解信息c.getAnnotation(YourAnnotation.class);</li>
-<li>如果需要获取方法或者字段的注解信息，大致流程跟上述获取类的注解信息的方法一致，只是调用的方法不同。</li>
-</ul>
-<p>比如上面的流程我们可以运行获取到运行结果：<br><img src="https://user-gold-cdn.xitu.io/2017/12/5/16024ef86c280bb0?w=1240&amp;h=442&amp;f=png&amp;s=69384" alt="运行结果"></p>
-<h4 id="五、简单的注解使用例子"><a href="#五、简单的注解使用例子" class="headerlink" title="五、简单的注解使用例子"></a>五、简单的注解使用例子</h4><ul>
-<li><p>假如我们有这样的一个需求，我们有一个Query，需要跟SQL进行字段的一一对应（不考虑MyBatis），然后我们构建出一条SQL可以用于执行。那我们可以在Query类用注解指定类名，字段名，然后到时候通过反射获取每个字段的值，这样我们就能把整条SQL拼接起来</p>
-<p>首先我们在Query上需要使用的两个注解：</p>
-<ul>
-<li>第一个是定义在类上面，指定类对应表名的注解</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  /**</span><br><span class="line"> * Created by buzheng on 17/12/5.</span><br><span class="line"> * 该注解用于类上，标明类对应的表名是什么</span><br><span class="line"> */</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface Table &#123;</span><br><span class="line">    String value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>第二个定义在类的字段上面，指定字段跟表的字段对应的注解</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * Created by buzheng on 17/12/5.</span><br><span class="line"> * 该注解用于标明类字段跟表字段向的一一对应关系</span><br><span class="line"> */</span><br><span class="line">@Inherited</span><br><span class="line">@Target(ElementType.FIELD)</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface Row &#123;</span><br><span class="line">    String value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>给Query定义注解，绑定跟查询的表的一一对应关系</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">    /**</span><br><span class="line">	 * Created by buzheng on 17/12/5.</span><br><span class="line">	 */</span><br><span class="line">	@Table(&quot;student&quot;)</span><br><span class="line">	public class Query &#123;</span><br><span class="line"></span><br><span class="line">    @Row(&quot;student_name&quot;)</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    @Row(&quot;student_age&quot;)</span><br><span class="line">    private int age;</span><br><span class="line"></span><br><span class="line">    @Row(&quot;student_grade&quot;)</span><br><span class="line">    private int grade;</span><br><span class="line"></span><br><span class="line">    @Row(&quot;student_number&quot;)</span><br><span class="line">    private int number;</span><br><span class="line"></span><br><span class="line">    @Row((&quot;id&quot;))</span><br><span class="line">    private int id;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getGrade() &#123;</span><br><span class="line">        return grade;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGrade(int grade) &#123;</span><br><span class="line">        this.grade = grade;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getNumber() &#123;</span><br><span class="line">        return number;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setNumber(int number) &#123;</span><br><span class="line">        this.number = number;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>解析注解、获取字段值并拼装SQL</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">	 /**</span><br><span class="line">	 * Created by buzheng on 17/12/5.</span><br><span class="line">	 */</span><br><span class="line">	public class Test &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Query query = new Query();</span><br><span class="line">        query.setAge(1);</span><br><span class="line">        query.setId(1);</span><br><span class="line">        query.setName(&quot;buzheng&quot;);</span><br><span class="line">        System.out.println(getQueryFromAnnotation(query));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 传进来查询的Query类 解析并拼装sql</span><br><span class="line">     *</span><br><span class="line">     * @param object</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String getQueryFromAnnotation(Object object) &#123;</span><br><span class="line">        Class clazz = object.getClass();</span><br><span class="line">        boolean flag = clazz.isAnnotationPresent(Table.class);</span><br><span class="line">        StringBuilder stringBuilder = new StringBuilder(&quot;select * from &quot;);</span><br><span class="line">        if (!flag) &#123;</span><br><span class="line">            return stringBuilder.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        Table table = (Table) clazz.getAnnotation(Table.class);</span><br><span class="line">        stringBuilder.append(table.value());</span><br><span class="line">        stringBuilder.append(&quot; where 1=1 &quot;);</span><br><span class="line">        java.lang.reflect.Field[] fileds = clazz.getDeclaredFields();</span><br><span class="line">        for (Field field : fileds) &#123;</span><br><span class="line">            boolean isFiledAnnotation = field.isAnnotationPresent(Row.class);</span><br><span class="line">            if (isFiledAnnotation) &#123;</span><br><span class="line">                stringBuilder.append(&quot; and &quot;);</span><br><span class="line">                Row row = (Row) field.getAnnotation(Row.class);</span><br><span class="line">                String fieldName = field.getName();</span><br><span class="line">                String methodName = &quot;get&quot; + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1, fieldName.length());</span><br><span class="line">                try &#123;</span><br><span class="line">                    Method method = clazz.getMethod(methodName);</span><br><span class="line">                    Object value = method.invoke(object);</span><br><span class="line">                    if (value == null || (value instanceof Integer &amp;&amp; (Integer) value == 0)) &#123;</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125;</span><br><span class="line">                    stringBuilder.append(row.value() + &quot; = &quot; + value);</span><br><span class="line">                &#125; catch (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return stringBuilder.toString();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>  运行上述代码可以看到我们的效果<img src="https://user-gold-cdn.xitu.io/2017/12/5/1602515aa08828e3?w=2490&amp;h=452&amp;f=png&amp;s=82903" alt="代码运行效果"></p>
-<ul>
-<li><p>假如我们还有一个需求，我们需要用AOP对某些请求进行拦截，那我们也可以将注解作为切面，将需要拦截的方法增加注解的方式进行拦截，并且可以将注解的信息解析出来在切面进行使用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * Created by buzheng on 17/12/5.</span><br><span class="line"> */</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">public @interface LogAnnotation &#123;</span><br><span class="line">  /**</span><br><span class="line">    * 操作</span><br><span class="line">    * @return</span><br><span class="line">    */</span><br><span class="line">   String operateType() default &quot;默认操作&quot;;</span><br><span class="line"></span><br><span class="line">   /**</span><br><span class="line">    * 操作人员工号ID</span><br><span class="line">    * @return</span><br><span class="line">    */</span><br><span class="line">   int workId();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用AOP的方式使用注解</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* Created by buzheng on 17/12/5.</span><br><span class="line">*/</span><br><span class="line">@Aspect</span><br><span class="line">@Component</span><br><span class="line">public class MyAspect &#123;</span><br><span class="line"></span><br><span class="line">    private Logger logger = LoggerFactory.getLogger(MyAspect.class);</span><br><span class="line"></span><br><span class="line">    @Pointcut(&quot;@annotation(com.buzheng.LogAnnotation)&quot;)</span><br><span class="line">    public void logPointCount() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Around(&quot;logPointCount()&quot;)</span><br><span class="line">    public Object actionLog(ProceedingJoinPoint joinPoint) &#123;</span><br><span class="line">        Object res = new Object();</span><br><span class="line">        try &#123;</span><br><span class="line">            //获取注解的各种信息</span><br><span class="line">            LogAnnotation logAnnotation = getAnnotation(joinPoint);</span><br><span class="line">            String operateType = logAnnotation.operateType();</span><br><span class="line">            int workId = logAnnotation.workId();</span><br><span class="line">            //然后你想做点什么，比如打个log</span><br><span class="line">            logger.warn(&quot;操作类型变更:&quot; + operateType + &quot;变更人工号:&quot; + workId);</span><br><span class="line">            res = joinPoint.proceed();</span><br><span class="line">        &#125; catch (Throwable throwable) &#123;</span><br><span class="line">            logger.error(&quot;aop is failed&quot;, throwable);</span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取注解信息</span><br><span class="line">     *</span><br><span class="line">     * @param joinPoint</span><br><span class="line">     * @return</span><br><span class="line">     * @throws Exception</span><br><span class="line">     */</span><br><span class="line">    public LogAnnotation getAnnotation(ProceedingJoinPoint joinPoint) throws Exception &#123;</span><br><span class="line">        Signature signature = joinPoint.getSignature();</span><br><span class="line">        MethodSignature methodSignature = (MethodSignature) signature;</span><br><span class="line">        Method method = methodSignature.getMethod();</span><br><span class="line">        boolean flag = method.isAnnotationPresent(LogAnnotation.class);</span><br><span class="line">        if (flag) &#123;</span><br><span class="line">            LogAnnotation logAnnotation = (LogAnnotation) method.getAnnotation(LogAnnotation.class);</span><br><span class="line">            return logAnnotation;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>好处</p>
+<p>极大的提高了应用之间的解耦，在分布式系统上，不同的节点之间不存在耦合的关系，只存在订阅消息与否的关系。</p>
 </li>
 </ul>
 
@@ -472,7 +478,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -518,7 +524,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -529,7 +535,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -540,7 +546,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
