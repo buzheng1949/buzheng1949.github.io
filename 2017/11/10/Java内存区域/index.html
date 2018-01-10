@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="读书笔记," />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -79,22 +79,20 @@
 
 
 
-<meta name="description" content="一、困境在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护">
-<meta name="keywords" content="读书笔记">
+<meta name="description" content="一、Java运行时数据区的组成  Java的运行时数据区分为两个区域，一个是线程私有的区域，一个是线程共享的区域。  线程私有 Java虚拟机栈 本地方法栈 程序计数器   线程共享 堆 方法区     二、Java运行时数据区分析 从上面已经知道了，Java虚拟机运行时数据区按照线程私有与否可以进行划分，线程私有的会随着线程的创建以及销毁，因此这是不需要进行垃圾回收的区域。而线程共享的会进行垃圾">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="应用服务化-服务框架">
-<meta property="og:url" content="http://yoursite.com/2018/01/05/读书笔记-服务框架/index.html">
+<meta property="og:title" content="Java虚拟机内存区域的那点事">
+<meta property="og:url" content="http://yoursite.com/2017/11/10/Java内存区域/index.html">
 <meta property="og:site_name" content="不正的博客小屋">
-<meta property="og:description" content="一、困境在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护">
+<meta property="og:description" content="一、Java运行时数据区的组成  Java的运行时数据区分为两个区域，一个是线程私有的区域，一个是线程共享的区域。  线程私有 Java虚拟机栈 本地方法栈 程序计数器   线程共享 堆 方法区     二、Java运行时数据区分析 从上面已经知道了，Java虚拟机运行时数据区按照线程私有与否可以进行划分，线程私有的会随着线程的创建以及销毁，因此这是不需要进行垃圾回收的区域。而线程共享的会进行垃圾">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_3d2leg0e15d5j9dd2jf383a02aa77_1088x328.png">
-<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_8gb9acd5lddh504000fci924d01ig_1034x414.png">
-<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_6dfkd7082h86dihi6a79a5b348hlj_1286x496.png">
-<meta property="og:updated_time" content="2018-01-05T15:49:27.000Z">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/6/1602c0738220d0cd?w=1254&h=832&f=png&s=59099">
+<meta property="og:updated_time" content="2018-01-10T18:46:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="应用服务化-服务框架">
-<meta name="twitter:description" content="一、困境在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护">
-<meta name="twitter:image" content="https://s3.mogucdn.com/mlcdn/c45406/180105_3d2leg0e15d5j9dd2jf383a02aa77_1088x328.png">
+<meta name="twitter:title" content="Java虚拟机内存区域的那点事">
+<meta name="twitter:description" content="一、Java运行时数据区的组成  Java的运行时数据区分为两个区域，一个是线程私有的区域，一个是线程共享的区域。  线程私有 Java虚拟机栈 本地方法栈 程序计数器   线程共享 堆 方法区     二、Java运行时数据区分析 从上面已经知道了，Java虚拟机运行时数据区按照线程私有与否可以进行划分，线程私有的会随着线程的创建以及销毁，因此这是不需要进行垃圾回收的区域。而线程共享的会进行垃圾">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/6/1602c0738220d0cd?w=1254&h=832&f=png&s=59099">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/05/读书笔记-服务框架/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/10/Java内存区域/"/>
 
 
 
 
 
-  <title>应用服务化-服务框架 | 不正的博客小屋</title>
+  <title>Java虚拟机内存区域的那点事 | 不正的博客小屋</title>
   
 
 
@@ -257,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/读书笔记-服务框架/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/10/Java内存区域/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不正1949">
@@ -274,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">应用服务化-服务框架</h1>
+          <h1 class="post-title" itemprop="name headline">Java虚拟机内存区域的那点事</h1>
         
 
         <div class="post-meta">
@@ -286,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T15:43:56+08:00">
-                2018-01-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T23:36:04+08:00">
+                2017-11-10
               </time>
             
 
@@ -309,8 +307,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -346,48 +344,55 @@
       
 
       
-        <h3 id="一、困境"><a href="#一、困境" class="headerlink" title="一、困境"></a>一、困境</h3><p>在应对业务量的快速增长的时候，单机单应用无法抗住压力的情况下，需要进行改造。首先让应用进行了数据库跟应用从单一服务器进行分离，将数据库以及应用部署在不同的服务器上面，然后进行数据库的读写分离、搜索引擎、缓存、读写分离等等缓解数据库压力。在应用方面，把应用从单机做成分布式集群，但是业务复杂度的提升，比如一个交易系统的订单、用户、购物车、地址等模块全部耦合在一个应用里面，不管是复杂度还是可维护性，难度都比较大。</p>
-<h3 id="二、应用拆分与服务化带来的问题"><a href="#二、应用拆分与服务化带来的问题" class="headerlink" title="二、应用拆分与服务化带来的问题"></a>二、应用拆分与服务化带来的问题</h3><ul>
-<li><p>应用拆分</p>
-<p>因为所有的业务都耦合在单个应用里，所以可以按照业务为维度进行垂直拆分，比如一个系统里面的不同业务，交易、订单、用户等等都是一个单独的业务模块可以进行单业务单应用的拆分。进行拆分之后，如下图。<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180105_3d2leg0e15d5j9dd2jf383a02aa77_1088x328.png" alt="根据功能拆分应用"></p>
-<p>在上图中，尽管业务的耦合度降低，但是还存在一个新的问题，就是不同的业务还是存在耦合性，存在一些重复的代码。这样会给不同应用的维护带来困难，会造成一致性的问题。比如不同的应用存在相同的代码，A应用改了这部分代码而B应用没同步更改，那么很容易出现问题，为此还需要进行应用拆分的服务化处理。</p>
-<p>服务化处理是将在应用层跟底层的中间增加一层服务层，减少最上层的应用层之间的应用交互，将这种交互转向应用层与服务层的交互。如下图所示：</p>
-<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180105_8gb9acd5lddh504000fci924d01ig_1034x414.png" alt="服务化方案"></p>
+        <h4 id="一、Java运行时数据区的组成"><a href="#一、Java运行时数据区的组成" class="headerlink" title="一、Java运行时数据区的组成"></a>一、Java运行时数据区的组成</h4><p>  Java的运行时数据区分为两个区域，一个是线程私有的区域，一个是线程共享的区域。</p>
+<ul>
+<li>线程私有<ul>
+<li>Java虚拟机栈</li>
+<li>本地方法栈</li>
+<li>程序计数器</li>
+</ul>
+</li>
+<li>线程共享<ul>
+<li>堆</li>
+<li>方法区</li>
+</ul>
 </li>
 </ul>
-<h3 id="三、服务框架总览"><a href="#三、服务框架总览" class="headerlink" title="三、服务框架总览"></a>三、服务框架总览</h3><p>  当系统进行服务化之后，很多的调用都会从本地调用变成远端调用。</p>
-<p>  而远端调用的大体流程应该如下：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/6/1602c0738220d0cd?w=1254&amp;h=832&amp;f=png&amp;s=59099" alt="Java虚拟机运行时数据区"></p>
+<h4 id="二、Java运行时数据区分析"><a href="#二、Java运行时数据区分析" class="headerlink" title="二、Java运行时数据区分析"></a>二、Java运行时数据区分析</h4><p> 从上面已经知道了，Java虚拟机运行时数据区按照线程私有与否可以进行划分，线程私有的会随着线程的创建以及销毁，因此这是不需要进行垃圾回收的区域。而线程共享的会进行垃圾回收。</p>
 <ul>
-<li>获取可提供服务列表、确定需要调用的服务机器</li>
-<li>发送请求</li>
-<li>解析请求并进行处理</li>
+<li><p>程序计数器</p>
+<p> 在Java中，假如单核CPU，同时有多条线程跑的情况下，线程之间可能在让出CPU执行权的时候，某条线程的还没执行完被切出去了，那么需要有一个记录此时线程执行的属性的，而完成这一使命的就是程序计数器。</p>
+<p> 程序计数器用于记录线程执行的字节码的行数，线程的分支跳转、循环、条件控制都基于程序计数器而完成的。</p>
+<p> 如果线程执行的是Java方法，程序计数器记录的是执行的字节码的指令地址。而如果执行的是Native方法，则这个计数器为空。</p>
+</li>
+<li><p>Java虚拟机栈</p>
+<p>Java虚拟机栈是线程私有的，每个线程都有一个栈，线程执行方法的过程对应的是栈帧的进栈以及出栈的过程。所以可以知道，栈帧实际上记录的就是方法的信息，比如局部变量表，动态链接，方法出口等信息。局部变量表存放的是基本数据类型以及对象引用。</p>
+<p>如果请求栈的深度超过允许的栈深度，则会抛出StackOverFlowError的异常。</p>
+</li>
+<li><p>本地方法栈</p>
+<p> 本地方法栈跟虚拟机栈是对应的，如果执行的不是Java的方法，那么就是在本地方法栈进行操作，同样会抛出StackOverFlowError的异常。</p>
+</li>
+<li><p>Java堆</p>
+<p>   Java堆是在虚拟机启动的时候创建并划分大小的，Java堆的大小是可以通过参数进行控制的，设置Xmx跟Xms参数，空闲程度大于70%就调整到小的，小于40%就调整到大的，因为如此设置的话课比较频繁，所以很多case下都是设置为一样大小。</p>
+<p>Java堆主要存放的是对象以及数组。</p>
+</li>
+<li><p>方法区</p>
+<p>方法区同样是线程共享的，分为两部分。方法区主要存放的是类信息，而里面还有一个运行时常量池，用于存放编译产生的字面量以及符号引用。</p>
+</li>
 </ul>
-<p><strong>A、获取可提供服务的列表</strong></p>
-<p>  首先要把自己根据请求的服务获取在线的服务提供机器列表。而在RPC调用中，服务其实就是我们的一个接口，比如：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.buzheng.test.api;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by buzheng on 18/1/5.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestServiceApi</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提供远端调用</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> input 输入参数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 返回请求列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">List&lt;String&gt; <span class="title">getDetailItemsByRemote</span><span class="params">(String input)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而当发起请求的时候，对目标机器的搜寻是可以将<strong>接口的名称</strong>作为寻址参数，如果使用负载均衡处于请求方跟服务提供方之间，请求的返回地址实际上是负载均衡或者LVS的地址跟端口，而如果使用名称服务的话返回的就直接是服务提供方的机器地址跟端口。</p>
-<p><strong>B、发送请求</strong></p>
-<p>发送请求涉及两个问题，请求以什么格式发送以及如何发送的问题。</p>
-<p>请求格式：一般使用序列化，其实就是把对象变成二进制数据。好比如类信息可以通过网络传输并被类加载器反序列化实现动态加载。</p>
-<p>发送方式：因为是RPC调用，分布式系统上不同机器之间是通过网络连接的，所以可以通过Socket进行发送。</p>
-<p><strong>C、解析请求返回结果</strong></p>
-<p>当发送到服务提供者机器之后，服务提供者进行反序列化并进行处理返回。</p>
-<h3 id="四、服务框架细节"><a href="#四、服务框架细节" class="headerlink" title="四、服务框架细节"></a>四、服务框架细节</h3><ul>
-<li><p>远端通信遇到的问题</p>
-<p>当请求方与服务提供方在集群上的不同节点的时候，假设此时集群上请求方以及服务提供方都是一台计算机，那么通过Socket通信，只需要进行固定的IP访问即可，但是实际情况是服务提供方节点背后也是一个集群，那么这个时候如何确定要连接的服务提供方的一台机器呢？</p>
-<p>此时自然可以想到的方案就是在请求方跟服务方之间增加一层LVS或者负载均衡设备的方案，但是如果负载均衡设备挂了的话，整个跨进程调用就会出现问题，因此可以采用第二个方案，就是名称服务方案。如下图所示：<img src="https://s3.mogucdn.com/mlcdn/c45406/180105_6dfkd7082h86dihi6a79a5b348hlj_1286x496.png" alt="名称服务方案"></p>
-<p>名称服务维护了服务提供者的在线信息，当服务提供者上下线的时候可以进行感知。服务提供者的信息一般缓存在调用者本地，但是当服务提供者上下线的时候，名称服务会把可用的服务提供者告知调用者。</p>
-</li>
-<li><p>流控</p>
-<p>为了保证系统的稳定，一般我们需要进行流量控制。一般有2种选择，一个是完全不进行流控，一个是控制每秒的QPS进行限制。</p>
-</li>
-<li><p>序列化与反序列化的选择</p>
-<p>二进制或者XML都是可以考虑的方式。</p>
-</li>
-<li><p>同步调用以及异步调用</p>
+<h4 id="三、如何创建对象"><a href="#三、如何创建对象" class="headerlink" title="三、如何创建对象"></a>三、如何创建对象</h4><p>Java作为一门面向对象语言，每时每刻都在产生对象。在语言层面，用到的是一个new关键字，但是在背后存在着复杂的逻辑。</p>
 <ul>
-<li>BIO/NIO 同步调用</li>
-<li>NIO+CallBack 异步调用</li>
+<li><p>Java虚拟机遇到一个new操作的时候，会先去常量池里面查看能否定位到一个符号引用，并检查该符号引用对应的类是否被加载、解析以及初始化过，如果没有则执行类加载的过程。</p>
+</li>
+<li><p>创建对象的方式<br>在不同的虚拟机上有不同创建对象的方式，主要有以下两种。</p>
+<ul>
+<li><p>指针碰撞</p>
+<p>  假设在内存都是规整的前提下，内存分为两块，一块是已经使用的区域，一块是待分配的区域。指针位于两个区域的中间，当需要分配内存的时候，计算需要分配的对象的大小，然后进行划分一个区域空间进行分配即可。</p>
+</li>
+<li><p>内存记录</p>
+<p>但是实际情况总是不是那么美好的，内存不可能一直都是工整的，在这个时候就需要有一个列表，记录着内存中哪一块是空闲的区域，当需要分配的时候，在内存列表上进行查找，分配一个足够大的内存进行分配。</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -437,7 +442,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -450,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/28/读书笔记-大型网站系统演进/" rel="next" title="大型网站系统演进流程">
-                <i class="fa fa-chevron-left"></i> 大型网站系统演进流程
+              <a href="/2017/10/05/Message/" rel="next" title="读书笔记-消息中间件">
+                <i class="fa fa-chevron-left"></i> 读书笔记-消息中间件
               </a>
             
           </div>
@@ -460,8 +465,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/05/Message/" rel="prev" title="读书笔记-消息中间件">
-                读书笔记-消息中间件 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/11/用Python给杰伦做张萌萌哒头像/" rel="prev" title="用Python给杰伦做张萌萌哒头像">
+                用Python给杰伦做张萌萌哒头像 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -610,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、困境"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x56F0;&#x5883;" class="headerlink" title="&#x4E00;&#x3001;&#x56F0;&#x5883;"></a>&#x4E00;&#x3001;&#x56F0;&#x5883;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、应用拆分与服务化带来的问题"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;" class="headerlink" title="&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;"></a>&#x4E8C;&#x3001;&#x5E94;&#x7528;&#x62C6;&#x5206;&#x4E0E;&#x670D;&#x52A1;&#x5316;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、服务框架总览"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;" class="headerlink" title="&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;"></a>&#x4E09;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x603B;&#x89C8;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、服务框架细节"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;" class="headerlink" title="&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;"></a>&#x56DB;&#x3001;&#x670D;&#x52A1;&#x6846;&#x67B6;&#x7EC6;&#x8282;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、Java运行时数据区的组成"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x7684;&#x7EC4;&#x6210;" class="headerlink" title="&#x4E00;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x7684;&#x7EC4;&#x6210;"></a>&#x4E00;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x7684;&#x7EC4;&#x6210;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Java运行时数据区分析"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x5206;&#x6790;" class="headerlink" title="&#x4E8C;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x5206;&#x6790;"></a>&#x4E8C;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x5206;&#x6790;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、如何创建对象"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;" class="headerlink" title="&#x4E09;&#x3001;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;"></a>&#x4E09;&#x3001;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</span></a></li></ol></div>
             
 
           </div>

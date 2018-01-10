@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/10/JavaMemoryManager/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/读书笔记-大型网站系统演进/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不正1949">
@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/10/JavaMemoryManager/" itemprop="url">Java内存管理</a></h1>
+                <a class="post-title-link" href="/2017/08/29/读书笔记-大型网站系统演进/" itemprop="url">大型网站系统演进流程</a></h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T23:35:03+08:00">
-                2017-12-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T23:37:20+08:00">
+                2017-08-29
               </time>
             
 
@@ -306,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
                   </a>
                 </span>
 
@@ -345,70 +345,100 @@
       
         
           
-            <h4 id="一、简述"><a href="#一、简述" class="headerlink" title="一、简述"></a>一、简述</h4><p>  Java的内存管理实际上解决了两个问题</p>
+            <h3 id="一、分布式系统概述"><a href="#一、分布式系统概述" class="headerlink" title="一、分布式系统概述"></a>一、分布式系统概述</h3><h5 id="一、什么是分布式系统"><a href="#一、什么是分布式系统" class="headerlink" title="一、什么是分布式系统"></a>一、什么是分布式系统</h5><ul>
+<li>组件分布在网络计算机上</li>
+<li>不同的组件之间通过消息进行通信</li>
+</ul>
+<p>简单理解就是一张蜘蛛网，不同的蜘蛛通过网络连接，并通过呼喊进行通信的方式叫做分布式网络。</p>
+<h5 id="二、为什么需要分布式系统"><a href="#二、为什么需要分布式系统" class="headerlink" title="二、为什么需要分布式系统"></a>二、为什么需要分布式系统</h5><ul>
+<li>单纯提高单机处理能力性价比低</li>
+<li>单机处理能力存在瓶颈</li>
+<li>单机处理如果一旦机器挂了会影响所有的组件服务</li>
+</ul>
+<h5 id="三、线程与进程"><a href="#三、线程与进程" class="headerlink" title="三、线程与进程"></a>三、线程与进程</h5><ul>
+<li>多线程：互不相互干扰的多线程、共享内存的多线程</li>
+<li>多进程（涉及数据共享问题）</li>
+</ul>
+<h5 id="四、网络IO实现过程"><a href="#四、网络IO实现过程" class="headerlink" title="四、网络IO实现过程"></a>四、网络IO实现过程</h5><ul>
+<li>BIO 阻塞式 一个请求一个线程处理</li>
+<li>NIO 非阻塞式 多个请求被Reactor代理并中转给Handler处理，派发给不同的线程</li>
+</ul>
+<h5 id="五、如何将单机拓展到分布式"><a href="#五、如何将单机拓展到分布式" class="headerlink" title="五、如何将单机拓展到分布式"></a>五、如何将单机拓展到分布式</h5><p> 计算机的组成分为输入设备、内存、控制器、运算器、输出设备</p>
+<p> 对于用户而言，一个请求发送，背后是一个庞大的分布式网络去处理，其实站在用户的角度，这也是一个计算机。</p>
+<h5 id="六、分布式系统跟单机的区别"><a href="#六、分布式系统跟单机的区别" class="headerlink" title="六、分布式系统跟单机的区别"></a>六、分布式系统跟单机的区别</h5><p>  1、输入设备：在庞大的分布式集群上面，每个能接受请求、消息的设备都可以称为输入设备</p>
+<p> 2、输出设备：能向分布式网络中的节点发送消息的节点都可以看成输出设备</p>
+<p> 3、控制器：对于单机而言，控制器就是CPU中的控制器，而在由许多节点通过网络相互连接，通过消息传递进行协调的分布式系统上，控制器实际上是不同的节点之间的一个桥梁，作用是用于控制或者调解不同节点之间的动作或者行为。例如在请求发起方以及请求处理方增加一个负载均衡设备，负载均衡设备能确定请求的处理机器的位置并且将请求发送给处理机器。也可以使用名称服务的方式，在这样的方式下，名称服务能维护一份请求处理方的状态信息，当请求处理方上下线的时候能进行感知并将服务提供方的信息更新到请求方，由请求方跟服务方进行直连。</p>
+<p> 4、运算器</p>
+<p> 5、存储</p>
+<h5 id="七、分布式系统的问题"><a href="#七、分布式系统的问题" class="headerlink" title="七、分布式系统的问题"></a>七、分布式系统的问题</h5><h3 id="二、大型网站及其架构演进"><a href="#二、大型网站及其架构演进" class="headerlink" title="二、大型网站及其架构演进"></a>二、大型网站及其架构演进</h3><h5 id="一、-单机系统存在的问题"><a href="#一、-单机系统存在的问题" class="headerlink" title="一、 单机系统存在的问题"></a>一、 单机系统存在的问题</h5><ul>
+<li>单机系统上，服务端以及数据库都部署在同一台机器上面，当访问量增大，机器的load持续升高。</li>
+</ul>
+<h5 id="二、演进"><a href="#二、演进" class="headerlink" title="二、演进"></a>二、演进</h5><p> 1、数据库与应用分离。</p>
+<p> 在最开始的设计上，应用跟数据库处于同一台机器，在load升高的时候，可以采用数据库应用分离的策略。<br>   <img src="https://s3.mogucdn.com/mlcdn/c45406/180104_061i6il31afel9e70iil0bh4k2je1_1612x730.png" alt="数据库应用分离"></p>
+<p> 2、单机变成集群。</p>
+<p> 当单机变成集群之后，有2个问题需要解决。</p>
 <ul>
-<li>内存分配</li>
-<li><p>内存回收</p>
-<p>接下来分两部分学习Java的内存分配以及回收策略</p>
+<li><p>请求过来哪台机器进行处理：增加负载均衡。<br><img src="https://s11.mogucdn.com/mlcdn/c45406/180104_6h4gij6dde0d12gj1dh51243k9bdd_1448x754.png" alt="引入负载均衡"></p>
+</li>
+<li><p>session问题。当用户请求的时候，因为session存储于单机服务器上，而负载均衡解析请求并把请求转发给的机器上不一定是刚刚访问并存在session的机器。比如一个用户登录完，请求打到了其他的机器，该机器没有session，用户又得重新登录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、SessionSticky </span><br><span class="line">  </span><br><span class="line">在负载均衡上，将同样的session请求都发送到同一台服务器上。</span><br><span class="line"></span><br><span class="line">2、SessionReplication</span><br><span class="line"></span><br><span class="line">集群上的服务器的所有session进行同步。</span><br><span class="line"></span><br><span class="line">3、Session数据集中存储</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="二、Java垃圾收集"><a href="#二、Java垃圾收集" class="headerlink" title="二、Java垃圾收集"></a>二、Java垃圾收集</h4><h5 id="1、垃圾收集需要解决的问题"><a href="#1、垃圾收集需要解决的问题" class="headerlink" title="1、垃圾收集需要解决的问题"></a>1、垃圾收集需要解决的问题</h5><p>   在使用Java的时候，Java为我们提供了垃圾回收，使我们不需要去手动去进行对象的释放。但是垃圾回收是一门大学问，主要有以下三个问题：</p>
+<p>  3、读写分离</p>
+<p>  前面已经能够解决一部分应用服务器压力大的问题，但是请求打到DB，DB的压力还是存在的。</p>
 <ul>
-<li>回收什么</li>
-<li>怎么回收</li>
-<li>几时回收</li>
-</ul>
-<h5 id="2、对象是否已经可以回收"><a href="#2、对象是否已经可以回收" class="headerlink" title="2、对象是否已经可以回收"></a>2、对象是否已经可以回收</h5><p>   在进行垃圾回收的时候，首先需要考虑的是我们的对象哪些可以进行回收，哪些不能进行回收。</p>
+<li><p>读写分离</p>
 <ul>
-<li><p>引用计数</p>
-<p>在大多数的情况下，引用计数是有效果的，它也非常的简单，当对象上面有引用的时候，每增加一个引用，就增加对象上存在引用的个数，当对象减少引用的时候，就进行减一的操作，当计数为0的时候，说明该对象没有被其他对象引用到，可以进行回收。但是该方法存在的问题是，无法解决循环引用的问题。以下面的代码为例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * Created by buzheng on 17/12/6.</span><br><span class="line"> * 测试循环引用</span><br><span class="line"> */</span><br><span class="line">public class MemoryTest &#123;</span><br><span class="line"></span><br><span class="line">    public Object instance = null;</span><br><span class="line"></span><br><span class="line">    public static void testGCRoot() &#123;</span><br><span class="line">        MemoryTest memoryTest1 = new MemoryTest();</span><br><span class="line">        MemoryTest memoryTest2 = new MemoryTest();</span><br><span class="line">        memoryTest1.instance = memoryTest2;</span><br><span class="line">        memoryTest2.instance = memoryTest1;</span><br><span class="line">        memoryTest1 = null;</span><br><span class="line">        memoryTest2 = null;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时两个对象彼此之间相互持有，但是实际上它们已经没用了，引用计数法无法解决该类问题。</p>
-<ul>
-<li>可达性分析</li>
+<li>假如我们做一个秒杀业务，实际上对于DB而言，是存在读多写少的情况的，那么针对这种情况，可以做读写分离。简单的说就是将原来的单DB换成读DB+写DB的组成。但是这样会带来几个问题：</li>
 </ul>
-<p>可达性分析解决了引用计数的弊端，它的思路是用GCRoot作为根节点，如果某个对象是有用的，那么总能找到属于它跟GCRoot的链路，如果某个对象，无法找到抵达GCRoot的路径，那么说明该对象是不可达的，可以进行回收操作。</p>
-<p>如下图所示:<img src="https://s10.mogucdn.com//mlcdn/c45406/171206_8bc1bc9397f99c9i86914hag0i9f3_1528x942.png" alt="可达性分析（图来自深入理解Java虚拟机）"></p>
-<p>从上图可以看到，object5等是没有链路到达GCRoot的，说明对象是不可达的，即使它存在引用，也是可以进行垃圾回收的。</p>
-</li>
-</ul>
-<h5 id="3、使用什么算法进行回收"><a href="#3、使用什么算法进行回收" class="headerlink" title="3、使用什么算法进行回收"></a>3、使用什么算法进行回收</h5><ul>
-<li><p>标记清除算法</p>
-<p>标记清除算法是一种简单直接的清除算法，假设内存分为N块，在N块中如果分散着M块的区域是可以进行回收的，那么对着M块进行标记后回收。存在的问题主要是，因为内存是分散的，如果仅仅进行简单的标记清除的话，会造成内存碎片，也就是无法形成一整片的内存空间，假设有一个对象需要分配，而无法找到足够大的内存空间进行分配的时候，又会触发GC操作，所以JVM采用的都是基于标记清除算法改进的算法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、数据同步问题</span><br><span class="line">因为从写库到读库的同步需要一点时间，故会存在一定的时间窗口。MySql自带复制功能，可以直接进行使用。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
-<li><p>标记整理算法</p>
-<p>标记整理算法指的是当在内存中，将存活的对象进行标记并整理到一块指定的内存中，然后对需要回收的对象进行回收。</p>
+<li><p>在使用中，经常使用引擎进行数据存储，因为检索速度快的原因，DB经常是作为打底数据使用。从这个角度看，搜索引擎也是一个读库。<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180104_57e9e9d3j6931a0628l4j07b9h5ee_1462x776.png" alt="搜索引擎"></p>
 </li>
-<li><p>复制算法</p>
-<p>每次只用一半的内存进行使用，当需要回收的时候，将存活的对象移动到另外一半未使用的内存中，然后将需要回收的内存进行回收。</p>
-<p>明显的是不同的算法适用于Java的不同对象分配的区域，在Java中，对象分配到两个区域，一个是新生代，一个是老年代，因为新生代是来得快去得快，所以比较适合复制算法，当然复制回收不是按照1：1的比例进行设置。而老年代是经过多次GC还存活下来的对象，说明是比较稳定的，可以采用标记整理算法。</p>
+<li><p>缓存<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180104_3cdic6i8dhkdl6iaa45hjb0i49cjb_1464x712.png" alt="缓存"></p>
 </li>
 </ul>
-<h4 id="三、对象的内存分配"><a href="#三、对象的内存分配" class="headerlink" title="三、对象的内存分配"></a>三、对象的内存分配</h4><p>  前面已经讲了对象何时进行回收以及使用什么方式进行回收，那么接下来讲的是对象如何进行内存的分配，我们的对象总得有个可以住的地方才行。</p>
-<p>  Java对象分配的分配主要如下图：<br>  <img src="https://s10.mogucdn.com//mlcdn/c45406/171206_00b0j866ekie6l7d50987f0529adl_1014x456.png" alt="Java内存分配"></p>
-<p>  从上图可以看到，内存分配主要分为新生代跟老年代。</p>
+<p>4、数据库垂直与水平拆分</p>
+<p> 当读写分离以及引入分布式存储之后，对于主库的压力大大减少，但是当系统变得更加复杂的时候，我们单一的主库也会开始扛不住压力。</p>
 <ul>
-<li><p>新生代</p>
+<li><p>数据库垂直拆分</p>
+<p>垂直拆分指的是以业务为维度进行数据库的拆分，比如一个交易管理系统有用户、订单、交易等等的业务，每个业务都放在同一个数据库中进行维护，当业务复杂之后，单DB会开始抗不住压力，此时我们可以按照业务的维度增加DB。比如用户DB,订单BD，交易DB等等，减轻所有的业务都存在一个DB的情况。</p>
+</li>
+<li><p>数据库水平拆分</p>
+<p>当按照业务的维度划分后，可能存在两个问题，第一个是业务的复杂度继续加深，单表无法支撑更多的查询或者写入的请求，耗时更长，此时针对单一业务的DB可以进行水平拆分。</p>
+<p>水平拆分的意思是按照某个维度拆分到更多的库中，在库中由原先的一张表变成多张表。比如用户表，可以根据用户的ID进行sharding，将单表改变成多表的形式进行优化。</p>
+</li>
+</ul>
+<p>5、数据压力减小、应用服务压力增大</p>
 <ul>
-<li>Eden区</li>
-<li>Survior区（又分为From跟To两个区域）</li>
-</ul>
+<li><p>应用拆分</p>
+<p>随着业务的复杂度提升，原先在一个系统中的交易、订单、购物车等等的应用会加入更多的模块，业务的模块增多，虽然我们已经如前面一样，在水平方向上做集群，但是如何让应用部再继续臃肿，是需要考虑的问题。</p>
+<p>就像分库分表一样，可以对臃肿的应用进行分家，比如交易分出去作为单一的应用，订单分出去作为单一的应用等等。</p>
+<p>垂直拆分之后，应用如下图：</p>
+<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180104_13gl565bkl8gaga5k146bic6ec4dd_1450x556.png" alt="垂直拆分应用"></p>
 </li>
-<li><p>老年代（经过多次GC的对象以及数组）</p>
-</li>
-</ul>
-<p>对象分配的原则主要有以下几个：</p>
+<li><p>服务化</p>
+<p>应用拆分会带来另外的问题，就是这些拆分出去的应用本来是在同一个应用里的，它们存在一些公共的服务，这个时候可以通过服务化的方式进行解决。</p>
+<p>比如有交易管理系统的订单、优惠券、活动等都需要跟用户打交道，此时用户应用可以作为中间层，也就是服务层对上述的前端应用进行服务。</p>
+<p>如此一来，整体的流程都会进行改变。</p>
 <ul>
-<li><p>对象优先在Eden区域进行分配：当有对象需要分配的时候，大多数情况下会在Eden区进行分配，当Eden区域不够空间分配的时候，会触发MinorGC，假如做这样的假设：我们设置Xmx，Xms跟Xmn分别是20，20 ，10 ，说明我们的堆大小刚好是20，然后新生代大小为10，老年代的大小也为10，其中新生代的大小设置为8：1，我们按顺序new4个对象，分别是2，2，2，4，那么当分配到第四个的时候，发现Eden区已经不足以放下4M大小的对象，那么会进行MiniorGC,就会把前面3个往老年代放，然后把4放在Eden区。</p>
-</li>
-<li><p>大对象直接进入老年代：所谓大对象指的是需要连续分配的内存空间大的对象称之为大对象，假如对象大于我们设定的大对象的阈值，那么对象会直接被分配到老年代去。</p>
-</li>
-<li><p>长期存活的对象进入老年代：对象如果经历的MiniorGC大于我们设定的阈值，那么对象会被直接分配给老年代。</p>
+<li>原先的单机调用一部分变成了RPC调用。</li>
+<li>散落在不同应用的代码都存放在服务中心中。</li>
+<li>数据库的工作更多的放在了服务中心中。</li>
+</ul>
 </li>
 </ul>
-<h4 id="四、记录一次FullGC频繁的事情"><a href="#四、记录一次FullGC频繁的事情" class="headerlink" title="四、记录一次FullGC频繁的事情"></a>四、记录一次FullGC频繁的事情</h4><p>前阵子部门使用了新的框架，发布之后随着时间的增长发现机器经常出现FullGC的现象。经过前面的例子已经知道了FullGC是在老年代的进行的GC操作。<br>反向推导：最终同事发现是缓存的key有问题，请求参数我们使用请求的queryTime跟一些其他的业务key作为缓存的key，本意是如果用户在几分钟之内做同样的请求的话可以帮服务器分担一些压力，降低RT。后来发现每次的queryTime都是不一样的，导致缓存的key是没有用的，每次都是取出新的数据并再次加入缓存，而且缓存的时间过长，冗余了非常多的无效的数据在内存中，导致了内存吃紧而引发FullGC。</p>
+<h5 id="三、消息中间件"><a href="#三、消息中间件" class="headerlink" title="三、消息中间件"></a>三、消息中间件</h5><p>上面可以知道，分布式系统是位于网络不同节点之间，不同节点通过消息进行协调工作的系统。而上面也解决了应用以及数据库的压力问题，此时消息中间件就非常重要了。</p>
+<ul>
+<li><p>概念</p>
+<p>消息中间件：在分布式系统中，完成消息的发送与接收的基础软件，称之为消息中间件。简单来说，在分布式系统的不同节点上，不同节点向外发送消息的时候，消息需要先存入消息中间件中并由消息中间件进行转发的操作。</p>
+</li>
+<li><p>好处</p>
+<p>极大的提高了应用之间的解耦，在分布式系统上，不同的节点之间不存在耦合的关系，只存在订阅消息与否的关系。</p>
+</li>
+</ul>
 
           
         
