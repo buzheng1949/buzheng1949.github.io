@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Spring," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="Never Say Goodbye">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不正的博客小屋">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="一、容器以及依赖注入 什么是依赖注入 新的一年到了，小明要开始购置全新的衣服，他去以纯买了裤子，耐克买了鞋子，森马买了上衣等等，为此他跑遍了整个城市的专卖店，他觉得很累很麻烦，自己过个年什么衣服都要自己跑去专卖店买。 新的一年到了，小妮也要购置全新的衣服，她在家里跟保姆说，我要一套漂亮的新年衣服，保姆便从某个神秘的地方拿了一套新的衣服给了小妮，这样小妮就不用到处跑来跑去了。 小明跟小妮的故事其实就">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring IoC之旅（1）">
+<meta property="og:url" content="http://yoursite.com/2018/01/11/SpringIoc-1/index.html">
 <meta property="og:site_name" content="不正的博客小屋">
-<meta property="og:description" content="Never Say Goodbye">
+<meta property="og:description" content="一、容器以及依赖注入 什么是依赖注入 新的一年到了，小明要开始购置全新的衣服，他去以纯买了裤子，耐克买了鞋子，森马买了上衣等等，为此他跑遍了整个城市的专卖店，他觉得很累很麻烦，自己过个年什么衣服都要自己跑去专卖店买。 新的一年到了，小妮也要购置全新的衣服，她在家里跟保姆说，我要一套漂亮的新年衣服，保姆便从某个神秘的地方拿了一套新的衣服给了小妮，这样小妮就不用到处跑来跑去了。 小明跟小妮的故事其实就">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-10T18:41:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不正的博客小屋">
-<meta name="twitter:description" content="Never Say Goodbye">
+<meta name="twitter:title" content="Spring IoC之旅（1）">
+<meta name="twitter:description" content="一、容器以及依赖注入 什么是依赖注入 新的一年到了，小明要开始购置全新的衣服，他去以纯买了裤子，耐克买了鞋子，森马买了上衣等等，为此他跑遍了整个城市的专卖店，他觉得很累很麻烦，自己过个年什么衣服都要自己跑去专卖店买。 新的一年到了，小妮也要购置全新的衣服，她在家里跟保姆说，我要一套漂亮的新年衣服，保姆便从某个神秘的地方拿了一套新的衣服给了小妮，这样小妮就不用到处跑来跑去了。 小明跟小妮的故事其实就">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/11/SpringIoc-1/"/>
 
 
 
 
 
-  <title>不正的博客小屋</title>
+  <title>Spring IoC之旅（1） | 不正的博客小屋</title>
   
 
 
@@ -143,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -269,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/11/SpringIoc-1/" itemprop="url">Spring IoC之旅（1）</a></h1>
+          <h1 class="post-title" itemprop="name headline">Spring IoC之旅（1）</h1>
         
 
         <div class="post-meta">
@@ -343,9 +342,7 @@
       
 
       
-        
-          
-            <h4 id="一、容器以及依赖注入"><a href="#一、容器以及依赖注入" class="headerlink" title="一、容器以及依赖注入"></a>一、容器以及依赖注入</h4><ul>
+        <h4 id="一、容器以及依赖注入"><a href="#一、容器以及依赖注入" class="headerlink" title="一、容器以及依赖注入"></a>一、容器以及依赖注入</h4><ul>
 <li><p>什么是依赖注入</p>
 <p>新的一年到了，小明要开始购置全新的衣服，他去以纯买了裤子，耐克买了鞋子，森马买了上衣等等，为此他跑遍了整个城市的专卖店，他觉得很累很麻烦，自己过个年什么衣服都要自己跑去专卖店买。</p>
 <p>新的一年到了，小妮也要购置全新的衣服，她在家里跟保姆说，我要一套漂亮的新年衣服，保姆便从某个神秘的地方拿了一套新的衣服给了小妮，这样小妮就不用到处跑来跑去了。</p>
@@ -424,8 +421,6 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 </ul>
 <p>看起来够简单明了，简单可以理解为寻找到XML文件，将XML文件转换为Resource类型，使用XmlBeanDefinitionReader加载bean。</p>
 
-          
-        
       
     </div>
     
@@ -435,19 +430,70 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="不正1949 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="不正1949 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/10/fastjsoissueslove/" rel="next" title="一次FastJSON的填坑之旅">
+                <i class="fa fa-chevron-left"></i> 一次FastJSON的填坑之旅
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -457,14 +503,11 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -472,6 +515,10 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 
 
           
+
+  
+
+
 
         </div>
         
@@ -492,8 +539,17 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -569,6 +625,22 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、容器以及依赖注入"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x5BB9;&#x5668;&#x4EE5;&#x53CA;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;" class="headerlink" title="&#x4E00;&#x3001;&#x5BB9;&#x5668;&#x4EE5;&#x53CA;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;"></a>&#x4E00;&#x3001;&#x5BB9;&#x5668;&#x4EE5;&#x53CA;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Spring容器"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;Spring&#x5BB9;&#x5668;" class="headerlink" title="&#x4E8C;&#x3001;Spring&#x5BB9;&#x5668;"></a>&#x4E8C;&#x3001;Spring&#x5BB9;&#x5668;</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、什么是IoC容器"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#1&#x3001;&#x4EC0;&#x4E48;&#x662F;IoC&#x5BB9;&#x5668;" class="headerlink" title="1&#x3001;&#x4EC0;&#x4E48;&#x662F;IoC&#x5BB9;&#x5668;"></a>1&#x3001;&#x4EC0;&#x4E48;&#x662F;IoC&#x5BB9;&#x5668;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、Spring-IoC容器总体设计"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#2&#x3001;Spring-IoC&#x5BB9;&#x5668;&#x603B;&#x4F53;&#x8BBE;&#x8BA1;" class="headerlink" title="2&#x3001;Spring IoC&#x5BB9;&#x5668;&#x603B;&#x4F53;&#x8BBE;&#x8BA1;"></a>2&#x3001;Spring IoC&#x5BB9;&#x5668;&#x603B;&#x4F53;&#x8BBE;&#x8BA1;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、Spring-IoC容器细节"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#3&#x3001;Spring-IoC&#x5BB9;&#x5668;&#x7EC6;&#x8282;" class="headerlink" title="3&#x3001;Spring IoC&#x5BB9;&#x5668;&#x7EC6;&#x8282;"></a>3&#x3001;Spring IoC&#x5BB9;&#x5668;&#x7EC6;&#x8282;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -709,6 +781,10 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
