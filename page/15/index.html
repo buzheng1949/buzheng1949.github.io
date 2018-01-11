@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,21 +79,16 @@
 
 
 
-<meta name="description" content="一、什么是ThreadLocal ThreadLocal  在网上许多的文章都是这么解释的，ThreadLocal提供了一种多线程并发处理共享变量的一种安全的解决思路。但是仔细查看代码之后，发现ThreadLocal更准确来讲，是提供了一种不同的线程之间，彼此的变量相互隔离，互不干扰的一种便于线程自己变量使用的方式。  简单例子  假如有一个银行，银行对客户的钱是存放在每个客户的存款账号里面，不同">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java-关于ThreadLocal的那点事">
-<meta property="og:url" content="http://yoursite.com/2017/05/10/Java-ThreadLocal/index.html">
+<meta name="description" content="Never Say Goodbye">
+<meta property="og:type" content="website">
+<meta property="og:title" content="不正的博客小屋">
+<meta property="og:url" content="http://yoursite.com/page/15/index.html">
 <meta property="og:site_name" content="不正的博客小屋">
-<meta property="og:description" content="一、什么是ThreadLocal ThreadLocal  在网上许多的文章都是这么解释的，ThreadLocal提供了一种多线程并发处理共享变量的一种安全的解决思路。但是仔细查看代码之后，发现ThreadLocal更准确来讲，是提供了一种不同的线程之间，彼此的变量相互隔离，互不干扰的一种便于线程自己变量使用的方式。  简单例子  假如有一个银行，银行对客户的钱是存放在每个客户的存款账号里面，不同">
+<meta property="og:description" content="Never Say Goodbye">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1428117-8346ff36fbe906e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1428117-80f21cdaa413f53a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-10T18:46:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java-关于ThreadLocal的那点事">
-<meta name="twitter:description" content="一、什么是ThreadLocal ThreadLocal  在网上许多的文章都是这么解释的，ThreadLocal提供了一种多线程并发处理共享变量的一种安全的解决思路。但是仔细查看代码之后，发现ThreadLocal更准确来讲，是提供了一种不同的线程之间，彼此的变量相互隔离，互不干扰的一种便于线程自己变量使用的方式。  简单例子  假如有一个银行，银行对客户的钱是存放在每个客户的存款账号里面，不同">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1428117-8346ff36fbe906e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="不正的博客小屋">
+<meta name="twitter:description" content="Never Say Goodbye">
 
 
 
@@ -123,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/10/Java-ThreadLocal/"/>
+  <link rel="canonical" href="http://yoursite.com/page/15/"/>
 
 
 
 
 
-  <title>Java-关于ThreadLocal的那点事 | 不正的博客小屋</title>
+  <title>不正的博客小屋</title>
   
 
 
@@ -148,7 +143,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -241,9 +237,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -273,7 +269,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java-关于ThreadLocal的那点事</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/10/Java-ThreadLocal/" itemprop="url">Java-关于ThreadLocal的那点事</a></h1>
         
 
         <div class="post-meta">
@@ -345,7 +343,9 @@
       
 
       
-        <h4 id="一、什么是ThreadLocal"><a href="#一、什么是ThreadLocal" class="headerlink" title="一、什么是ThreadLocal"></a>一、什么是ThreadLocal</h4><ul>
+        
+          
+            <h4 id="一、什么是ThreadLocal"><a href="#一、什么是ThreadLocal" class="headerlink" title="一、什么是ThreadLocal"></a>一、什么是ThreadLocal</h4><ul>
 <li><strong>ThreadLocal</strong></li>
 </ul>
 <p>在网上许多的文章都是这么解释的，ThreadLocal提供了一种多线程并发处理共享变量的一种安全的解决思路。但是仔细查看代码之后，发现ThreadLocal更准确来讲，是提供了一种不同的线程之间，彼此的变量相互隔离，互不干扰的一种便于线程自己变量使用的方式。</p>
@@ -399,6 +399,8 @@
 <li>ThreadLocal存在的意义不是说为了解决多线程情况下，共享变量的同步问题，而更准确的说是为了解决当变量之间不相互依赖，在一个线程情况下不同的方法进行调用的问题。好比如我们的银行卡账户在不同的ATM机都可以取钱这样的case。我们有一个ThredLocalMap放着我们多个银行账户的副本，然后我们取什么银行的钱，往什么银行存钱都不会互相影响了，逃~~~ </li>
 </ul>
 
+          
+        
       
     </div>
     
@@ -408,70 +410,19 @@
     
 
     
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="不正1949 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="不正1949 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
 
     
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/10/Java-ClassLoader/" rel="prev" title="Java-关于类加载器">
-                Java-关于类加载器 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -481,11 +432,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span>
+  </nav>
+
 
 
           </div>
@@ -493,10 +447,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -517,17 +467,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -603,22 +544,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、什么是ThreadLocal"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;ThreadLocal" class="headerlink" title="&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;ThreadLocal"></a>&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;ThreadLocal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、ThreadLocal有什么作用？"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;ThreadLocal&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;" class="headerlink" title="&#x4E8C;&#x3001;ThreadLocal&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;"></a>&#x4E8C;&#x3001;ThreadLocal&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、ThreadLocal到底是如何工作的"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;ThreadLocal&#x5230;&#x5E95;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;" class="headerlink" title="&#x4E09;&#x3001;ThreadLocal&#x5230;&#x5E95;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;"></a>&#x4E09;&#x3001;ThreadLocal&#x5230;&#x5E95;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、写在最后的总结"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x5199;&#x5728;&#x6700;&#x540E;&#x7684;&#x603B;&#x7ED3;" class="headerlink" title="&#x56DB;&#x3001;&#x5199;&#x5728;&#x6700;&#x540E;&#x7684;&#x603B;&#x7ED3;"></a>&#x56DB;&#x3001;&#x5199;&#x5728;&#x6700;&#x540E;&#x7684;&#x603B;&#x7ED3;</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -759,10 +684,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
-
-
 
   
 
