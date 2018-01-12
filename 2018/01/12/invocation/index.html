@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -79,16 +79,23 @@
 
 
 
-<meta name="description" content="Never Say Goodbye">
-<meta property="og:type" content="website">
-<meta property="og:title" content="土耳其冰淇淋">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="一、动态代理动态代理指的是在运行的时候动态生成代理类。生成动态代理的方式有很多，比如Java动态代理，Spring中的cglib库等等。 二、动态代理例子假如我们有一个接口类Car,代码实现如下： 1234567/** * Created by buzheng on 18/1/12. * 接口类 */public interface Car &amp;#123;    public void run();">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java动态代理">
+<meta property="og:url" content="http://yoursite.com/2018/01/12/invocation/index.html">
 <meta property="og:site_name" content="土耳其冰淇淋">
-<meta property="og:description" content="Never Say Goodbye">
+<meta property="og:description" content="一、动态代理动态代理指的是在运行的时候动态生成代理类。生成动态代理的方式有很多，比如Java动态代理，Spring中的cglib库等等。 二、动态代理例子假如我们有一个接口类Car,代码实现如下： 1234567/** * Created by buzheng on 18/1/12. * 接口类 */public interface Car &amp;#123;    public void run();">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180112_1b37b94a9ga6ag5ji123ji6l7jlc0_949x260.png">
+<meta property="og:image" content="https://s11.mogucdn.com/mlcdn/c45406/180112_59797kdg6fba5a3041311e39hjf5k_1149x474.png">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180112_3h7lg29daekk2c1ih7125gif8bfa0_1422x805.png">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180112_5k7ffhke9eha7a6j15j174dl4l1c9_1297x250.png">
+<meta property="og:updated_time" content="2018-01-12T12:58:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="土耳其冰淇淋">
-<meta name="twitter:description" content="Never Say Goodbye">
+<meta name="twitter:title" content="Java动态代理">
+<meta name="twitter:description" content="一、动态代理动态代理指的是在运行的时候动态生成代理类。生成动态代理的方式有很多，比如Java动态代理，Spring中的cglib库等等。 二、动态代理例子假如我们有一个接口类Car,代码实现如下： 1234567/** * Created by buzheng on 18/1/12. * 接口类 */public interface Car &amp;#123;    public void run();">
+<meta name="twitter:image" content="https://s3.mogucdn.com/mlcdn/c45406/180112_1b37b94a9ga6ag5ji123ji6l7jlc0_949x260.png">
 
 
 
@@ -118,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/12/invocation/"/>
 
 
 
 
 
-  <title>土耳其冰淇淋</title>
+  <title>Java动态代理 | 土耳其冰淇淋</title>
   
 
 
@@ -143,8 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,9 +243,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -269,9 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/12/invocation/" itemprop="url">Java动态代理</a></h1>
+          <h1 class="post-title" itemprop="name headline">Java动态代理</h1>
         
 
         <div class="post-meta">
@@ -343,9 +347,7 @@
       
 
       
-        
-          
-            <h4 id="一、动态代理"><a href="#一、动态代理" class="headerlink" title="一、动态代理"></a>一、动态代理</h4><p><strong>动态代理指的是在运行的时候动态生成代理类。生成动态代理的方式有很多，比如Java动态代理，Spring中的cglib库等等。</strong></p>
+        <h4 id="一、动态代理"><a href="#一、动态代理" class="headerlink" title="一、动态代理"></a>一、动态代理</h4><p><strong>动态代理指的是在运行的时候动态生成代理类。生成动态代理的方式有很多，比如Java动态代理，Spring中的cglib库等等。</strong></p>
 <h4 id="二、动态代理例子"><a href="#二、动态代理例子" class="headerlink" title="二、动态代理例子"></a>二、动态代理例子</h4><p>假如我们有一个接口类Car,代码实现如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by buzheng on 18/1/12.</span><br><span class="line"> * 接口类</span><br><span class="line"> */</span><br><span class="line">public interface Car &#123;</span><br><span class="line">    public void run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>同时我们有一个Minicooper类实现了Car接口，代码如下：</p>
@@ -361,8 +363,6 @@
 <h4 id="三、动态代理优缺点"><a href="#三、动态代理优缺点" class="headerlink" title="三、动态代理优缺点"></a>三、动态代理优缺点</h4><p>从上面可以看到，如果我们需要在方法执行的前后增加自定义的逻辑，做一些特殊的处理，比如记录日志等等都可以使用动态代理的方式。但是动态代理只支持接口层面，而无法做到类层面的动态代理。</p>
 <h4 id="四、动态代理处理流程"><a href="#四、动态代理处理流程" class="headerlink" title="四、动态代理处理流程"></a>四、动态代理处理流程</h4><p>接下来通过debug代码的方式，首先看一下代理类怎么生成，从我们的函数调用入口跟进去：<br><img src="https://s11.mogucdn.com/mlcdn/c45406/180112_59797kdg6fba5a3041311e39hjf5k_1149x474.png" alt="调用入口"><br>跟进来可以看到具体的实现如下图：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_3h7lg29daekk2c1ih7125gif8bfa0_1422x805.png" alt="代码具体细节"><br>可以看到实际上是通过反射的方式生成了一个实例，而这个实例的参数就是之前定义的InvocationHandler。<br>而在执行方法的时候，实际上执行的就是就是我们的InvocationHandler的invoke方法：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_5k7ffhke9eha7a6j15j174dl4l1c9_1297x250.png" alt="实际执行方法"></p>
 
-          
-        
       
     </div>
     
@@ -372,19 +372,70 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="yupeibiao 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="yupeibiao 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/11/SpringIoc-2/" rel="next" title="Spring IoC之旅（二）">
+                <i class="fa fa-chevron-left"></i> Spring IoC之旅（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -394,14 +445,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -409,6 +457,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -429,8 +481,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -506,6 +567,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、动态代理"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;" class="headerlink" title="&#x4E00;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;"></a>&#x4E00;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、动态代理例子"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4F8B;&#x5B50;" class="headerlink" title="&#x4E8C;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4F8B;&#x5B50;"></a>&#x4E8C;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4F8B;&#x5B50;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、动态代理优缺点"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4F18;&#x7F3A;&#x70B9;" class="headerlink" title="&#x4E09;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4F18;&#x7F3A;&#x70B9;"></a>&#x4E09;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4F18;&#x7F3A;&#x70B9;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、动态代理处理流程"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x56DB;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x5904;&#x7406;&#x6D41;&#x7A0B;" class="headerlink" title="&#x56DB;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x5904;&#x7406;&#x6D41;&#x7A0B;"></a>&#x56DB;&#x3001;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x5904;&#x7406;&#x6D41;&#x7A0B;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -646,6 +723,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 

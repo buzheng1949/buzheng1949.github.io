@@ -81,13 +81,13 @@
 
 <meta name="description" content="Never Say Goodbye">
 <meta property="og:type" content="website">
-<meta property="og:title" content="土耳其冰淇淋小店">
+<meta property="og:title" content="土耳其冰淇淋">
 <meta property="og:url" content="http://yoursite.com/page/14/index.html">
-<meta property="og:site_name" content="土耳其冰淇淋小店">
+<meta property="og:site_name" content="土耳其冰淇淋">
 <meta property="og:description" content="Never Say Goodbye">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="土耳其冰淇淋小店">
+<meta name="twitter:title" content="土耳其冰淇淋">
 <meta name="twitter:description" content="Never Say Goodbye">
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <title>土耳其冰淇淋小店</title>
+  <title>土耳其冰淇淋</title>
   
 
 
@@ -155,7 +155,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">土耳其冰淇淋小店</span>
+        <span class="site-title">土耳其冰淇淋</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/10/Java-ClassLoader/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/Python免密码登陆服务器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yupeibiao">
@@ -261,7 +261,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="土耳其冰淇淋小店">
+      <meta itemprop="name" content="土耳其冰淇淋">
     </span>
 
     
@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/10/Java-ClassLoader/" itemprop="url">Java-关于类加载器</a></h1>
+                <a class="post-title-link" href="/2017/08/09/Python免密码登陆服务器/" itemprop="url">Python实现ssh免密码登录+自定义命令操作服务器</a></h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T23:37:44+08:00">
-                2017-06-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T13:57:38+08:00">
+                2017-08-09
               </time>
             
 
@@ -306,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -345,78 +345,47 @@
       
         
           
-            <h3 id="一、什么是-ClassLoader-？"><a href="#一、什么是-ClassLoader-？" class="headerlink" title="一、什么是 ClassLoader ？"></a>一、什么是 ClassLoader ？</h3><ul>
-<li><p>什么是ClassLoader </p>
-<p>当代码编写完成之后，我们会写很多的以Java文件，而这些Java文件会被编译生成class文件，class文件被需要被经历一系列的流程才能够进行使用与卸载。而在程序启动的时候，所有的class文件并不会一次性加载，而是在需要的时候，根据Java的类加载机制进行动态加载。而完成对class文件加载操作的，就是ClassLoader。</p>
+            <h4 id="如何实现免密码登录服务器"><a href="#如何实现免密码登录服务器" class="headerlink" title="如何实现免密码登录服务器"></a>如何实现免密码登录服务器</h4><p><a href="https://github.com/buzheng1949/Athena/tree/master/FreeServer" target="_blank" rel="noopener">源代码</a><br>如果打不开请直接访问<strong><a href="https://github.com/buzheng1949/Athena/tree/master/FreeServer" target="_blank" rel="noopener">https://github.com/buzheng1949/Athena/tree/master/FreeServer</a></strong></p>
+<p>首先介绍脚本背景，我司查看服务器的时候，需要经过<strong>登录堡垒机，输入查看的服务器的IP地址，输入命令对服务器进行操作的流程</strong>，为此学习了Python之后，鼓捣了一个Python版本的免密码登录服务器的脚本</p>
+<h4 id="一、需求分析"><a href="#一、需求分析" class="headerlink" title="一、需求分析"></a>一、需求分析</h4><ul>
+<li>登录堡垒机</li>
+<li>登录服务器</li>
+<li>输入命令</li>
+</ul>
+<h4 id="二、方案选择"><a href="#二、方案选择" class="headerlink" title="二、方案选择"></a>二、方案选择</h4><p>首先我们考虑的是Linux下是可以用expect进行ssh交互的，强大如Python当然也有这个能力，于是我们就自然想到了Python的pexpect库。<br>如果对pexpect库不熟悉的可以看下面的文章进行学习：<a href="http://www.jianshu.com/p/cfd163200d12" target="_blank" rel="noopener">pexpect学习教程</a></p>
+<h4 id="三、方案实现"><a href="#三、方案实现" class="headerlink" title="三、方案实现"></a>三、方案实现</h4><ul>
+<li>第一步，使用pexpect跟堡垒机打声招呼,以我司的登录堡垒机的命令为例子，<strong>ssh -pxxx username@server_ip</strong>，我们首先向服务器打声招呼。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">child = pexpect.spawn(&apos;ssh -pxxxxx %s@%s&apos;%(user_name,fortresses_ip))</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>ClassLoader的作用</p>
+</ul>
+<p>得到服务器的回应后，对我进行了密码输入的请求，如下图：<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087aca701041f?w=1134&amp;h=246&amp;f=png&amp;s=41990" alt="输入密码图片"></p>
 <ul>
-<li>将类加载到内存中</li>
-<li>决定类是由哪个类加载器进行加载</li>
-<li>将class文件中的信息解析成对象</li>
-</ul>
+<li>第二步，okay，既然期待的是我输入密码，那么使用pexpect的另外一个大招，匹配返回的操作句柄，并进行密码发送。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ret_login = child.expect([&apos;%s@%s\&apos;s password:&apos;%(user_name,fortresses_ip),pexpect.TIMEOUT])</span><br><span class="line">child.sendline(password)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="二、分析ClassLoader"><a href="#二、分析ClassLoader" class="headerlink" title="二、分析ClassLoader"></a>二、分析ClassLoader</h3><ul>
-<li><p>ClassLoader的类型</p>
+<p>从上面的两行代码我们可以看到，第一行代码使用了pexpect的expect方法，表示上一步返回的内容中是否包含expect里面的列表的关键字。第二行代码表示包含到了我们设想的关键字之后，我们可以模拟发送密码给远端。</p>
 <ul>
-<li>BootstrapClassLoader </li>
-<li>ExtClassLoader   </li>
-<li>AppClassLoader  </li>
+<li>第三步，发送完密码之后，我们已经实现了登录堡垒机的功能，如下图所示:<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087aca74a656f?w=1122&amp;h=384&amp;f=png&amp;s=37024" alt="登录堡垒机"><br>接下来就是输入我们需要登录的服务器的IP地址，然后再次输入密码，只需要调用两次pexpect的sendline方法即可完成服务器的交互。</li>
 </ul>
-<p>其中3个ClassLoader各自负责加载的区域不同，如下代码所示:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 测试classloader的加载范围</span><br><span class="line"> */</span><br><span class="line">private void testClassLoader()&#123;</span><br><span class="line">    /**</span><br><span class="line">     * BootstrapClassLoader 加载  jre/lib</span><br><span class="line">     */</span><br><span class="line">    System.out.println(System.getProperty(&quot;sun.boot.class.path&quot;));</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Extention ClassLoader   jre/lib/ext</span><br><span class="line">     */</span><br><span class="line">    System.out.println(System.getProperty(&quot;java.ext.dirs&quot;));</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * AppClassLoader  bin目录</span><br><span class="line">     */</span><br><span class="line">    System.out.println(System.getProperty(&quot;java.class.path&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p> 通过以上代码，我们可以看到每个ClassLoader的加载范围是不一样的，其中BootStrapClassLoder加载的是jre/lib目录下的jar包，这些比如rat.jar等等。而ExtClassLoader负责加载的是jre/lib/ext目录下的jar包，而AppClassLoader主要加载的是我们定义的类的class文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ret_watch_server = child.expect([watch_server_ip,pexpect.TIMEOUT])</span><br><span class="line">            if ret_watch_server != 0:</span><br><span class="line">                print (&apos;the password is correct,but the server ip maybe you have no perssion,please apply it&apos;)</span><br><span class="line">                return</span><br><span class="line">            else:</span><br><span class="line">                child.sendline(watch_server_ip)</span><br><span class="line">                child.expect(&apos;password&apos;)</span><br><span class="line">                child.sendline(password)</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>ClassLoader的加载机制<br>ClassLoder的继承关系图如下所示：<br><img src="https://user-gold-cdn.xitu.io/2017/12/7/1603172695147f2f?w=591&amp;h=552&amp;f=png&amp;s=29094" alt="ClassLoader继承关系图"></p>
-<p>而当我们看到ClassLoder的源码的时候，我们可以看到：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">   * Loads the class with the specified &lt;a href=&quot;#name&quot;&gt;binary name&lt;/a&gt;.  The</span><br><span class="line">   * default implementation of this method searches for classes in the</span><br><span class="line">   * following order:</span><br><span class="line">   *</span><br><span class="line">   * &lt;ol&gt;</span><br><span class="line">   *</span><br><span class="line">   *   &lt;li&gt;&lt;p&gt; Invoke &#123;@link #findLoadedClass(String)&#125; to check if the class</span><br><span class="line">   *   has already been loaded.  &lt;/p&gt;&lt;/li&gt;</span><br><span class="line">   *</span><br><span class="line">   *   &lt;li&gt;&lt;p&gt; Invoke the &#123;@link #loadClass(String) &lt;tt&gt;loadClass&lt;/tt&gt;&#125; method</span><br><span class="line">   *   on the parent class loader.  If the parent is &lt;tt&gt;null&lt;/tt&gt; the class</span><br><span class="line">   *   loader built-in to the virtual machine is used, instead.  &lt;/p&gt;&lt;/li&gt;</span><br><span class="line">   *</span><br><span class="line">   *   &lt;li&gt;&lt;p&gt; Invoke the &#123;@link #findClass(String)&#125; method to find the</span><br><span class="line">   *   class.  &lt;/p&gt;&lt;/li&gt;</span><br><span class="line">   *</span><br><span class="line">   * &lt;/ol&gt;</span><br><span class="line">   *</span><br><span class="line">   * &lt;p&gt; If the class was found using the above steps, and the</span><br><span class="line">   * &lt;tt&gt;resolve&lt;/tt&gt; flag is true, this method will then invoke the &#123;@link</span><br><span class="line">   * #resolveClass(Class)&#125; method on the resulting &lt;tt&gt;Class&lt;/tt&gt; object.</span><br><span class="line">   *</span><br><span class="line">   * &lt;p&gt; Subclasses of &lt;tt&gt;ClassLoader&lt;/tt&gt; are encouraged to override &#123;@link</span><br><span class="line">   * #findClass(String)&#125;, rather than this method.  &lt;/p&gt;</span><br><span class="line">   *</span><br><span class="line">   * &lt;p&gt; Unless overridden, this method synchronizes on the result of</span><br><span class="line">   * &#123;@link #getClassLoadingLock &lt;tt&gt;getClassLoadingLock&lt;/tt&gt;&#125; method</span><br><span class="line">   * during the entire class loading process.</span><br><span class="line">   *</span><br><span class="line">   * @param  name</span><br><span class="line">   *         The &lt;a href=&quot;#name&quot;&gt;binary name&lt;/a&gt; of the class</span><br><span class="line">   *</span><br><span class="line">   * @param  resolve</span><br><span class="line">   *         If &lt;tt&gt;true&lt;/tt&gt; then resolve the class</span><br><span class="line">   *</span><br><span class="line">   * @return  The resulting &lt;tt&gt;Class&lt;/tt&gt; object</span><br><span class="line">   *</span><br><span class="line">   * @throws  ClassNotFoundException</span><br><span class="line">   *          If the class could not be found</span><br><span class="line">   */</span><br><span class="line">  protected Class&lt;?&gt; loadClass(String name, boolean resolve)</span><br><span class="line">      throws ClassNotFoundException</span><br><span class="line">  &#123;</span><br><span class="line">      synchronized (getClassLoadingLock(name)) &#123;</span><br><span class="line">          // First, check if the class has already been loaded</span><br><span class="line">          Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">          if (c == null) &#123;</span><br><span class="line">              long t0 = System.nanoTime();</span><br><span class="line">              try &#123;</span><br><span class="line">                  if (parent != null) &#123;</span><br><span class="line">                      c = parent.loadClass(name, false);</span><br><span class="line">                  &#125; else &#123;</span><br><span class="line">                      c = findBootstrapClassOrNull(name);</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">                  // ClassNotFoundException thrown if class not found</span><br><span class="line">                  // from the non-null parent class loader</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              if (c == null) &#123;</span><br><span class="line">                  // If still not found, then invoke findClass in order</span><br><span class="line">                  // to find the class.</span><br><span class="line">                  long t1 = System.nanoTime();</span><br><span class="line">                  c = findClass(name);</span><br><span class="line"></span><br><span class="line">                  // this is the defining class loader; record the stats</span><br><span class="line">                  sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                  sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                  sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          if (resolve) &#123;</span><br><span class="line">              resolveClass(c);</span><br><span class="line">          &#125;</span><br><span class="line">          return c;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>  简单翻译一下类加载的过程：</p>
+<li><p>第四步，但是即使进行免密码登录之后，我们还是很困扰，因为我们有两个问题还没解决，第一个问题是如何当我们想要登录查看的机器很多的时候，难道我每次都去改脚本的服务器的IP地址么？第二个问题是，难道我每次都需要去执行python xxx.py的方式去执行我们的脚本么？</p>
 <ul>
-<li>首先当需要加载类的时候，先检查需要加载的类是否已经加载。</li>
-<li>如果还没加载，自己不会去尝试加载类，而是将类加载的任务委托给了parentClass，向上进行类的查找过程。</li>
-<li><p>如果向上委托后，找到最顶上的BootStrapClassLoader类进行加载，如果没有加载到会交给下一级ExtClassLoader进行加载，如果在此从上到下查找的过程中查找到，则会将类加载到内存中，如果没有找到，会交给发起委托的类加载器，由它去指定的文件系统等进行查找加载，如果还是没有找到，则抛出ClassNotFound的异常。</p>
-<p>从上面可以看到的是，类的加载过程先由加载发起者进行向上委托，然后再由顶上的类加载器进行查找返回，找不到就自己加载的过程，这种加载的过程我们称作双亲委派机制。</p>
-<p>但是仔细一想，不对呀，假如AppClassLoader需要加载一个类的时候，会向上委托到ExtClassLoader，然后再向上委托给BootStrapClassLoader。如下代码所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * 类加载过程</span><br><span class="line">  */</span><br><span class="line"> private static void parentDelegation()&#123;</span><br><span class="line">     ClassLoader classLoader = Test.class.getClassLoader(); //app</span><br><span class="line">     System.out.println(classLoader);</span><br><span class="line">     ClassLoader parentClassLoader = classLoader.getParent(); //ext</span><br><span class="line">     System.out.println(parentClassLoader);</span><br><span class="line">     ClassLoader parentParentClassLoader = parentClassLoader.getParent(); //null</span><br><span class="line">     System.out.println(parentParentClassLoader);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<li>第一个问题的解决方式：我们可以使用docopt库进行在命令行执行Python命令的同时带上你想登录的服务器的IP地址。如下所示：<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087aca83148d7?w=1642&amp;h=592&amp;f=png&amp;s=175542" alt="server"><br>这样我们就可以在执行Python命令的时候，按照usage的方式输入然后解析watch_server_ip字段的方式进行自定义查看服务器而无需改脚本的方式。如下图所示，在入口进行简单的判断：<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087acac4f4fee?w=988&amp;h=150&amp;f=png&amp;s=32438" alt="server4"></li>
+<li><p>第二个问题的解决方式：我们可以使用setuptools搞事情，代码如下所示：<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087acabd7e208?w=1350&amp;h=542&amp;f=png&amp;s=69030" alt="setup"><br>从上面我们可以看到，我们定义了一个脚本，自定义了一个命令叫<strong>freeserver</strong>，然后调用freeserver脚本的时候，调用脚本的main方法。<br>编写完以上代码之后，我们执行<strong>python3 setup.py install</strong> 方法，就可以完成自定义命令行的方式输入而无需执行Python xxx.py xxxx_ip的麻烦的方式了。</p>
+</li>
+<li><p>第五步，让我们来看看效果吧,虽然都打了马赛克，但是红红绿绿的可以看到我们的脚本确实成功了。<br><img src="https://user-gold-cdn.xitu.io/2017/11/29/160087aca4fb03e1?w=1376&amp;h=962&amp;f=png&amp;s=99007" alt="success"></p>
 </li>
 </ul>
-<p>  <img src="https://user-gold-cdn.xitu.io/2017/12/7/1603172695b5f873?w=839&amp;h=150&amp;f=png&amp;s=27078" alt="执行结果"></p>
-<p>  我们可以看到，输出结果除了null确实跟我们设想的一样，但是为什么BootStrapClassLoader为空呢，其实是因为BootStrapClassLoader是一个native的实现，所以在这里输出是null。但是仔细一想貌似还是不对，因为从我们上面给出的ClassLoader继承关系图，我们看到这几个ClassLoader没有继承关系，那为啥叫双亲委派，从代码中我们可以看到这个“亲”的定义：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected ClassLoader(ClassLoader parent) &#123;</span><br><span class="line">     this(checkCreateClassLoader(), parent);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>  原来，是在产生一个类加载器的时候，通过传入parent指定了该ClassLoader的亲是哪个ClassLoader。它们之前是没有任何的继承关系的。</p>
+</li>
+</ul>
+<h4 id="果不其然的源代码分享"><a href="#果不其然的源代码分享" class="headerlink" title="果不其然的源代码分享"></a>果不其然的源代码分享</h4><ul>
+<li>freeserver.py代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;免密码登录远端服务器</span><br><span class="line">Usage:</span><br><span class="line">    freeserver &lt;watch_server_ip&gt;</span><br><span class="line"></span><br><span class="line">Examples:</span><br><span class="line">    freeserver xxxxxxx</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import pexpect</span><br><span class="line">import os </span><br><span class="line">import getpass</span><br><span class="line">from docopt import docopt</span><br><span class="line"># 实现免密码登录方法</span><br><span class="line">def login(fortresses_ip,user_name,password,watch_server_ip,command):</span><br><span class="line">    child = pexpect.spawn(&apos;ssh -pxxx %s@%s&apos;%(user_name,fortresses_ip))</span><br><span class="line">    ret_login = child.expect([&apos;%s@%s\&apos;s password:&apos;%(user_name,fortresses_ip),pexpect.TIMEOUT])</span><br><span class="line">    if ret_login == 1:</span><br><span class="line">        print (&apos;login the remote server ip is timeout&apos;)</span><br><span class="line">        return</span><br><span class="line">    else:</span><br><span class="line">        child.sendline(password)</span><br><span class="line">        ret_password = child.expect([&apos;This is a beta version. If you find bugs, please contact @Securit&apos;,pexpect.TIMEOUT])</span><br><span class="line">        if ret_password == 1:</span><br><span class="line">            print (&apos;the password is wrong,please check the password&apos;)</span><br><span class="line">            return</span><br><span class="line">        else:</span><br><span class="line">            child.sendline(&apos;p&apos;)</span><br><span class="line">            ret_watch_server = child.expect([watch_server_ip,pexpect.TIMEOUT])</span><br><span class="line">            if ret_watch_server != 0:</span><br><span class="line">                print (&apos;the password is correct,but the server ip maybe you have no perssion,please apply it&apos;)</span><br><span class="line">                return</span><br><span class="line">            else:</span><br><span class="line">                child.sendline(watch_server_ip)</span><br><span class="line">                child.expect(&apos;password&apos;)</span><br><span class="line">                child.sendline(password)</span><br><span class="line">                child.expect(&apos;Powered&apos;)</span><br><span class="line">                if command is not None:</span><br><span class="line">                    child.sendline(command)</span><br><span class="line">                child.sendline(&apos;tailf web.log&apos;)</span><br><span class="line">                child.interact()</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    arguments = docopt(__doc__)</span><br><span class="line">    watch_server_ip = arguments.get(&apos;&lt;watch_server_ip&gt;&apos;)</span><br><span class="line">    user_name = &apos;your user name&apos;</span><br><span class="line">    password = &apos;your password&apos;</span><br><span class="line">    fortresses_ip = &apos;fortresses_ip&apos;</span><br><span class="line">    command = &apos;your command when your want success enter the ip server&apos;</span><br><span class="line">    login(fortresses_ip,user_name,password,watch_server_ip,command)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>双亲委派的作用是什么？</p>
-<p> 从上面可以看到，ClassLoader采用的是双亲委派机制，那到底有什么作用呢？</p>
-<ul>
-<li><p>减少重复加载</p>
-<p>在双亲委派机制中，当它的parentClassLoader已经加载了该类的时候，就没必要自己再加载一遍了，可以减少重复加载的可能性。</p>
-</li>
-<li><p>安全</p>
-<p> 假如没有双亲委派机制，那我们就可以随意让自定义的ClassLoader去加载经过改造的系统的类，比如String，这是一件非常危险的事情，而有双亲委派的时候，因为String类已经被加载过，所以就不能被我们自定义的ClassLoader加载。</p>
-</li>
+<li>setup.py</li>
 </ul>
-</li>
-<li><p>ClassLoder常见方法</p>
-<ul>
-<li>Class&lt;?&gt; defineClass(byte[] b, int off, int len) 表示将一个byte数组中的内容转换成一个类的实例。</li>
-<li>Class&lt;?&gt; findClass(String name) 从指定的位置查找类，返回一个类的实例。（自定义类加载器主要实现该方法）</li>
-<li>Class&lt;?&gt; loadClass(String name) 从指定的位置加载类。</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、实现自定义ClassLoader"><a href="#三、实现自定义ClassLoader" class="headerlink" title="三、实现自定义ClassLoader"></a>三、实现自定义ClassLoader</h3><p> 前面已经描述了ClassLoader的作用以及加载的过程，而当我们需要自定义一个ClassLoder去加载我们自己的类并执行某些操作的时候，就需要实现自定义ClassLoder。</p>
-<ul>
-<li>首先需要继承ClassLoader类</li>
-<li>实现自定义的findClass方法</li>
-</ul>
-<p>以下代码为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by buzheng on 17/12/7.</span><br><span class="line"> */</span><br><span class="line">public class TestClassLoader &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            MyClassLoder myClassLoder = new MyClassLoder();</span><br><span class="line">            Class clazz = myClassLoder.loadClass(&quot;com.buzheng.class_test.TestClassLoader&quot;);</span><br><span class="line">            Object object = clazz.newInstance();</span><br><span class="line">            Method method = clazz.getMethod(&quot;say&quot;, null);</span><br><span class="line">            Object o = method.invoke(object, null);</span><br><span class="line">            System.out.println(o);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 定义一个方法</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public String say() &#123;</span><br><span class="line">        return &quot;here&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    static class MyClassLoder extends ClassLoader &#123;</span><br><span class="line">        @Override</span><br><span class="line">        protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                String classPath = name.substring(name.lastIndexOf(&quot;.&quot;) + 1) + &quot;.class&quot;;</span><br><span class="line">                InputStream is = getClass().getResourceAsStream(classPath);</span><br><span class="line">                if (is == null) &#123;</span><br><span class="line">                    return super.findClass(name);</span><br><span class="line">                &#125;</span><br><span class="line">                byte[] b = new byte[is.available()];</span><br><span class="line">                return defineClass(name, b, 0, b.length);</span><br><span class="line"></span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                return super.findClass(name);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>执行main方法可以看到，我们确实自定义了一个类加载器，并且将字节码文件转为字节流进行自定义加载。<br><img src="https://user-gold-cdn.xitu.io/2017/12/7/16031726989504d1?w=785&amp;h=148&amp;f=png&amp;s=18372" alt="执行结果"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from setuptools import setup </span><br><span class="line">setup( </span><br><span class="line">    name=&apos;freeserver&apos;,</span><br><span class="line">    py_modules=[&apos;__inti__&apos;, &apos;freeserver&apos;], </span><br><span class="line">    install_requires=[&apos;pexpect&apos;], </span><br><span class="line">    entry_points=&#123; </span><br><span class="line">        &apos;console_scripts&apos;: [&apos;freeserver=freeserver:main&apos;] </span><br><span class="line">        &#125; </span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
 
           
         
@@ -456,7 +425,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -502,7 +471,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
