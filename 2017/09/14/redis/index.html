@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -79,16 +79,23 @@
 
 
 
-<meta name="description" content="Never Say Goodbye">
-<meta property="og:type" content="website">
-<meta property="og:title" content="土耳其冰淇淋">
-<meta property="og:url" content="http://yoursite.com/page/12/index.html">
+<meta name="description" content="一、NoSQL1、NoSQL的优点： 高并发、效率高 拓展性强 数据结构灵活   2、NoSQL的类型： 键值对存储：Redis (内容缓存，高并发访问效率高) 列存储：Hbase 文档数据库：MongoDB 图形数据库  二、Redis1、概述 使用C语言进行开发的一个高性能的键值对型数据库   每秒11万次的读，8W次的写操作，高吞吐量    2、应用场景 缓存 任务队列 分布式集群的sess">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Spring中使用Redis">
+<meta property="og:url" content="http://yoursite.com/2017/09/14/redis/index.html">
 <meta property="og:site_name" content="土耳其冰淇淋">
-<meta property="og:description" content="Never Say Goodbye">
+<meta property="og:description" content="一、NoSQL1、NoSQL的优点： 高并发、效率高 拓展性强 数据结构灵活   2、NoSQL的类型： 键值对存储：Redis (内容缓存，高并发访问效率高) 列存储：Hbase 文档数据库：MongoDB 图形数据库  二、Redis1、概述 使用C语言进行开发的一个高性能的键值对型数据库   每秒11万次的读，8W次的写操作，高吞吐量    2、应用场景 缓存 任务队列 分布式集群的sess">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180114_1l40g1k49cafk1jhbalh188974fg7_1262x828.png">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180114_3j21kkklg847g56c9d9chci2abah2_1096x230.png">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180114_12baaig523625aa90ad4li77dcdg9_1506x428.png">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180114_1k54kc22594l6ih755888fa1d6eik_2000x1344.png">
+<meta property="og:updated_time" content="2018-01-14T06:01:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="土耳其冰淇淋">
-<meta name="twitter:description" content="Never Say Goodbye">
+<meta name="twitter:title" content="在Spring中使用Redis">
+<meta name="twitter:description" content="一、NoSQL1、NoSQL的优点： 高并发、效率高 拓展性强 数据结构灵活   2、NoSQL的类型： 键值对存储：Redis (内容缓存，高并发访问效率高) 列存储：Hbase 文档数据库：MongoDB 图形数据库  二、Redis1、概述 使用C语言进行开发的一个高性能的键值对型数据库   每秒11万次的读，8W次的写操作，高吞吐量    2、应用场景 缓存 任务队列 分布式集群的sess">
+<meta name="twitter:image" content="https://s3.mogucdn.com/mlcdn/c45406/180114_1l40g1k49cafk1jhbalh188974fg7_1262x828.png">
 
 
 
@@ -118,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/12/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/14/redis/"/>
 
 
 
 
 
-  <title>土耳其冰淇淋</title>
+  <title>在Spring中使用Redis | 土耳其冰淇淋</title>
   
 
 
@@ -143,8 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,9 +243,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -269,9 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/14/redis/" itemprop="url">在Spring中使用Redis</a></h1>
+          <h1 class="post-title" itemprop="name headline">在Spring中使用Redis</h1>
         
 
         <div class="post-meta">
@@ -343,9 +347,7 @@
       
 
       
-        
-          
-            <h3 id="一、NoSQL"><a href="#一、NoSQL" class="headerlink" title="一、NoSQL"></a>一、NoSQL</h3><h4 id="1、NoSQL的优点："><a href="#1、NoSQL的优点：" class="headerlink" title="1、NoSQL的优点："></a>1、NoSQL的优点：</h4><ul>
+        <h3 id="一、NoSQL"><a href="#一、NoSQL" class="headerlink" title="一、NoSQL"></a>一、NoSQL</h3><h4 id="1、NoSQL的优点："><a href="#1、NoSQL的优点：" class="headerlink" title="1、NoSQL的优点："></a>1、NoSQL的优点：</h4><ul>
 <li>高并发、效率高</li>
 <li>拓展性强</li>
 <li>数据结构灵活 </li>
@@ -387,8 +389,6 @@
 <p>执行完毕之后可以在你的本机的Redis客户端查看到写入的内容。或者可以通过brew cask install rdm安装RDM（Redis Desktop Manager）可视化工具进行查看，如下图：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180114_1k54kc22594l6ih755888fa1d6eik_2000x1344.png" alt="Redis可视化工具"></p>
 <p>具体RedisTemplate的使用姿势：<a href="https://www.jianshu.com/p/7bf5dc61ca06" target="_blank" rel="noopener">如何使用RedisTemplate访问Redis数据结构</a></p>
 
-          
-        
       
     </div>
     
@@ -398,19 +398,74 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="yupeibiao 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="yupeibiao 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/05/读书笔记-服务框架/" rel="next" title="应用服务化-服务框架">
+                <i class="fa fa-chevron-left"></i> 应用服务化-服务框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/05/Message/" rel="prev" title="读书笔记-消息中间件">
+                读书笔记-消息中间件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -420,14 +475,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -435,6 +487,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -455,8 +511,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -532,6 +597,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、NoSQL"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;NoSQL" class="headerlink" title="&#x4E00;&#x3001;NoSQL"></a>&#x4E00;&#x3001;NoSQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、NoSQL的优点："><span class="nav-number">1.1.</span> <span class="nav-text"><a href="#1&#x3001;NoSQL&#x7684;&#x4F18;&#x70B9;&#xFF1A;" class="headerlink" title="1&#x3001;NoSQL&#x7684;&#x4F18;&#x70B9;&#xFF1A;"></a>1&#x3001;NoSQL&#x7684;&#x4F18;&#x70B9;&#xFF1A;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、NoSQL的类型："><span class="nav-number">1.2.</span> <span class="nav-text"><a href="#2&#x3001;NoSQL&#x7684;&#x7C7B;&#x578B;&#xFF1A;" class="headerlink" title="2&#x3001;NoSQL&#x7684;&#x7C7B;&#x578B;&#xFF1A;"></a>2&#x3001;NoSQL&#x7684;&#x7C7B;&#x578B;&#xFF1A;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Redis"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;Redis" class="headerlink" title="&#x4E8C;&#x3001;Redis"></a>&#x4E8C;&#x3001;Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、概述"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#1&#x3001;&#x6982;&#x8FF0;" class="headerlink" title="1&#x3001;&#x6982;&#x8FF0;"></a>1&#x3001;&#x6982;&#x8FF0;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、应用场景"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#2&#x3001;&#x5E94;&#x7528;&#x573A;&#x666F;" class="headerlink" title="2&#x3001;&#x5E94;&#x7528;&#x573A;&#x666F;"></a>2&#x3001;&#x5E94;&#x7528;&#x573A;&#x666F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、安装"><span class="nav-number">2.3.</span> <span class="nav-text"><a href="#3&#x3001;&#x5B89;&#x88C5;" class="headerlink" title="3&#x3001;&#x5B89;&#x88C5;"></a>3&#x3001;&#x5B89;&#x88C5;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、持久化"><span class="nav-number">2.4.</span> <span class="nav-text"><a href="#4&#x3001;&#x6301;&#x4E45;&#x5316;" class="headerlink" title="4&#x3001;&#x6301;&#x4E45;&#x5316;"></a>4&#x3001;&#x6301;&#x4E45;&#x5316;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Spring-Boot使用Redis"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;Spring-Boot&#x4F7F;&#x7528;Redis" class="headerlink" title="&#x4E09;&#x3001;Spring Boot&#x4F7F;&#x7528;Redis"></a>&#x4E09;&#x3001;Spring Boot&#x4F7F;&#x7528;Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、增加依赖spring-boot-starter-data-redis"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#1&#x3001;&#x589E;&#x52A0;&#x4F9D;&#x8D56;spring-boot-starter-data-redis" class="headerlink" title="1&#x3001;&#x589E;&#x52A0;&#x4F9D;&#x8D56;spring-boot-starter-data-redis"></a>1&#x3001;&#x589E;&#x52A0;&#x4F9D;&#x8D56;spring-boot-starter-data-redis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、进行配置注入"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#2&#x3001;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#x6CE8;&#x5165;" class="headerlink" title="2&#x3001;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#x6CE8;&#x5165;"></a>2&#x3001;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#x6CE8;&#x5165;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、代码测试"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#3&#x3001;&#x4EE3;&#x7801;&#x6D4B;&#x8BD5;" class="headerlink" title="3&#x3001;&#x4EE3;&#x7801;&#x6D4B;&#x8BD5;"></a>3&#x3001;&#x4EE3;&#x7801;&#x6D4B;&#x8BD5;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -672,6 +753,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
