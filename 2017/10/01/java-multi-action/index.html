@@ -79,19 +79,20 @@
 
 
 
-<meta name="description" content="未完待续  一、chapter2:线程安全性1、安全性概念当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。  当数据被多线程访问并且执行并发读写操作的时候，如果没有足够的可靠性保证，对象本身状态容易发生不安全的变化。  2、原子性 概念：当一个操作不能单次完成，需要由多个操作组合而成，是可以进行分割的，对外而言，这个操作就非原子性质的。比如执行i++的操作，需要由读取数据、修改数">
+<meta name="description" content="一、chapter2:线程安全性1、安全性概念当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。  当数据被多线程访问并且执行并发读写操作的时候，如果没有足够的可靠性保证，对象本身状态容易发生不安全的变化。  2、原子性 概念：当一个操作不能单次完成，需要由多个操作组合而成，是可以进行分割的，对外而言，这个操作就非原子性质的。比如执行i++的操作，需要由读取数据、修改数据、写入数据的">
 <meta name="keywords" content="读书笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发编程实战读书笔记">
 <meta property="og:url" content="http://yoursite.com/2017/10/01/java-multi-action/index.html">
 <meta property="og:site_name" content="土耳其冰淇淋">
-<meta property="og:description" content="未完待续  一、chapter2:线程安全性1、安全性概念当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。  当数据被多线程访问并且执行并发读写操作的时候，如果没有足够的可靠性保证，对象本身状态容易发生不安全的变化。  2、原子性 概念：当一个操作不能单次完成，需要由多个操作组合而成，是可以进行分割的，对外而言，这个操作就非原子性质的。比如执行i++的操作，需要由读取数据、修改数">
+<meta property="og:description" content="一、chapter2:线程安全性1、安全性概念当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。  当数据被多线程访问并且执行并发读写操作的时候，如果没有足够的可靠性保证，对象本身状态容易发生不安全的变化。  2、原子性 概念：当一个操作不能单次完成，需要由多个操作组合而成，是可以进行分割的，对外而言，这个操作就非原子性质的。比如执行i++的操作，需要由读取数据、修改数据、写入数据的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180206_6hl4cbigkl0g38hc10h9c9b9825fh_1590x950.png">
-<meta property="og:updated_time" content="2018-02-06T15:00:33.000Z">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c45406/180207_014ajj9dbecic6972kgc37ie47585_4110x3864.png">
+<meta property="og:updated_time" content="2018-02-07T06:53:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发编程实战读书笔记">
-<meta name="twitter:description" content="未完待续  一、chapter2:线程安全性1、安全性概念当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。  当数据被多线程访问并且执行并发读写操作的时候，如果没有足够的可靠性保证，对象本身状态容易发生不安全的变化。  2、原子性 概念：当一个操作不能单次完成，需要由多个操作组合而成，是可以进行分割的，对外而言，这个操作就非原子性质的。比如执行i++的操作，需要由读取数据、修改数">
+<meta name="twitter:description" content="一、chapter2:线程安全性1、安全性概念当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。  当数据被多线程访问并且执行并发读写操作的时候，如果没有足够的可靠性保证，对象本身状态容易发生不安全的变化。  2、原子性 概念：当一个操作不能单次完成，需要由多个操作组合而成，是可以进行分割的，对外而言，这个操作就非原子性质的。比如执行i++的操作，需要由读取数据、修改数据、写入数据的">
 <meta name="twitter:image" content="https://s3.mogucdn.com/mlcdn/c45406/180206_6hl4cbigkl0g38hc10h9c9b9825fh_1590x950.png">
 
 
@@ -344,10 +345,7 @@
       
 
       
-        <blockquote>
-<p>未完待续</p>
-</blockquote>
-<h4 id="一、chapter2-线程安全性"><a href="#一、chapter2-线程安全性" class="headerlink" title="一、chapter2:线程安全性"></a>一、chapter2:线程安全性</h4><h5 id="1、安全性概念"><a href="#1、安全性概念" class="headerlink" title="1、安全性概念"></a>1、安全性概念</h5><p>当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。</p>
+        <h4 id="一、chapter2-线程安全性"><a href="#一、chapter2-线程安全性" class="headerlink" title="一、chapter2:线程安全性"></a>一、chapter2:线程安全性</h4><h5 id="1、安全性概念"><a href="#1、安全性概念" class="headerlink" title="1、安全性概念"></a>1、安全性概念</h5><p>当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。</p>
 <blockquote>
 <p>当数据被多线程访问并且执行并发读写操作的时候，如果没有足够的可靠性保证，对象本身状态容易发生不安全的变化。</p>
 </blockquote>
@@ -491,7 +489,10 @@
 <li>提供了公平与否的选择</li>
 <li>性能高</li>
 </ul>
-<h5 id="3、读写锁"><a href="#3、读写锁" class="headerlink" title="3、读写锁"></a>3、读写锁</h5>
+<h5 id="3、读写锁"><a href="#3、读写锁" class="headerlink" title="3、读写锁"></a>3、读写锁</h5><blockquote>
+<p>附上一个思维导图<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180207_014ajj9dbecic6972kgc37ie47585_4110x3864.png" alt="思维导图"></p>
+</blockquote>
+
       
     </div>
     
