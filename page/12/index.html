@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/01/java-multi-action/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/05/Message/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yupeibiao">
@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/01/java-multi-action/" itemprop="url">Java并发编程实战读书笔记</a></h1>
+                <a class="post-title-link" href="/2017/10/05/Message/" itemprop="url">读书笔记-消息中间件</a></h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-01T23:37:20+08:00">
-                2017-10-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-05T23:41:01+08:00">
+                2017-10-05
               </time>
             
 
@@ -345,153 +345,74 @@
       
         
           
-            <h4 id="一、chapter2-线程安全性"><a href="#一、chapter2-线程安全性" class="headerlink" title="一、chapter2:线程安全性"></a>一、chapter2:线程安全性</h4><h5 id="1、安全性概念"><a href="#1、安全性概念" class="headerlink" title="1、安全性概念"></a>1、安全性概念</h5><p>当对象在多线程并发条件下进行访问的时候，能保证自身状态的正确性。</p>
-<blockquote>
-<p>当数据被多线程访问并且执行并发读写操作的时候，如果没有足够的可靠性保证，对象本身状态容易发生不安全的变化。</p>
-</blockquote>
-<h5 id="2、原子性"><a href="#2、原子性" class="headerlink" title="2、原子性"></a>2、原子性</h5><ul>
-<li>概念：当一个操作不能单次完成，需要由多个操作组合而成，是可以进行分割的，对外而言，这个操作就非原子性质的。比如执行i++的操作，需要由读取数据、修改数据、写入数据的操作序列组合而成，并不是一个原子性的操作。</li>
-</ul>
-<blockquote>
-<p>当多个线程执行i++的操作，比如A线程读取i的值为1，修改i为2的时候让出CPU的执行权，由线程B进行执行，此时B读取到的还是1，然后分别执行操作，就会导致双方操作后少加了一次数的问题，此时线程并不安全。</p>
-</blockquote>
-<ul>
-<li>竞态条件：当某个计算的正确性与否取决于多个线程的交替执行时序，就会发生竞态条件。比如如下代码：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class LazyInitInstance &#123;</span><br><span class="line"></span><br><span class="line">    private LazyInitInstance() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static LazyInitInstance instance = null;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 产生竞态条件的case</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static LazyInitInstance getInstance() &#123;</span><br><span class="line">        if (instance == null) &#123;</span><br><span class="line">            instance = new LazyInitInstance();</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="3、加锁机制（如何避免被同时访问）"><a href="#3、加锁机制（如何避免被同时访问）" class="headerlink" title="3、加锁机制（如何避免被同时访问）"></a>3、加锁机制（如何避免被同时访问）</h5><ul>
-<li><p>为什么需要加锁：上面已经说到原子性是实现多线程并发访问的时候的一个必要条件，Java提供了一个内置的锁支持原子性，也就是<strong>同步代码块</strong></p>
-</li>
-<li><p>同步代码块:同步代码块的使用姿势很简单，在方法块加上synchronized修饰即可，而synchronized实际上是一个内置锁，线程进入同步代码块的时候先获取锁，在推出的时候释放锁。因为Java的内置锁实际上是一个互斥锁（也是一个可重入锁），因为当某个线程已经获取锁的情况下，如果另外的线程尝试获取锁会进行阻塞或者等待的操作。而因为每次只能有一个线程获取锁并执行，因此同步代码块中的执行实际上就变成了一个原子操作，因此是线程安全的。</p>
-</li>
-<li><p>可重入锁：当一个线程请求另外的线程持有的锁的时候会进行阻塞，当时当持有锁的线程请求自己的锁的时候，是不会有问题的，否则会引起死锁。代码如下：</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class SynchronizedDemo &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 父类</span><br><span class="line">     */</span><br><span class="line">    class Father &#123;</span><br><span class="line">        public synchronized void doSomething() &#123;</span><br><span class="line">            //方法使用synchronized 修饰 synchronized是一个内置锁  也是可重入锁</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 继承自父类</span><br><span class="line">     */</span><br><span class="line">    class Son extends Father &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public synchronized void doSomething() &#123;</span><br><span class="line">            //先获取锁  再次获取锁  如果不是可重入锁（自己再次获取自己所持有的锁称之为重入）那么会产生卡住死锁的现象</span><br><span class="line">            super.doSomething();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="二、chapter3-对象共享"><a href="#二、chapter3-对象共享" class="headerlink" title="二、chapter3:对象共享"></a>二、chapter3:对象共享</h4><h5 id="1、可见性"><a href="#1、可见性" class="headerlink" title="1、可见性"></a>1、可见性</h5><blockquote>
-<p>上面的加锁实际上是避免了对象被同时访问从而保证了线程安全性。接下来如何保证对象在可被同时访问的情况下线程的安全性变得至关重要。</p>
-</blockquote>
-<p>在Java的内存模型中，具体可以参考<a href="https://buzheng1949.github.io/2017/12/10/JavaMemoryModel/" target="_blank" rel="noopener">Java内存模型</a>，在Java的内存模型中定义了主内存以及工作内存的概念，因此如果主内存跟工作内存中的数据无法进行实时同步的一个机制保证的情况下，在不同的线程中的数据是彼此不一致的，也就是不可见的现象，比如A线程修改了数据，但是因为CPU缓存的原因，无法被其他线程看到，那么其他线程的数据就会失效，而对失效数据的操作也就失去了意义。</p>
-<ul>
-<li>synchronized：通过在工作线程的数据修改完成后需要同步到主内存以及在进入同步代码块的时候数据需要从主内存同步的约定保证数据的可见性。</li>
-<li>volatile: 通过每个原子性操作的数据变更都会同步到主内存的操作保证数据的可靠性。</li>
-</ul>
-<h5 id="2、线程封闭"><a href="#2、线程封闭" class="headerlink" title="2、线程封闭"></a>2、线程封闭</h5><blockquote>
-<p>既然多线程访问共享的数据会导致数据的不可靠，那如果单个线程的数据都封闭在单个线程中呢？</p>
-</blockquote>
-<ul>
-<li>栈封闭：线程内部使用，也就是使用局部变量，对象不进行发布，不逸出。</li>
-<li>ThreadLocal:ThreadLocal用于线程隔离，当不同线程的数据不进行相互影响的情况下，使用ThreadLocal是一个非常规范的方式。ThreadLocal的实现大概是<map<thread,<threadlocalmap>&gt;&gt;，而ThreadLocalMap可以看成<threadlocal,threadlocals>，进行数据隔离</threadlocal,threadlocals></map<thread,<threadlocalmap></li>
-</ul>
-<h5 id="3、不变性"><a href="#3、不变性" class="headerlink" title="3、不变性"></a>3、不变性</h5><blockquote>
-<p>那如果访问的数据不可变，不也是安全的么？</p>
-</blockquote>
-<ul>
-<li>对象创建之后便不能修改</li>
-<li>对象的所有域都是final类型</li>
-<li>对象是正确创建的，没有产生逸出的情况</li>
-</ul>
-<h4 id="三、chapter5-基础构建模块"><a href="#三、chapter5-基础构建模块" class="headerlink" title="三、chapter5:基础构建模块"></a>三、chapter5:基础构建模块</h4><h5 id="1、同步容器类"><a href="#1、同步容器类" class="headerlink" title="1、同步容器类"></a>1、同步容器类</h5><ul>
-<li>概念：同步容器类是通过将他们的状态封装起来，并对所有的公有方法使用synchronized进行同步，使得每次只能有一个线程持有锁进行访问。</li>
-<li>常见的同步容器类：Vector、HashTable或者Collections的synchronizedXXX等产生的同步类。</li>
-<li>同样存在的问题：同步容器类是线程安全的，但是当同步容器类被不同的线程并发访问执行读写操作的时候依然存在相互影响的可能。比如获取size的之后去get(size)的同时另外的线程删除了容器中的某个值的时候，就会发生角标越界的case。那只能在修改的过程中进行加锁解决线程安全问题，但是在高并发情况下，加锁之后使得系统的并发能力下降，因为比较折中的解决办法就是将容器进行克隆，并在副本上进行迭代。</li>
-</ul>
-<h5 id="2、并发容器"><a href="#2、并发容器" class="headerlink" title="2、并发容器"></a>2、并发容器</h5><ul>
-<li>同步容器类的问题：同步容器类是通过将所有对容器状态的访问进行串行化，实现线程安全性，这种实现方式的代价就是严重降低并发性，当多个线程竞争容器的锁的时候，吞吐量会急剧下降。</li>
-<li>类型<ul>
-<li>ConcurrentHashMap:通过使用分段锁的方式进行加锁，任意数量的读取线程可以并发的访问Map，执行读取操作的线程以及执行写入操作的线程可以并发的访问Map。因为CouncurrentHashMap无法通过加锁进行独占访问，因为客户端是无法进行加锁创建新的原子操作的。所以ConcurrentHashMap提供了一些常见的原子性的复合操作，比如putIfAbsent等等。</li>
-<li>CopyOnWriteArrayList:CopyOnWirteArrayList的实现方式是在写操作的时候进行加锁，同时将自身的数据复制一份，同时对复制的数据进行修改，修改完成之后，再进行同步，因此适合读多写少的情况，存在一定的并发情况下，读取的数据不是最新的可能性，因此如果需要保证读取的数据都是最新的，那么不推荐使用CopyOnWrite容器。</li>
+            <h3 id="一、什么是消息中间件"><a href="#一、什么是消息中间件" class="headerlink" title="一、什么是消息中间件"></a>一、什么是消息中间件</h3><p> 在分布式系统中，网络上的不同节点之间可以通过服务框架进行互相调用，但是会在不同的应用之间造成耦合。而消息中间件就是能够使得不同的节点通过消息进行互相关联而又不存在耦合。</p>
+<h3 id="二、为什么需要消息中间件"><a href="#二、为什么需要消息中间件" class="headerlink" title="二、为什么需要消息中间件"></a>二、为什么需要消息中间件</h3><p>  假设有一个交易管理系统，用户登录的时候，短信服务中心需要发送短信给用户进行验证，风控系统需要进行用户的登录环境核实，如果没有消息中间件，那么需要在用户登录的管理系统中主动调用不同应用的服务，而实际上用户登录模块只需要完成自己校验密码正确与否的工作即可，那么就会造成一个登录操作耦合不同的服务中心的情况。</p>
+<p>  而消息中间件的出现可以解决以上的耦合情况。当出现了消息中间件之后，以上需要主动去调用服务的情况就变成了其他的应用去订阅用户登录的消息，当其他应用收到消息的时候自己去处理逻辑，而登录模块就不需要关心什么服务需要监听用户登录的情况，代码就解耦了。</p>
+<h3 id="三、JMS"><a href="#三、JMS" class="headerlink" title="三、JMS"></a>三、JMS</h3><ul>
+<li>JMS规范的组成<ul>
+<li>Destination:消息的通道，定义消息从发送到接收的通道。</li>
+<li>ConnectionFactory:用于创建消息连接的对象，属于管理类。</li>
+<li>Connection:连接接口，主要用于创建Session。</li>
+<li>Session:会话接口。消息对象、消息的创建者、消息的消费者都是由Session会话产生。</li>
+<li>MessageConsumer:消息的消费者。</li>
+<li>MessageProducer:消息产生者。</li>
+<li>Message:消息</li>
 </ul>
 </li>
 </ul>
-<h5 id="3、同步工具类"><a href="#3、同步工具类" class="headerlink" title="3、同步工具类"></a>3、同步工具类</h5><ul>
-<li><p>闭锁:闭锁的作用在于相当于一个等待开关，在闭锁未满足结束条件的时候会执行阻塞式等待结果完成。</p>
+<p>以上的数据流程为:ConnectionFactory-&gt;Connection-&gt;Session-&gt;Message</p>
+<p>Destination+Session-&gt; MessageProducer</p>
+<p>Destination+Session-&gt; MessageConsumer</p>
 <ul>
-<li>CountDownLatch:CoutDownLatch是一种灵活的闭锁实现，它可以使一个或者多个线程在等待一组事件的完成。闭锁状态包括一个计数器，该计数器表示需要等待的事件数量，countDown方法递减计数器，表示有一个事件发生，而await方法是一个阻塞操作，它会等待所有需要发生的事件完成才会继续向下执行。闭锁的好处在于如果以前我们是单线程串行执行，然后将所有结果整合在一起的过程可以变成并发的操作再整合，可以大幅提高程序的性能。</li>
+<li><p>JMS的消费模型</p>
+<ul>
+<li><p>Topic模型</p>
+<p>  Topic模型指的是每个消息的订阅方都会接收到所有一模一样的消息。如下图所示：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180105_443ahdfd704540aa3ccbjkh6faiaj_1116x408.png" alt="Topic模型"></p>
+</li>
+<li><p>Queue模型</p>
+<p> 队列模型指的是每个消息的订阅方共享所有的消息并集体消费。如下图所示：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180105_0fh1ie54c91gkkg98ah99l83h3875_1070x426.png" alt="Queue模型"></p>
+</li>
 </ul>
-<p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">  public class CountDownLatchLock &#123;</span><br><span class="line"></span><br><span class="line">    private static CountDownLatch countDownLatch = new CountDownLatch(4);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Thread thread1 = new Thread(new MyRunnable());</span><br><span class="line">        Thread thread2 = new Thread(new MyRunnable());</span><br><span class="line">        Thread thread3 = new Thread(new MyRunnable());</span><br><span class="line">        Thread thread4 = new Thread(new MyRunnable());</span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">        thread3.start();</span><br><span class="line">        thread4.start();</span><br><span class="line">        try &#123;</span><br><span class="line">            countDownLatch.await();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;count down latch left :&quot; + countDownLatch.getCount() + &quot; and all task is done&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class MyRunnable implements Runnable &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Integer time = new Random().nextInt(10) * 1000;</span><br><span class="line">                Thread.sleep(time);</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + &quot;  sleep  &quot; + time + &quot;ms&quot;);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                System.out.println(&quot;count down latch left :&quot; + countDownLatch.getCount());</span><br><span class="line">                countDownLatch.countDown();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="四、消息中间件"><a href="#四、消息中间件" class="headerlink" title="四、消息中间件"></a>四、消息中间件</h3><p><strong>A、消息发送端保证可靠性</strong></p>
+<p>   消息的一致性指的是当消息的发送应该是应用的操作成功或者失败，有明确具体的返回结果之后消息进行发送，而当应用未进行操作的时候，消息不能被发送，当应用进行操作之后，消息必须被发送，这个称之为消息的一致性。</p>
+<p>   而当我们使用应用与消息中间件进行交互的时候，消息的一致性就变得尤其重要了，消息如果不一致容易造成业务的数据出现问题。</p>
+<p>   如何保证消息的发送的一致性，找到一个通用的消息一致性模型是非常重要。按照TopSky的书里的图如下：</p>
+<p>   <img src="https://s11.mogucdn.com/mlcdn/c45406/180105_7g0j24362e464g77hh4a9h3bljeh1_1092x470.png" alt="消息一致性正向流程"></p>
+<p>   从上图可以看到一条消息的发送路径如下：</p>
+<ul>
+<li>先发送消息到消息中间件并将消息变为待处理状态存储在消息存储系统里面。（消息存储系统可以是数据库、分布式存储、内存等等存储方式）</li>
+<li>返回存储成功与否的状态给应用，应用进行消息存储状态判断，如果存储成功，则触发业务操作，如果存储失败，则取消业务操作。</li>
+<li>当消息存储成功，应用触发相关操作后，应用将操作的处理结果返回给消息中间件。</li>
+<li><p>如果应用返回处理结果的为成功，那么将消息的状态变更为待发送。而当业务失败，则删除消息。</p>
+<p>但是其实依旧可以看到存在一些问题，比如当应用在进行业务操作的时候迟迟未返回操作结果，那么消息是否需要发送呢？</p>
+<p>由此可以将消息中间件被动等待应用返回结果可以变更为消息中间件主动轮询业务结果即可。如下图所示：</p>
+<p><img src="https://s11.mogucdn.com/mlcdn/c45406/180105_24b7ch927f661jc21gjecdb3e87bl_1034x492.png" alt="主动更新结果"></p>
+</li>
+</ul>
+<p><strong>B、如何保证消息的可靠性</strong></p>
+<ul>
+<li><p>订阅方式的可靠性</p>
+<p>消息的订阅分为两种：分别为永久订阅与非永久订阅。永久订阅指的是当订阅消息的机器下线的时候，在下线期间产生的消息会在机器重新上线的时候进行发送。而非永久订阅则在订阅消息的机器下线的时间窗口不会将该时间段产生的消息发送给消息订阅者。因此为了能收到消息，可靠的选择是永久订阅。</p>
 </li>
 </ul>
 <ul>
-<li><p>FutureTask:FutureTask跟CountDownLatch类似，FutureTask是通过调用get方法的时候进行阻塞，实现方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class FutureTaskLock &#123;</span><br><span class="line">   private static final FutureTask&lt;String&gt; futureTask = new FutureTask&lt;String&gt;(new Callable&lt;String&gt;() &#123;</span><br><span class="line">       @Override</span><br><span class="line">       public String call() throws Exception &#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               Thread.sleep(new Random().nextInt(5000));</span><br><span class="line">           &#125; catch (InterruptedException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">           System.out.println(&quot;task1 is finished&quot;);</span><br><span class="line">           return &quot;task1 is finished&quot;;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   private static final FutureTask&lt;String&gt; futureTask2 = new FutureTask&lt;String&gt;(new Callable&lt;String&gt;() &#123;</span><br><span class="line">       @Override</span><br><span class="line">       public String call() throws Exception &#123;</span><br><span class="line">           try &#123;</span><br><span class="line">               Thread.sleep(new Random().nextInt(5000));</span><br><span class="line">           &#125; catch (InterruptedException e) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">           System.out.println(&quot;task2 is finished&quot;);</span><br><span class="line">           return &quot;task2 is finished&quot;;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">       Thread thread = new Thread(futureTask);</span><br><span class="line">       Thread thread1 = new Thread(futureTask2);</span><br><span class="line">       thread.start();</span><br><span class="line">       thread1.start();</span><br><span class="line">       System.out.println(&quot;start time is &quot; + System.currentTimeMillis() + &quot;ms&quot;);</span><br><span class="line">       try &#123;</span><br><span class="line">           futureTask.get();</span><br><span class="line">           futureTask2.get();</span><br><span class="line">       &#125; catch (InterruptedException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; catch (ExecutionException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(&quot;task is over,end time is &quot; + System.currentTimeMillis() + &quot;ms&quot;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<li><p>消息存储的可靠性</p>
 <ul>
-<li><p>信号量Semaphore</p>
-<p>信号量用于控制同时访问某个特定资源的操作数量。Semaphore存放的是许可permit，在执行操作前先获取许可，在执行操作后释放许可，如果没有许可，Semaphore的acquire就会一直阻塞到有许可，release表示执行完毕返回许可给信号量。（注意：看起来是不是又是另外一种互斥锁的实现方式），使用姿势如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">   public class SemaphoreLock &#123;</span><br><span class="line"></span><br><span class="line">    static Semaphore semaphore = new Semaphore(3);</span><br><span class="line"></span><br><span class="line">    static class MyRunnable implements Runnable &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                //从信号量中获取一个机会 如果没有则阻塞等待操作 如果获取得到就执行</span><br><span class="line">                System.out.println(&quot;left change:&quot;+ semaphore.availablePermits());</span><br><span class="line">                semaphore.acquire();</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + &quot; start at &quot; + System.currentTimeMillis());</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + &quot; stop at &quot; + System.currentTimeMillis());</span><br><span class="line">                //释放机会</span><br><span class="line">                semaphore.release();</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">            Thread thread = new Thread(new MyRunnable());</span><br><span class="line">            thread.start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="四、chapter6-任务执行"><a href="#四、chapter6-任务执行" class="headerlink" title="四、chapter6:任务执行"></a>四、chapter6:任务执行</h4><h5 id="1、单线程以及无限线程的问题"><a href="#1、单线程以及无限线程的问题" class="headerlink" title="1、单线程以及无限线程的问题"></a>1、单线程以及无限线程的问题</h5><ul>
-<li>单线程：资源利用率低</li>
-<li>无线线程：资源耗尽、线程开销</li>
-</ul>
-<h5 id="2、Executor框架"><a href="#2、Executor框架" class="headerlink" title="2、Executor框架"></a>2、Executor框架</h5><ul>
-<li>优点：Executor框架是一个典型的BlockingQueue的生产者消费者模型，提交任务的操作是生产者，执行任务的操作是消费者。</li>
-<li>生命周期：因为Executor是一个异步执行的框架，任务一旦提交，何时执行是取决于有无空闲的线程，而不能被控制的，换句话而言，Executor何时结束是不可知的。<ul>
-<li>运行：创建成功就处于运行等待任务提交状态</li>
-<li>关闭：调用shutdown表示处理完当前已经提交的任务后关闭，新来的任务不会接受。shutdownNow是暴力终止。</li>
-<li>终止</li>
+<li>分布式文件存储</li>
+<li>双内存+外存存储</li>
+<li>数据库存储</li>
 </ul>
 </li>
-<li><p>实例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"> public class TaskExecutorWebServer &#123;</span><br><span class="line"></span><br><span class="line">    public static final int MAX_THREAD_COUNT = 10;</span><br><span class="line"></span><br><span class="line">    private static final ExecutorService executor = Executors.newFixedThreadPool(MAX_THREAD_COUNT);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        withReturnAndDo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 需要返回值操作 使用callble+future 其实使用futuretask一样可以实现  使用Executor节省资源，降低不必要开支，增加管理</span><br><span class="line">     */</span><br><span class="line">    private static void withReturnAndDo() &#123;</span><br><span class="line">        Callable&lt;String&gt; callable = new Callable&lt;String&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public String call() throws Exception &#123;</span><br><span class="line">                return &quot;i am well done&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Future&lt;String&gt; future = executor.submit(callable);</span><br><span class="line">        try &#123;</span><br><span class="line">            String s = future.get();</span><br><span class="line">            //记得关掉</span><br><span class="line">            executor.shutdown();</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 不需要返回值 直接使用runnable的方式</span><br><span class="line">     */</span><br><span class="line">    private static void withNoReturn() &#123;</span><br><span class="line">        for (int i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">            Runnable runnable = new Runnable() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        Thread.sleep(1000);</span><br><span class="line">                        System.out.println(&quot;do the thing&quot;);</span><br><span class="line">                    &#125; catch (Exception e) &#123;</span><br><span class="line">                        System.out.println(&quot;do the thing error&quot;);</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            executor.execute(runnable);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private void shutdown() &#123;</span><br><span class="line">        executor.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>消息发送的可靠性</p>
+<p>消息发送的可靠性也就是消息的一致性，如上文所讲的内容。</p>
 </li>
 </ul>
-<ul>
-<li><p>思考：如果当有一个需求，页面是瀑布流，展示非常多的图片，任务分为两部分，一部分是渲染文本，一个是下载图片并渲染的过程。</p>
-<ul>
-<li>方案：先渲染文本、再执行下载图片的操作，这样文本先显示，图片等下载完显示。</li>
-<li>改进step1：渲染文本的同时看开启另外的线程，下载完所有图片并显示。</li>
-<li>改进step2:step1的作用微乎其微，因为渲染文本是一个很快的操作，所以效果将差不多。因此如果增加Future以及Callable的方式将请求提交到Executor中，比如设置为3个线程，那么速度能提高不少。当时又带来新的问题，每个submit提交的future的get返回值的操作是阻塞操作，当第一个future阻塞的时候，其他的future就算已经有返回值，那还是无法进行渲染。</li>
-<li>改进step3:如果想要提交给线程池中的task能够及时返回结果，while循环看起来是一个不错的主意，不过代码看起来会比较难受，因此可以使用CompletionService, CompletionService将Executor与BlockingQueue结合在一起，当调用take的时候，能返回已经执行完的future，这样就能做到及时返回结果，渲染图片。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"> public class CompletionServiceWeb &#123;</span><br><span class="line"></span><br><span class="line">    static List&lt;Task&gt; taskList = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public static void init() &#123;</span><br><span class="line">        taskList.add(new Task2());</span><br><span class="line">        taskList.add(new Task2());</span><br><span class="line">        taskList.add(new Task1());</span><br><span class="line">        taskList.add(new Task1());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void testCompletionService(ExecutorService executor) &#123;</span><br><span class="line">        CompletionService&lt;String&gt; completionService = new ExecutorCompletionService&lt;String&gt;(executor);</span><br><span class="line">        for (final Task task : taskList) &#123;</span><br><span class="line">            completionService.submit(new Callable&lt;String&gt;() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public String call() throws Exception &#123;</span><br><span class="line">//                    System.out.println(task.testTask());</span><br><span class="line">                    return task.testTask();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; taskList.size(); i++) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Future&lt;String&gt; future = completionService.take();</span><br><span class="line">                String s = future.get();</span><br><span class="line">                System.out.println(s);</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        executor.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    interface Task &#123;</span><br><span class="line">        String testTask();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class Task1 implements Task &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public String testTask() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;Thread:&quot; + Thread.currentThread().getName() + &quot; task1 is start&quot;);</span><br><span class="line">            return &quot;Thread:&quot; + Thread.currentThread().getName() + &quot; task1 is end&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class Task2 implements Task &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public String testTask() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(10000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;Thread:&quot; + Thread.currentThread().getName() + &quot; task2 is start&quot;);</span><br><span class="line">            return &quot;Thread:&quot; + Thread.currentThread().getName() + &quot; task2 is end&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        init();</span><br><span class="line">        ExecutorService executorService = Executors.newFixedThreadPool(5);</span><br><span class="line">        testCompletionService(executorService);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>总结<ul>
-<li>如果使用Runnable请转成Callable,Callable是一个具有返回值的特殊的Runnable</li>
-<li>如果大量使用Thread(Runnable).start()，可以换成Executor框架代替</li>
-<li>如果各个任务之间互相独立，返回值一致的情况下，可以使用CompletionService</li>
-<li>如果需要控制多线程顺序，可以使用FutureTask、CountDownLatch、Semaphore等等闭锁方式实现</li>
-</ul>
-</li>
-</ul>
-<h4 id="五、chapter8-线程池的使用"><a href="#五、chapter8-线程池的使用" class="headerlink" title="五、chapter8:线程池的使用"></a>五、chapter8:线程池的使用</h4><h5 id="1、问题"><a href="#1、问题" class="headerlink" title="1、问题"></a>1、问题</h5><p>线程池可以方便的将提交的task以及线程池的调度执行策略向分离，但是这种分离并不是特别彻底：</p>
-<ul>
-<li>依赖任务（可能导致饥饿死锁）：大多数提交给线程池的任务是独立的，比如在一个App下载首页的瀑布流图片的时候，每张图片的下载都是互相独立的。当任务是独立的时候，修改线程池的配置以及执行策略，这部分修改只对执行的性能比如负载、吞吐量等等有关系，但是如果task之间彼此依赖，那么执行策略以及提交的任务之间便存在隐性耦合。</li>
-<li>线程封闭：单线程的Executor能对并发下的数据安全做出保证，同时也把任务以及执行策略进行了隐性耦合，一旦改变执行策略，处理结果就会出现问题。</li>
-<li><p>任务执行时间不均匀：如下图所示<img src="https://s3.mogucdn.com/mlcdn/c45406/180206_6hl4cbigkl0g38hc10h9c9b9825fh_1590x950.png" alt="线程池"></p>
-<p>task1跟task2如果长时间占据线程池的资源工作，其他的线程会处于堵塞状态。</p>
-</li>
-</ul>
-<h5 id="2、配置ThreadPoolExecutor"><a href="#2、配置ThreadPoolExecutor" class="headerlink" title="2、配置ThreadPoolExecutor"></a>2、配置ThreadPoolExecutor</h5><ul>
-<li>线程创建销毁：线程的创建销毁的损耗由线程池的大小，最大值以及线程的超时时间共同决定。<ul>
-<li>基本大小：线程池无任务的大小</li>
-<li>最大值：同时活动的线程数量上限</li>
-<li>超时时间：如果线程的空闲时间超过了超时时间，则会被标记为回收线程</li>
-</ul>
-</li>
-<li>队列策略<ul>
-<li>无界队列：例如Executors#newFixedThreadPool或者Executors.newSingleThreadExecutor等</li>
-<li>有界队列</li>
-<li>同步移交：如果此时线程容量以及达到上限，将请求直接拒绝加入队列直接交给工作线程处理</li>
-</ul>
-</li>
-</ul>
-<h4 id="六、chapter13-显式锁"><a href="#六、chapter13-显式锁" class="headerlink" title="六、chapter13:显式锁"></a>六、chapter13:显式锁</h4><h5 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h5><p>与synchronized的内置锁不同，Lock定义了一个无条件的、可轮询的、可定时的、可中断的锁机制。</p>
-<h5 id="2、意义"><a href="#2、意义" class="headerlink" title="2、意义"></a>2、意义</h5><ul>
-<li>提供了可轮询的锁：避免了顺序死锁（哲学家问题）</li>
-<li>提供了定时锁：超时放弃</li>
-<li>提供了公平与否的选择</li>
-<li>性能高</li>
-</ul>
-<h5 id="3、读写锁"><a href="#3、读写锁" class="headerlink" title="3、读写锁"></a>3、读写锁</h5><blockquote>
-<p>附上一个思维导图<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180207_014ajj9dbecic6972kgc37ie47585_4110x3864.png" alt="思维导图"></p>
-</blockquote>
+<h3 id="五、消息的重复性问题"><a href="#五、消息的重复性问题" class="headerlink" title="五、消息的重复性问题"></a>五、消息的重复性问题</h3><p>在消息的情景中，最常见的是订阅了消息，然而消息会重复进行发送消费的情况。导致消息重复发送的情况有很多种，第一种是应用重复发送消息，当应用将消息存入消息中间件的时候，消息已经存入中间件而应用未得到已经存入消息中间件的返回结果的时候。第二种是消息中间件发送消息但是未得到发送成功的返回的时候，会以为发送失败，则会尝试再次发送消息等等情况。</p>
+<p>而在消息订阅者的角度，为了防止消息重复消费，应该增加一层幂等校验。</p>
+<p>举一个例子:当我们需要监听一个订单更新的消息的时候，因为订单的状态很多种，比如创建订单、取消订单、订单付款等等状态，因为消息的重复发送我们如果不做幂等校验会导致插入多条数据，而消息的先后顺序会造成数据的丢失以及错乱等等。</p>
+<p>做幂等校验有许多的方式：例如增加缓存，判断该消息是否已经消息过了。或者在进行CRUD操作的时候先判断该状态是否已经存在等等的方式做幂等。防止因为消息的重复性问题导致数据的错乱。 </p>
 
           
         
@@ -531,7 +452,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -577,7 +498,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
