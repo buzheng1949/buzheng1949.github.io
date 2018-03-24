@@ -79,20 +79,23 @@
 
 
 
-<meta name="description" content="一、Java运行时数据区的组成  Java的运行时数据区分为两个区域，一个是线程私有的区域，一个是线程共享的区域。  线程私有 Java虚拟机栈 本地方法栈 程序计数器   线程共享 堆 方法区     二、Java运行时数据区分析 从上面已经知道了，Java虚拟机运行时数据区按照线程私有与否可以进行划分，线程私有的会随着线程的创建以及销毁，因此这是不需要进行垃圾回收的区域。而线程共享的会进行垃圾">
+<meta name="description" content="最近经常被问到分布式唯一主键的生成方式，以前是按照自己的理解去思考怎么生成唯一的分布式主键，最近查看了公司的数据库中间件的源码，发现生成方式挺有趣的，记录一下  一、传统的分布式主键生成的方式1、Java自带的UUID   UUID通过复杂的规范保证其唯一性。但是其存储为字符串格式，索引效率低。 2、数据库自增id   假如有N台机器（此时设定N=2），两张表分别为T1,T2，不同表的起始值不一">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java虚拟机内存区域的那点事">
-<meta property="og:url" content="http://yoursite.com/2017/11/10/Java内存区域/index.html">
+<meta property="og:title" content="一种分布式唯一主键生成的方式">
+<meta property="og:url" content="http://yoursite.com/2018/03/24/sequence-unqie/index.html">
 <meta property="og:site_name" content="土耳其冰淇淋">
-<meta property="og:description" content="一、Java运行时数据区的组成  Java的运行时数据区分为两个区域，一个是线程私有的区域，一个是线程共享的区域。  线程私有 Java虚拟机栈 本地方法栈 程序计数器   线程共享 堆 方法区     二、Java运行时数据区分析 从上面已经知道了，Java虚拟机运行时数据区按照线程私有与否可以进行划分，线程私有的会随着线程的创建以及销毁，因此这是不需要进行垃圾回收的区域。而线程共享的会进行垃圾">
+<meta property="og:description" content="最近经常被问到分布式唯一主键的生成方式，以前是按照自己的理解去思考怎么生成唯一的分布式主键，最近查看了公司的数据库中间件的源码，发现生成方式挺有趣的，记录一下  一、传统的分布式主键生成的方式1、Java自带的UUID   UUID通过复杂的规范保证其唯一性。但是其存储为字符串格式，索引效率低。 2、数据库自增id   假如有N台机器（此时设定N=2），两张表分别为T1,T2，不同表的起始值不一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/6/1602c0738220d0cd?w=1254&h=832&f=png&s=59099">
-<meta property="og:updated_time" content="2018-01-10T18:46:26.000Z">
+<meta property="og:image" content="https://s17.mogucdn.com/mlcdn/c024f5/180324_09celacjlb9571jja8dhk32dgdb1d_2086x440.png">
+<meta property="og:image" content="https://s17.mogucdn.com/mlcdn/c024f5/180324_7hkgcfb4651afag49jhk91akj1cjb_2044x458.png">
+<meta property="og:image" content="https://s17.mogucdn.com/mlcdn/c024f5/180324_0c15jhgf253208fi6lhg36j5l0lfj_544x218.png">
+<meta property="og:image" content="https://s3.mogucdn.com/mlcdn/c024f5/180324_72e2f1570kfh4f58bd451eehhc700_733x378.png">
+<meta property="og:updated_time" content="2018-03-24T09:31:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java虚拟机内存区域的那点事">
-<meta name="twitter:description" content="一、Java运行时数据区的组成  Java的运行时数据区分为两个区域，一个是线程私有的区域，一个是线程共享的区域。  线程私有 Java虚拟机栈 本地方法栈 程序计数器   线程共享 堆 方法区     二、Java运行时数据区分析 从上面已经知道了，Java虚拟机运行时数据区按照线程私有与否可以进行划分，线程私有的会随着线程的创建以及销毁，因此这是不需要进行垃圾回收的区域。而线程共享的会进行垃圾">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/6/1602c0738220d0cd?w=1254&h=832&f=png&s=59099">
+<meta name="twitter:title" content="一种分布式唯一主键生成的方式">
+<meta name="twitter:description" content="最近经常被问到分布式唯一主键的生成方式，以前是按照自己的理解去思考怎么生成唯一的分布式主键，最近查看了公司的数据库中间件的源码，发现生成方式挺有趣的，记录一下  一、传统的分布式主键生成的方式1、Java自带的UUID   UUID通过复杂的规范保证其唯一性。但是其存储为字符串格式，索引效率低。 2、数据库自增id   假如有N台机器（此时设定N=2），两张表分别为T1,T2，不同表的起始值不一">
+<meta name="twitter:image" content="https://s17.mogucdn.com/mlcdn/c024f5/180324_09celacjlb9571jja8dhk32dgdb1d_2086x440.png">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/10/Java内存区域/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/24/sequence-unqie/"/>
 
 
 
 
 
-  <title>Java虚拟机内存区域的那点事 | 土耳其冰淇淋</title>
+  <title>一种分布式唯一主键生成的方式 | 土耳其冰淇淋</title>
   
 
 
@@ -255,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/10/Java内存区域/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/24/sequence-unqie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yupeibiao">
@@ -272,7 +275,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java虚拟机内存区域的那点事</h1>
+          <h1 class="post-title" itemprop="name headline">一种分布式唯一主键生成的方式</h1>
         
 
         <div class="post-meta">
@@ -284,8 +287,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T23:36:04+08:00">
-                2017-11-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T17:28:37+08:00">
+                2018-03-24
               </time>
             
 
@@ -344,58 +347,35 @@
       
 
       
-        <h4 id="一、Java运行时数据区的组成"><a href="#一、Java运行时数据区的组成" class="headerlink" title="一、Java运行时数据区的组成"></a>一、Java运行时数据区的组成</h4><p>  Java的运行时数据区分为两个区域，一个是线程私有的区域，一个是线程共享的区域。</p>
-<ul>
-<li>线程私有<ul>
-<li>Java虚拟机栈</li>
-<li>本地方法栈</li>
-<li>程序计数器</li>
-</ul>
-</li>
-<li>线程共享<ul>
-<li>堆</li>
-<li>方法区</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://user-gold-cdn.xitu.io/2017/12/6/1602c0738220d0cd?w=1254&amp;h=832&amp;f=png&amp;s=59099" alt="Java虚拟机运行时数据区"></p>
-<h4 id="二、Java运行时数据区分析"><a href="#二、Java运行时数据区分析" class="headerlink" title="二、Java运行时数据区分析"></a>二、Java运行时数据区分析</h4><p> 从上面已经知道了，Java虚拟机运行时数据区按照线程私有与否可以进行划分，线程私有的会随着线程的创建以及销毁，因此这是不需要进行垃圾回收的区域。而线程共享的会进行垃圾回收。</p>
-<ul>
-<li><p>程序计数器</p>
-<p> 在Java中，假如单核CPU，同时有多条线程跑的情况下，线程之间可能在让出CPU执行权的时候，某条线程的还没执行完被切出去了，那么需要有一个记录此时线程执行的属性的，而完成这一使命的就是程序计数器。</p>
-<p> 程序计数器用于记录线程执行的字节码的行数，线程的分支跳转、循环、条件控制都基于程序计数器而完成的。</p>
-<p> 如果线程执行的是Java方法，程序计数器记录的是执行的字节码的指令地址。而如果执行的是Native方法，则这个计数器为空。</p>
-</li>
-<li><p>Java虚拟机栈</p>
-<p>Java虚拟机栈是线程私有的，每个线程都有一个栈，线程执行方法的过程对应的是栈帧的进栈以及出栈的过程。所以可以知道，栈帧实际上记录的就是方法的信息，比如局部变量表，动态链接，方法出口等信息。局部变量表存放的是基本数据类型以及对象引用。</p>
-<p>如果请求栈的深度超过允许的栈深度，则会抛出StackOverFlowError的异常。</p>
-</li>
-<li><p>本地方法栈</p>
-<p> 本地方法栈跟虚拟机栈是对应的，如果执行的不是Java的方法，那么就是在本地方法栈进行操作，同样会抛出StackOverFlowError的异常。</p>
-</li>
-<li><p>Java堆</p>
-<p>   Java堆是在虚拟机启动的时候创建并划分大小的，Java堆的大小是可以通过参数进行控制的，设置Xmx跟Xms参数，空闲程度大于70%就调整到小的，小于40%就调整到大的，因为如此设置的话课比较频繁，所以很多case下都是设置为一样大小。</p>
-<p>Java堆主要存放的是对象以及数组。</p>
-</li>
-<li><p>方法区</p>
-<p>方法区同样是线程共享的，分为两部分。方法区主要存放的是类信息，而里面还有一个运行时常量池，用于存放编译产生的字面量以及符号引用。</p>
-</li>
-</ul>
-<h4 id="三、如何创建对象"><a href="#三、如何创建对象" class="headerlink" title="三、如何创建对象"></a>三、如何创建对象</h4><p>Java作为一门面向对象语言，每时每刻都在产生对象。在语言层面，用到的是一个new关键字，但是在背后存在着复杂的逻辑。</p>
-<ul>
-<li><p>Java虚拟机遇到一个new操作的时候，会先去常量池里面查看能否定位到一个符号引用，并检查该符号引用对应的类是否被加载、解析以及初始化过，如果没有则执行类加载的过程。</p>
-</li>
-<li><p>创建对象的方式<br>在不同的虚拟机上有不同创建对象的方式，主要有以下两种。</p>
-<ul>
-<li><p>指针碰撞</p>
-<p>  假设在内存都是规整的前提下，内存分为两块，一块是已经使用的区域，一块是待分配的区域。指针位于两个区域的中间，当需要分配内存的时候，计算需要分配的对象的大小，然后进行划分一个区域空间进行分配即可。</p>
-</li>
-<li><p>内存记录</p>
-<p>但是实际情况总是不是那么美好的，内存不可能一直都是工整的，在这个时候就需要有一个列表，记录着内存中哪一块是空闲的区域，当需要分配的时候，在内存列表上进行查找，分配一个足够大的内存进行分配。</p>
-</li>
-</ul>
-</li>
-</ul>
+        <blockquote>
+<p>最近经常被问到分布式唯一主键的生成方式，以前是按照自己的理解去思考怎么生成唯一的分布式主键，最近查看了公司的数据库中间件的源码，发现生成方式挺有趣的，记录一下</p>
+</blockquote>
+<h4 id="一、传统的分布式主键生成的方式"><a href="#一、传统的分布式主键生成的方式" class="headerlink" title="一、传统的分布式主键生成的方式"></a>一、传统的分布式主键生成的方式</h4><p><strong>1、Java自带的UUID</strong></p>
+<p>  UUID通过复杂的规范保证其唯一性。但是其存储为字符串格式，索引效率低。</p>
+<p><strong>2、数据库自增id</strong></p>
+<p>  假如有N台机器（此时设定N=2），两张表分别为T1,T2，不同表的起始值不一样，比如一个起始ID为1，另外一个为2，每次自增N，那么形成的序列就是1,3,5,7,9与2,4,6,8,10等等。但是高并发下性能不佳，主键产生的性能上限是数据库服务器单机的上限。</p>
+<h4 id="二、另外的一种生成方式"><a href="#二、另外的一种生成方式" class="headerlink" title="二、另外的一种生成方式"></a>二、另外的一种生成方式</h4><blockquote>
+<p>起初一直以为我司的中间件的全局唯一ID是利用数据库的自增ID，刚好昨天大促，晚上值班的时候看了公司数据库中间件的唯一ID的生成方式，觉得设计得挺巧妙的，记录下。</p>
+</blockquote>
+<p><strong>1、先生成一张表，表结构如下</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> CREATE TABLE sequence(</span><br><span class="line">  id BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT &apos;自增主键&apos;,</span><br><span class="line">  `password`  VARCHAR(32) NOT NULL COMMENT &apos;业务库的密码&apos;,</span><br><span class="line">  `schema` VARCHAR(65) NOT NULL COMMENT &apos;scheme&apos;,</span><br><span class="line">  `table` VARCHAR(65) NOT NULL COMMENT &apos;具体表&apos;,</span><br><span class="line">  `appName` VARCHAR(65) NOT NULL COMMENT &apos;应用名&apos;,</span><br><span class="line">  minId BIGINT(20) NOT NULL COMMENT &apos;生成ID的最小可以使用的值&apos;,</span><br><span class="line">  step INT(11) NOT NULL COMMENT  &apos;生成ID的步长&apos;,</span><br><span class="line">  created INT(11) NOT NULL COMMENT &apos;创建时间&apos;,</span><br><span class="line">  updated INT(11) NOT NULL COMMENT &apos;最后更新时间&apos;,</span><br><span class="line">  PRIMARY KEY (id),</span><br><span class="line">  UNIQUE KEY idx_schema_table(`schema`,`table`)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>具体解释如下：password是业务库的密码，schema是逻辑库的schema，table是需要生成唯一主键的表名，appName为上层应用的应用名称，minId为当前最小已经分配的ID值，step是不同的应用单次生成分布式主键个数的步长，适配不同的应用的写入并发量的需求，比如订单中心可能每秒钟产生非常多的订单，那步长可以设置为比较大，例如10000，那么单次取能得到10000个主键空间，而如果有的服务QPS较低，可以适量设置为比较小，比如100，避免过度浪费。</p>
+</blockquote>
+<p>2、<strong>当应用A完成数据库配置的时候，生成如下的记录</strong></p>
+<p>   <img src="https://s17.mogucdn.com/mlcdn/c024f5/180324_09celacjlb9571jja8dhk32dgdb1d_2086x440.png" alt="应用记录"></p>
+<p>3、<strong>需要分配ID的时候，比如应用A为order,password是orderpassword,scheme是free,minId起始值为1，step是1000，那么当需要获取分布式主键的时候，需要执行如下SQL，重置minId。</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update sequence set minId = minId + step where  minId =xxxx and appName = xxx and schame=xxx and table=xxx and password = xxxx</span><br></pre></td></tr></table></figure>
+<p> <img src="https://s17.mogucdn.com/mlcdn/c024f5/180324_7hkgcfb4651afag49jhk91akj1cjb_2044x458.png" alt="修改之后"></p>
+<p> 从上可以看出该应用分配了step为1000,此时minId = minId + step，然后返回minId，也就意味着每个应用的主键都是自己单条记录的minId控制的。</p>
+<p>4、<strong>当更新完minId之后，此时获取了一批长度为step的id序列，使用AtmoicLong进行分发与计算，保证安全与唯一。</strong></p>
+<p> <img src="https://s17.mogucdn.com/mlcdn/c024f5/180324_0c15jhgf253208fi6lhg36j5l0lfj_544x218.png" alt="源代码"></p>
+<p> IdRangeRound的next()方法，使用了AtomicLong进行获取，并移动内存中可用的ID序列。<br> <img src="https://s3.mogucdn.com/mlcdn/c024f5/180324_72e2f1570kfh4f58bd451eehhc700_733x378.png" alt="next方法"></p>
+<p> <strong>同时为了防止高并发下step设置不合理的问题，会有一条异步线程去提前load一批主键到内存中使用，防止高并发的情况下数据库成为瓶颈。</strong></p>
+<p>5、<strong>通过这样的方式，一个简单的update指令分配空间，每个业务都被一条记录唯一确定并更新获取。</strong></p>
+<blockquote>
+<p>不得不说做法真是巧妙，三人行必有我师，好好地学习收获，争取变得更好。</p>
+</blockquote>
 
       
     </div>
@@ -455,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/05/Message/" rel="next" title="读书笔记-消息中间件">
-                <i class="fa fa-chevron-left"></i> 读书笔记-消息中间件
+              <a href="/2018/03/23/rpc/" rel="next" title="简单RPC实现">
+                <i class="fa fa-chevron-left"></i> 简单RPC实现
               </a>
             
           </div>
@@ -464,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/11/用Python给杰伦做张萌萌哒头像/" rel="prev" title="用Python给杰伦做张萌萌哒头像">
-                用Python给杰伦做张萌萌哒头像 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -615,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、Java运行时数据区的组成"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x7684;&#x7EC4;&#x6210;" class="headerlink" title="&#x4E00;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x7684;&#x7EC4;&#x6210;"></a>&#x4E00;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x7684;&#x7EC4;&#x6210;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Java运行时数据区分析"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x5206;&#x6790;" class="headerlink" title="&#x4E8C;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x5206;&#x6790;"></a>&#x4E8C;&#x3001;Java&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#x5206;&#x6790;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、如何创建对象"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x4E09;&#x3001;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;" class="headerlink" title="&#x4E09;&#x3001;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;"></a>&#x4E09;&#x3001;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、传统的分布式主键生成的方式"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4E00;&#x3001;&#x4F20;&#x7EDF;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x4E3B;&#x952E;&#x751F;&#x6210;&#x7684;&#x65B9;&#x5F0F;" class="headerlink" title="&#x4E00;&#x3001;&#x4F20;&#x7EDF;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x4E3B;&#x952E;&#x751F;&#x6210;&#x7684;&#x65B9;&#x5F0F;"></a>&#x4E00;&#x3001;&#x4F20;&#x7EDF;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x4E3B;&#x952E;&#x751F;&#x6210;&#x7684;&#x65B9;&#x5F0F;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、另外的一种生成方式"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x4E8C;&#x3001;&#x53E6;&#x5916;&#x7684;&#x4E00;&#x79CD;&#x751F;&#x6210;&#x65B9;&#x5F0F;" class="headerlink" title="&#x4E8C;&#x3001;&#x53E6;&#x5916;&#x7684;&#x4E00;&#x79CD;&#x751F;&#x6210;&#x65B9;&#x5F0F;"></a>&#x4E8C;&#x3001;&#x53E6;&#x5916;&#x7684;&#x4E00;&#x79CD;&#x751F;&#x6210;&#x65B9;&#x5F0F;</span></a></li></ol></div>
             
 
           </div>

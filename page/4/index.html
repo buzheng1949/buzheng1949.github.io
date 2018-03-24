@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/SpringIoc-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/SpringIoc-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yupeibiao">
@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/11/SpringIoc-1/" itemprop="url">Spring IoC之旅（一）</a></h1>
+                <a class="post-title-link" href="/2018/01/11/SpringIoc-2/" itemprop="url">Spring IoC之旅（二）</a></h1>
         
 
         <div class="post-meta">
@@ -283,7 +283,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T02:40:07+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T23:53:12+08:00">
                 2018-01-11
               </time>
             
@@ -345,98 +345,64 @@
       
         
           
-            <h3 id="一、容器以及依赖注入"><a href="#一、容器以及依赖注入" class="headerlink" title="一、容器以及依赖注入"></a>一、容器以及依赖注入</h3><ul>
-<li><p>什么是依赖注入</p>
-<p>新的一年到了，小明要开始购置全新的衣服，他去以纯买了裤子，耐克买了鞋子，森马买了上衣等等，为此他跑遍了整个城市的专卖店，他觉得很累很麻烦，自己过个年什么衣服都要自己跑去专卖店买。</p>
-<p>新的一年到了，小妮也要购置全新的衣服，她在家里跟保姆说，我要一套漂亮的新年衣服，保姆便从某个神秘的地方拿了一套新的衣服给了小妮，这样小妮就不用到处跑来跑去了。</p>
-<p>小明跟小妮的故事其实就是一个依赖反转的过程，小明需要的衣服需要自己从每个地方自己去买，而小妮的衣服则是由保姆给她的。对于获取衣服的方式而言，两者的方式从一个主动获取转换为被注入到过程。</p>
-<blockquote>
-<p>控制的反转指的是获取方式的反转。</p>
-</blockquote>
-<p>在Spring中，控制反转指的是原先对象需要自己去关心，创建自己依赖的对象的过程转换为由容器自动生成注入依赖的过程，而对象自己不需要再关心这个过程了。</p>
-</li>
-<li><p>什么是容器？</p>
-<p>当我们去打水的时候，水桶是一个容器，这个容器能盛许多单位的水，不管你是红茶、绿茶等等，只要你是符合水的特性的，都能够往容器里面存放。<br>而容器能够帮助我们，在需要喝水的时候，自动把水装好并且递给主人的过程。</p>
-</li>
-<li><p>容器与依赖反转的好处？</p>
-<p>容器以及依赖注入的出现，使得开发者不需要去创建、生成以及管理bean之间的依赖关系，极大的解放了bean的责任。</p>
-</li>
-</ul>
-<h3 id="二、Spring容器"><a href="#二、Spring容器" class="headerlink" title="二、Spring容器"></a>二、Spring容器</h3><p>同样，在Spring中，核心也是容器跟依赖注入的概念。</p>
-<h4 id="1、什么是IoC容器"><a href="#1、什么是IoC容器" class="headerlink" title="1、什么是IoC容器"></a>1、什么是IoC容器</h4><p>  在日常生活中，容器就是用来盛放东西的，比如水桶，水桶可以抽象为一个接口，这个接口定义了要有容量，要有挂钩的就是容器。而水桶的类型有很多种，只要实现了水桶的接口，那么就是一个水桶，也就是一个容器。</p>
-<p>  在Spring中同样也不例外，我们可以看到BeanFactory就是一个接口，而它其实就是容器的“水桶接口”，BeanFactory简单理解为一个模型，模型定义了Spring的容器的规范。</p>
-<p>  而在Spring容器中，盛放的bean的方式就是BeanDefinition，BeanDefinition抽象的描述了bean的各种属性。</p>
-<h4 id="2、Spring-IoC容器总体设计"><a href="#2、Spring-IoC容器总体设计" class="headerlink" title="2、Spring IoC容器总体设计"></a>2、Spring IoC容器总体设计</h4><p>前面已经说到，Spring有一系列的容器，它的定义是在BeanFactory里面。<br>先看一下官方文档是怎么定义BeanFactory的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * The root interface for accessing a Spring bean container.</span><br><span class="line"> * This is the basic client view of a bean container;</span><br><span class="line"> * further interfaces such as &#123;@link ListableBeanFactory&#125; and</span><br><span class="line"> * &#123;@link org.springframework.beans.factory.config.ConfigurableBeanFactory&#125;</span><br><span class="line"> * are available for specific purposes.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;This interface is implemented by objects that hold a number of bean definitions,</span><br><span class="line"> * each uniquely identified by a String name. Depending on the bean definition,</span><br><span class="line"> * the factory will return either an independent instance of a contained object</span><br><span class="line"> * (the Prototype design pattern), or a single shared instance (a superior</span><br><span class="line"> * alternative to the Singleton design pattern, in which the instance is a</span><br><span class="line"> * singleton in the scope of the factory). Which type of instance will be returned</span><br><span class="line"> * depends on the bean factory configuration: the API is the same. Since Spring</span><br><span class="line"> * 2.0, further scopes are available depending on the concrete application</span><br><span class="line"> * context (e.g. &quot;request&quot; and &quot;session&quot; scopes in a web environment).</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;The point of this approach is that the BeanFactory is a central registry</span><br><span class="line"> * of application components, and centralizes configuration of application</span><br><span class="line"> * components (no more do individual objects need to read properties files,</span><br><span class="line"> * for example). See chapters 4 and 11 of &quot;Expert One-on-One J2EE Design and</span><br><span class="line"> * Development&quot; for a discussion of the benefits of this approach.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;Note that it is generally better to rely on Dependency Injection</span><br><span class="line"> * (&quot;push&quot; configuration) to configure application objects through setters</span><br><span class="line"> * or constructors, rather than use any form of &quot;pull&quot; configuration like a</span><br><span class="line"> * BeanFactory lookup. Spring&apos;s Dependency Injection functionality is</span><br><span class="line"> * implemented using this BeanFactory interface and its subinterfaces.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;Normally a BeanFactory will load bean definitions stored in a configuration</span><br><span class="line"> * source (such as an XML document), and use the &#123;@code org.springframework.beans&#125;</span><br><span class="line"> * package to configure the beans. However, an implementation could simply return</span><br><span class="line"> * Java objects it creates as necessary directly in Java code. There are no</span><br><span class="line"> * constraints on how the definitions could be stored: LDAP, RDBMS, XML,</span><br><span class="line"> * properties file, etc. Implementations are encouraged to support references</span><br><span class="line"> * amongst beans (Dependency Injection).</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;In contrast to the methods in &#123;@link ListableBeanFactory&#125;, all of the</span><br><span class="line"> * operations in this interface will also check parent factories if this is a</span><br><span class="line"> * &#123;@link HierarchicalBeanFactory&#125;. If a bean is not found in this factory instance,</span><br><span class="line"> * the immediate parent factory will be asked. Beans in this factory instance</span><br><span class="line"> * are supposed to override beans of the same name in any parent factory.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;Bean factory implementations should support the standard bean lifecycle interfaces</span><br><span class="line"> * as far as possible. The full set of initialization methods and their standard order is:&lt;br&gt;</span><br><span class="line"> * 1. BeanNameAware&apos;s &#123;@code setBeanName&#125;&lt;br&gt;</span><br><span class="line"> * 2. BeanClassLoaderAware&apos;s &#123;@code setBeanClassLoader&#125;&lt;br&gt;</span><br><span class="line"> * 3. BeanFactoryAware&apos;s &#123;@code setBeanFactory&#125;&lt;br&gt;</span><br><span class="line"> * 4. ResourceLoaderAware&apos;s &#123;@code setResourceLoader&#125;</span><br><span class="line"> * (only applicable when running in an application context)&lt;br&gt;</span><br><span class="line"> * 5. ApplicationEventPublisherAware&apos;s &#123;@code setApplicationEventPublisher&#125;</span><br><span class="line"> * (only applicable when running in an application context)&lt;br&gt;</span><br><span class="line"> * 6. MessageSourceAware&apos;s &#123;@code setMessageSource&#125;</span><br><span class="line"> * (only applicable when running in an application context)&lt;br&gt;</span><br><span class="line"> * 7. ApplicationContextAware&apos;s &#123;@code setApplicationContext&#125;</span><br><span class="line"> * (only applicable when running in an application context)&lt;br&gt;</span><br><span class="line"> * 8. ServletContextAware&apos;s &#123;@code setServletContext&#125;</span><br><span class="line"> * (only applicable when running in a web application context)&lt;br&gt;</span><br><span class="line"> * 9. &#123;@code postProcessBeforeInitialization&#125; methods of BeanPostProcessors&lt;br&gt;</span><br><span class="line"> * 10. InitializingBean&apos;s &#123;@code afterPropertiesSet&#125;&lt;br&gt;</span><br><span class="line"> * 11. a custom init-method definition&lt;br&gt;</span><br><span class="line"> * 12. &#123;@code postProcessAfterInitialization&#125; methods of BeanPostProcessors</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;On shutdown of a bean factory, the following lifecycle methods apply:&lt;br&gt;</span><br><span class="line"> * 1. DisposableBean&apos;s &#123;@code destroy&#125;&lt;br&gt;</span><br><span class="line"> * 2. a custom destroy-method definition</span><br><span class="line"> *</span><br><span class="line"> * @author Rod Johnson</span><br><span class="line"> * @author Juergen Hoeller</span><br><span class="line"> * @author Chris Beams</span><br><span class="line"> * @since 13 April 2001</span><br><span class="line"> * @see BeanNameAware#setBeanName</span><br><span class="line"> * @see BeanClassLoaderAware#setBeanClassLoader</span><br><span class="line"> * @see BeanFactoryAware#setBeanFactory</span><br><span class="line"> * @see org.springframework.context.ResourceLoaderAware#setResourceLoader</span><br><span class="line"> * @see org.springframework.context.ApplicationEventPublisherAware#setApplicationEventPublisher</span><br><span class="line"> * @see org.springframework.context.MessageSourceAware#setMessageSource</span><br><span class="line"> * @see org.springframework.context.ApplicationContextAware#setApplicationContext</span><br><span class="line"> * @see org.springframework.web.context.ServletContextAware#setServletContext</span><br><span class="line"> * @see org.springframework.beans.factory.config.BeanPostProcessor#postProcessBeforeInitialization</span><br><span class="line"> * @see InitializingBean#afterPropertiesSet</span><br><span class="line"> * @see org.springframework.beans.factory.support.RootBeanDefinition#getInitMethodName</span><br><span class="line"> * @see org.springframework.beans.factory.config.BeanPostProcessor#postProcessAfterInitialization</span><br><span class="line"> * @see DisposableBean#destroy</span><br><span class="line"> * @see org.springframework.beans.factory.support.RootBeanDefinition#getDestroyMethodName</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这个注释也太长了吧</p>
-</blockquote>
-<p>从上面可以看到BeanFactory有如下的特点：</p>
+            <h3 id="一、IoC容器的初始化过程"><a href="#一、IoC容器的初始化过程" class="headerlink" title="一、IoC容器的初始化过程"></a>一、IoC容器的初始化过程</h3><h4 id="1、IoC容器的流程"><a href="#1、IoC容器的流程" class="headerlink" title="1、IoC容器的流程"></a>1、IoC容器的流程</h4><p>前面已经分析过IoC容器的整体流程。</p>
 <ul>
-<li>它是Spring容器的根接口，实现它的接口并且符合规范的都是容器，同时它也是Spring中最基础的一个容器。</li>
-<li>实现这个接口可以包含很多的bean definition，而且每个definition的ID都是不一样的，是唯一的。</li>
-<li>BeanFactory能解析配置文件，如xml文件等，转成definition并且存放在容器中。</li>
-<li>定义了实现BeanFactory的实现类的要求。</li>
-</ul>
-<p>而从实现而言，BeanFactory实现了几个容器的必备功能，例如获取Bean，判断Bean是否存在等等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public interface BeanFactory &#123;</span><br><span class="line"></span><br><span class="line">	String FACTORY_BEAN_PREFIX = &quot;&amp;&quot;;</span><br><span class="line"></span><br><span class="line">	Object getBean(String name) throws BeansException;</span><br><span class="line"></span><br><span class="line">	&lt;T&gt; T getBean(String name, Class&lt;T&gt; requiredType) throws BeansException;</span><br><span class="line"></span><br><span class="line">	&lt;T&gt; T getBean(Class&lt;T&gt; requiredType) throws BeansException;</span><br><span class="line"></span><br><span class="line">	Object getBean(String name, Object... args) throws BeansException;</span><br><span class="line"></span><br><span class="line">	boolean containsBean(String name);</span><br><span class="line"></span><br><span class="line">	boolean isSingleton(String name) throws NoSuchBeanDefinitionException;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	boolean isPrototype(String name) throws NoSuchBeanDefinitionException;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	boolean isTypeMatch(String name, Class&lt;?&gt; targetType) throws NoSuchBeanDefinitionException;</span><br><span class="line"></span><br><span class="line">	Class&lt;?&gt; getType(String name) throws NoSuchBeanDefinitionException;</span><br><span class="line"></span><br><span class="line">	String[] getAliases(String name);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="3、Spring-IoC容器细节"><a href="#3、Spring-IoC容器细节" class="headerlink" title="3、Spring IoC容器细节"></a>3、Spring IoC容器细节</h4><p>因为BeanFactory都比较大同小异，所以在这里只使用已经废弃的XMLBeanfactory进行学习。</p>
-<blockquote>
-<p>主要是因为比较简单易懂</p>
-</blockquote>
-<p>同样我们需要摘代码出来看一下：</p>
-<pre><code>@Deprecated
-@SuppressWarnings({&quot;serial&quot;, &quot;all&quot;})
-public class XmlBeanFactory extends DefaultListableBeanFactory {
-
-    private final XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this);
-
-
-    /**
-     * Create a new XmlBeanFactory with the given resource,
-     * which must be parsable using DOM.
-     * @param resource XML resource to load bean definitions from
-     * @throws BeansException in case of loading or parsing errors
-     */
-    public XmlBeanFactory(Resource resource) throws BeansException {
-        this(resource, null);
-    }
-
-    /**
-     * Create a new XmlBeanFactory with the given input stream,
-     * which must be parsable using DOM.
-     * @param resource XML resource to load bean definitions from
-     * @param parentBeanFactory parent bean factory
-     * @throws BeansException in case of loading or parsing errors
-     */
-    public XmlBeanFactory(Resource resource, BeanFactory parentBeanFactory) throws BeansException {
-        super(parentBeanFactory);
-        this.reader.loadBeanDefinitions(resource);
-    }
-
-}
-</code></pre><p>从上面可以总结这个类做的事情：</p>
+<li><p><strong>第一阶段(载入阶段)</strong></p>
 <ul>
-<li>使用Resource，把有着bean信息的XML文件转成Resource类型。</li>
-<li>先创建了一个XmlBeanDefinitionReader，顾名思义就是用来读BeanDefinition资源的。</li>
-<li>使用reader读取已经被转成Resource类型的XML定义的bean。</li>
-<li>完成容器的构建</li>
-</ul>
-<p>看起来够简单明了，简单可以理解为寻找到XML文件，将XML文件转换为Resource类型，使用XmlBeanDefinitionReader加载bean。</p>
-<h4 id="4、Spring-IoC容器的主要工作"><a href="#4、Spring-IoC容器的主要工作" class="headerlink" title="4、Spring IoC容器的主要工作"></a>4、Spring IoC容器的主要工作</h4><ul>
-<li>寻址：寻找bean的配置信息，并且以Resource方式进行读取。</li>
-<li>载入：将Resource资源文件读取完毕后，将bean的配置信息转换为BeanFactory的BeanDefinition。</li>
-<li><p>注册：将载入的BeanDefinition注册到IoC容器中，以HashMap的方式进行存储。</p>
+<li><p><strong>寻址：寻找配置文件地址并转成Resource。</strong></p>
+<p>Resource的定位指的是BeanDefinition的定位，也就是需要被注册成bean的资源的定位，比如在XML中进行bean的配置的资源定位。 Resource的定位通过ResourceLoader进行定位。不同的Resource可以由不同的ResourceLoader的不同实现进行加载。</p>
 <blockquote>
-<p>这一阶段可以总结为寻址-&gt;载入-&gt;注册阶段，称之为容器的初始化阶段，这是单独的一个过程。</p>
+<p>如果你有一个容纳金币的金库，需要将进行寻找钱（配置文件），不同的钱的寻找方式不同，需要去不同的国家获取。只要是想要把容器填满，就需要进行找到根源。</p>
 </blockquote>
 </li>
-<li><p>注入：当触发getBean操作的时候会触发将Bean注入的过程。</p>
+<li><p><strong>加载：将Resource进行加载，解析成BeanFactory容器的bean的数据结构BeanDefinition</strong></p>
+<p> 加载阶段指的是将Resource文件里面的bean信息表示成IoC统一管理的数据格式，而这种数据格式就是BeanDefinition。BeanDefinition实际上就是将Bean信息进行抽象的数据结构。</p>
 <blockquote>
-<p>这一阶段可以总结为注入阶段，是容器发挥作用的阶段，同样跟容器的初始化阶段是两个不同的过程。</p>
+<p>当你有人民币、美元等等钱找到了之后，为了方便容器管理，你需要将不同的货币转换成一个统一的管理方式，就是金币（BeanDefinition）。</p>
 </blockquote>
 </li>
+<li><p><strong>注册：将BeanDefinition进行注册到IoC容器中</strong></p>
+<p>将BeanDefinition进行注册，存放在一个HashMap中。</p>
+</li>
 </ul>
+</li>
+<li><p><strong>第二阶段(依赖注入阶段)</strong></p>
+<p>从上面的第一阶段，载入阶段已经完成了用户配置的bean信息被存放在IoC容器中。那么接下来就是一个将容器中的bean信息转换为实际需要的Object了。<br>依赖注入一般发生在首次getBean()的操作发生的时候，由于bean的层层依赖，所以注入的方式也是使用递归的方式进行依赖注入。</p>
+</li>
+</ul>
+<h3 id="二、IoC容器载入阶段"><a href="#二、IoC容器载入阶段" class="headerlink" title="二、IoC容器载入阶段"></a>二、IoC容器载入阶段</h3><h4 id="1、寻址阶段"><a href="#1、寻址阶段" class="headerlink" title="1、寻址阶段"></a>1、寻址阶段</h4><p>  在寻址阶段，先看一下ApplicationContext的各种实现，可以看到实现有ClassPathXmlApplicationContext、FileSystemXmlApplicationContext等等多种实现，顾名思义就是不同的加载Resource的方式。</p>
+<blockquote>
+<p>写起来太复杂了 直接上图吧<br>  <img src="https://s3.mogucdn.com/mlcdn/c45406/180111_675jib0lch56hll4j95i430e6bhi6_990x618.png" alt="IoC容器寻址"></p>
+</blockquote>
+<h4 id="2、加载阶段"><a href="#2、加载阶段" class="headerlink" title="2、加载阶段"></a>2、加载阶段</h4><h5 id="2-1-加载阶段"><a href="#2-1-加载阶段" class="headerlink" title="2.1 加载阶段"></a>2.1 加载阶段</h5><p>为了方便起见，选择最常用的ApplicationContext的实现类FileSystemXmlApplicationContext进行分析。先看FileSystemXmlApplicationContext的构造函数，可以看到构造函数的定义如下：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_2hjgjagb940513ef745aagg31d4k0_1152x335.png" alt="构造函数"></p>
+<p>从上面的代码可以看到，FileSystemXmlApplicationContext是表示可以指定的XML配置文件中进行加载。在构造函数中调用了refresh()函数，该函数是加载Bean的主要入口。先来看一下方法的具体实现：</p>
+<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_0fa93903lbf0hhbi8c4f5bajd9abg_1344x901.png" alt="s2"></p>
+<p>再跟进来obtainFreshBeanFactory()方法的具体实现：</p>
+<p><img src="https://s17.mogucdn.com/mlcdn/c45406/180112_27f6883g5hi7feaeej41ebe9if9ha_867x240.png" alt="s3"></p>
+<p>在refreshBeanFactory方法中可以看到它的具体实现是在AbstractRefreshableApplicationContext中，而AbstractRefreshableApplicationContext又是继承自AbstractApplicationContext，如下图：</p>
+<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_08j68jfl48kkk5c9hi1kdg9h90bb3_1110x375.png" alt="s5"></p>
+<p><strong>可以看到refreshBeanFactory先创建了一个DefaultlistBeanFactory做为容器，调用了一个loadBeanDefinitions的方法进行bean的加载。再来看一下loadBeanDefinitions方法的实现。</strong><br><img src="https://s17.mogucdn.com/mlcdn/c45406/180112_7jdj80d73e08hdllc65lkel1chia0_1020x348.png" alt="s5"></p>
+<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_5c3fj9b7dkh23ilccchgagblg4ih3_982x346.png" alt="s6"></p>
+<p><strong>整理一下整体的流程思路：</strong></p>
+<ul>
+<li>首先通过refresh()方法触发IoC容器的加载过程。</li>
+<li>如果IoC容器已经创建就销毁（类似机器重启），然后重新创建一个DefaultListableBeanFactory作为容器。</li>
+<li>使用XmlBeanDefinitionReader与DefaultListableBeanFactory进行关联并加载beandefinitions。</li>
+</ul>
+<h5 id="2-2-如何加载BeanDefinition"><a href="#2-2-如何加载BeanDefinition" class="headerlink" title="2.2 如何加载BeanDefinition"></a>2.2 如何加载BeanDefinition</h5><p>  <strong>既然已经知道了整体的流程，那么配置文件是如何转换成IoC容器中的BeanDefinition的呢？</strong></p>
+<p>  顺着上面的最后一步，跟进来看到loadBeanDefinitions的具体实现：</p>
+<p>  <img src="https://s3.mogucdn.com/mlcdn/c45406/180112_8a2hkidcg8l0731i21i689b6kk4ce_1043x724.png" alt="s7"></p>
+<p>  从源代码可以发现<strong>loadBeanDefinitions</strong>实际上调用了<strong>doLoadBeanDefinitions</strong>方法：<br>  <img src="https://s3.mogucdn.com/mlcdn/c45406/180112_7h6a1gggallk23a7dbfl6h1g8j5c0_1041x613.png" alt="s8"></p>
+<p> <strong>继续往下看：</strong><br> <img src="https://s17.mogucdn.com/mlcdn/c45406/180112_88biee19hbj16i8514a4ejj086k00_912x298.png" alt="s9"></p>
+<p><strong>从上面可以看到将Resource的内容解析成BeanDefinition主要分两步，第一步是先把Resource转换成待会可被解析的Document，第二步是将XML文件中的bean信息进行获取并将其构建到BeanDefinitionHolder中并且生成BeanDefinition。</strong></p>
+<h4 id="3、注册阶段"><a href="#3、注册阶段" class="headerlink" title="3、注册阶段"></a>3、注册阶段</h4><p>在2中已经生成了BeanDefinition，那么是它如何放置在容器中，就是IoC的注册阶段了。</p>
+<ul>
+<li>生成之后是如何放入IoC容器中，也就是上文生成的DefaultListableBeanFactory中？</li>
+</ul>
+<p>从上面可以看到，注册的最后一步的代码是：</p>
+<p><img src="https://s17.mogucdn.com/mlcdn/c45406/180112_80dk007e8aj5fiefi4l6d7ga6a6b8_952x328.png" alt="s11"><br><strong>在代码中使用BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());其实这里的getRegistry()返回的就是XmlReaderContext的BeanDefinitionRegistry。</strong></p>
+<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_442j50icli8jfda4c6el6k5e5jh8c_1104x820.png" alt="s12"></p>
+<p><strong>而在2中创建的DefaultListableBeanFactory实现了BeanDefinitionRegistry接口，而这里的BeanDefinitionRegistry就是DefaultListableBeanFactory的BeanDefinitionRegistry，而具体实现代码是在DefaultListableBeanFactory类中，具体实现如下:</strong><br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_781dkljdl5kj02kga9llc0fi9ea10_951x363.png" alt="s13"><br><img src="https://s11.mogucdn.com/mlcdn/c45406/180112_00akad62jgg040eg156id1a462cdd_1360x477.png" alt="s14"><br><strong>在这里可以确认这里的registry就是DefaultListableBeanFactory，而调用注册的方法registerBeanDefinition()就是DefaultListableBeanFactory自己实现的，可以在DefaultListableBeanFactory找到该方法：</strong><br><img src="https://s11.mogucdn.com/mlcdn/c45406/180112_6agkd809ilb8d4013093lad6h01cg_1378x856.png" alt="s16"><br><strong>可以看到，它实际上是将BeanDefinition放入一个beanDefinitionMap里面,将bean的name做key，value是BeanDefinition的方式进行存储。存储的Map实际上就是DefaultListableBeanFactory的一个成员变量，定义如下：</strong><br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_2c23f382g9d535c1afbc3j97ci3jf_1193x469.png" alt="s16"></p>
 
           
         
@@ -476,7 +442,7 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -522,7 +488,7 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

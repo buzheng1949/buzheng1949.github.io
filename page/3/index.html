@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/SpringIoc-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/invocation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yupeibiao">
@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/11/SpringIoc-2/" itemprop="url">Spring IoC之旅（二）</a></h1>
+                <a class="post-title-link" href="/2018/01/12/invocation/" itemprop="url">Java动态代理</a></h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T23:53:12+08:00">
-                2018-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T20:55:47+08:00">
+                2018-01-12
               </time>
             
 
@@ -306,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -345,64 +345,21 @@
       
         
           
-            <h3 id="一、IoC容器的初始化过程"><a href="#一、IoC容器的初始化过程" class="headerlink" title="一、IoC容器的初始化过程"></a>一、IoC容器的初始化过程</h3><h4 id="1、IoC容器的流程"><a href="#1、IoC容器的流程" class="headerlink" title="1、IoC容器的流程"></a>1、IoC容器的流程</h4><p>前面已经分析过IoC容器的整体流程。</p>
+            <h4 id="一、动态代理"><a href="#一、动态代理" class="headerlink" title="一、动态代理"></a>一、动态代理</h4><p><strong>动态代理指的是在运行的时候动态生成代理类。生成动态代理的方式有很多，比如Java动态代理，Spring中的cglib库等等。</strong></p>
+<h4 id="二、动态代理例子"><a href="#二、动态代理例子" class="headerlink" title="二、动态代理例子"></a>二、动态代理例子</h4><p>假如我们有一个接口类Car,代码实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by buzheng on 18/1/12.</span><br><span class="line"> * 接口类</span><br><span class="line"> */</span><br><span class="line">public interface Car &#123;</span><br><span class="line">    public void run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时我们有一个Minicooper类实现了Car接口，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by buzheng on 18/1/12.</span><br><span class="line"> */</span><br><span class="line">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">public class Minicooper implements Car &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(&quot;minicooper is running&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Java动态代理中，生成代理需要实现InvocationHandler，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by buzheng on 18/1/12.</span><br><span class="line"> */</span><br><span class="line">public class DynamicProxy  implements InvocationHandler &#123;</span><br><span class="line">    private Object target;</span><br><span class="line"></span><br><span class="line">    public DynamicProxy(Object target) &#123;</span><br><span class="line">        this.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //生成代理对象</span><br><span class="line">    public  &lt;T&gt; T getProxy() &#123;</span><br><span class="line">        return (T) Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        //在代理类最终调用的方法前后增加日志</span><br><span class="line">        System.out.println(&quot;the car is running&quot;);</span><br><span class="line">        method.invoke(target,args);</span><br><span class="line">        System.out.println(&quot;the car is end running&quot;);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Car minicooper = new Minicooper();</span><br><span class="line">        DynamicProxy dynamicProxy = new DynamicProxy(minicooper);</span><br><span class="line">        Car proxyMinicooper = dynamicProxy.getProxy();</span><br><span class="line">        proxyMinicooper.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行main方法，可以看到输出结果如下图:<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_1b37b94a9ga6ag5ji123ji6l7jlc0_949x260.png" alt="输出"></p>
 <ul>
-<li><p><strong>第一阶段(载入阶段)</strong></p>
-<ul>
-<li><p><strong>寻址：寻找配置文件地址并转成Resource。</strong></p>
-<p>Resource的定位指的是BeanDefinition的定位，也就是需要被注册成bean的资源的定位，比如在XML中进行bean的配置的资源定位。 Resource的定位通过ResourceLoader进行定位。不同的Resource可以由不同的ResourceLoader的不同实现进行加载。</p>
-<blockquote>
-<p>如果你有一个容纳金币的金库，需要将进行寻找钱（配置文件），不同的钱的寻找方式不同，需要去不同的国家获取。只要是想要把容器填满，就需要进行找到根源。</p>
-</blockquote>
-</li>
-<li><p><strong>加载：将Resource进行加载，解析成BeanFactory容器的bean的数据结构BeanDefinition</strong></p>
-<p> 加载阶段指的是将Resource文件里面的bean信息表示成IoC统一管理的数据格式，而这种数据格式就是BeanDefinition。BeanDefinition实际上就是将Bean信息进行抽象的数据结构。</p>
-<blockquote>
-<p>当你有人民币、美元等等钱找到了之后，为了方便容器管理，你需要将不同的货币转换成一个统一的管理方式，就是金币（BeanDefinition）。</p>
-</blockquote>
-</li>
-<li><p><strong>注册：将BeanDefinition进行注册到IoC容器中</strong></p>
-<p>将BeanDefinition进行注册，存放在一个HashMap中。</p>
-</li>
+<li>Car：首先定义了一个接口以及接口实现类</li>
+<li>Proxy：通过Proxy可以生成一个代理对象。在获取代理对象的Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)方法中，loader指的是需要被代理的类的ClassLoader，interfaces是需要被代理的类的接口，而h是InvocationHandler，动态代理对象调用方法的时候，要发送到哪个InvocationHandler上。</li>
+<li>InvocationHandler：InvocationHandler只有一个接口，就是Object invoke(Object proxy, Method method, Object[] args)方法，是代理类方法的真正执行的地方。proxy是调用的真实对象。method，我们调用的真实对象的方法。args，要调用真实对象的方法时接受的参数。</li>
 </ul>
-</li>
-<li><p><strong>第二阶段(依赖注入阶段)</strong></p>
-<p>从上面的第一阶段，载入阶段已经完成了用户配置的bean信息被存放在IoC容器中。那么接下来就是一个将容器中的bean信息转换为实际需要的Object了。<br>依赖注入一般发生在首次getBean()的操作发生的时候，由于bean的层层依赖，所以注入的方式也是使用递归的方式进行依赖注入。</p>
-</li>
-</ul>
-<h3 id="二、IoC容器载入阶段"><a href="#二、IoC容器载入阶段" class="headerlink" title="二、IoC容器载入阶段"></a>二、IoC容器载入阶段</h3><h4 id="1、寻址阶段"><a href="#1、寻址阶段" class="headerlink" title="1、寻址阶段"></a>1、寻址阶段</h4><p>  在寻址阶段，先看一下ApplicationContext的各种实现，可以看到实现有ClassPathXmlApplicationContext、FileSystemXmlApplicationContext等等多种实现，顾名思义就是不同的加载Resource的方式。</p>
-<blockquote>
-<p>写起来太复杂了 直接上图吧<br>  <img src="https://s3.mogucdn.com/mlcdn/c45406/180111_675jib0lch56hll4j95i430e6bhi6_990x618.png" alt="IoC容器寻址"></p>
-</blockquote>
-<h4 id="2、加载阶段"><a href="#2、加载阶段" class="headerlink" title="2、加载阶段"></a>2、加载阶段</h4><h5 id="2-1-加载阶段"><a href="#2-1-加载阶段" class="headerlink" title="2.1 加载阶段"></a>2.1 加载阶段</h5><p>为了方便起见，选择最常用的ApplicationContext的实现类FileSystemXmlApplicationContext进行分析。先看FileSystemXmlApplicationContext的构造函数，可以看到构造函数的定义如下：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_2hjgjagb940513ef745aagg31d4k0_1152x335.png" alt="构造函数"></p>
-<p>从上面的代码可以看到，FileSystemXmlApplicationContext是表示可以指定的XML配置文件中进行加载。在构造函数中调用了refresh()函数，该函数是加载Bean的主要入口。先来看一下方法的具体实现：</p>
-<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_0fa93903lbf0hhbi8c4f5bajd9abg_1344x901.png" alt="s2"></p>
-<p>再跟进来obtainFreshBeanFactory()方法的具体实现：</p>
-<p><img src="https://s17.mogucdn.com/mlcdn/c45406/180112_27f6883g5hi7feaeej41ebe9if9ha_867x240.png" alt="s3"></p>
-<p>在refreshBeanFactory方法中可以看到它的具体实现是在AbstractRefreshableApplicationContext中，而AbstractRefreshableApplicationContext又是继承自AbstractApplicationContext，如下图：</p>
-<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_08j68jfl48kkk5c9hi1kdg9h90bb3_1110x375.png" alt="s5"></p>
-<p><strong>可以看到refreshBeanFactory先创建了一个DefaultlistBeanFactory做为容器，调用了一个loadBeanDefinitions的方法进行bean的加载。再来看一下loadBeanDefinitions方法的实现。</strong><br><img src="https://s17.mogucdn.com/mlcdn/c45406/180112_7jdj80d73e08hdllc65lkel1chia0_1020x348.png" alt="s5"></p>
-<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_5c3fj9b7dkh23ilccchgagblg4ih3_982x346.png" alt="s6"></p>
-<p><strong>整理一下整体的流程思路：</strong></p>
-<ul>
-<li>首先通过refresh()方法触发IoC容器的加载过程。</li>
-<li>如果IoC容器已经创建就销毁（类似机器重启），然后重新创建一个DefaultListableBeanFactory作为容器。</li>
-<li>使用XmlBeanDefinitionReader与DefaultListableBeanFactory进行关联并加载beandefinitions。</li>
-</ul>
-<h5 id="2-2-如何加载BeanDefinition"><a href="#2-2-如何加载BeanDefinition" class="headerlink" title="2.2 如何加载BeanDefinition"></a>2.2 如何加载BeanDefinition</h5><p>  <strong>既然已经知道了整体的流程，那么配置文件是如何转换成IoC容器中的BeanDefinition的呢？</strong></p>
-<p>  顺着上面的最后一步，跟进来看到loadBeanDefinitions的具体实现：</p>
-<p>  <img src="https://s3.mogucdn.com/mlcdn/c45406/180112_8a2hkidcg8l0731i21i689b6kk4ce_1043x724.png" alt="s7"></p>
-<p>  从源代码可以发现<strong>loadBeanDefinitions</strong>实际上调用了<strong>doLoadBeanDefinitions</strong>方法：<br>  <img src="https://s3.mogucdn.com/mlcdn/c45406/180112_7h6a1gggallk23a7dbfl6h1g8j5c0_1041x613.png" alt="s8"></p>
-<p> <strong>继续往下看：</strong><br> <img src="https://s17.mogucdn.com/mlcdn/c45406/180112_88biee19hbj16i8514a4ejj086k00_912x298.png" alt="s9"></p>
-<p><strong>从上面可以看到将Resource的内容解析成BeanDefinition主要分两步，第一步是先把Resource转换成待会可被解析的Document，第二步是将XML文件中的bean信息进行获取并将其构建到BeanDefinitionHolder中并且生成BeanDefinition。</strong></p>
-<h4 id="3、注册阶段"><a href="#3、注册阶段" class="headerlink" title="3、注册阶段"></a>3、注册阶段</h4><p>在2中已经生成了BeanDefinition，那么是它如何放置在容器中，就是IoC的注册阶段了。</p>
-<ul>
-<li>生成之后是如何放入IoC容器中，也就是上文生成的DefaultListableBeanFactory中？</li>
-</ul>
-<p>从上面可以看到，注册的最后一步的代码是：</p>
-<p><img src="https://s17.mogucdn.com/mlcdn/c45406/180112_80dk007e8aj5fiefi4l6d7ga6a6b8_952x328.png" alt="s11"><br><strong>在代码中使用BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());其实这里的getRegistry()返回的就是XmlReaderContext的BeanDefinitionRegistry。</strong></p>
-<p><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_442j50icli8jfda4c6el6k5e5jh8c_1104x820.png" alt="s12"></p>
-<p><strong>而在2中创建的DefaultListableBeanFactory实现了BeanDefinitionRegistry接口，而这里的BeanDefinitionRegistry就是DefaultListableBeanFactory的BeanDefinitionRegistry，而具体实现代码是在DefaultListableBeanFactory类中，具体实现如下:</strong><br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_781dkljdl5kj02kga9llc0fi9ea10_951x363.png" alt="s13"><br><img src="https://s11.mogucdn.com/mlcdn/c45406/180112_00akad62jgg040eg156id1a462cdd_1360x477.png" alt="s14"><br><strong>在这里可以确认这里的registry就是DefaultListableBeanFactory，而调用注册的方法registerBeanDefinition()就是DefaultListableBeanFactory自己实现的，可以在DefaultListableBeanFactory找到该方法：</strong><br><img src="https://s11.mogucdn.com/mlcdn/c45406/180112_6agkd809ilb8d4013093lad6h01cg_1378x856.png" alt="s16"><br><strong>可以看到，它实际上是将BeanDefinition放入一个beanDefinitionMap里面,将bean的name做key，value是BeanDefinition的方式进行存储。存储的Map实际上就是DefaultListableBeanFactory的一个成员变量，定义如下：</strong><br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_2c23f382g9d535c1afbc3j97ci3jf_1193x469.png" alt="s16"></p>
+<h4 id="三、动态代理优缺点"><a href="#三、动态代理优缺点" class="headerlink" title="三、动态代理优缺点"></a>三、动态代理优缺点</h4><p>从上面可以看到，如果我们需要在方法执行的前后增加自定义的逻辑，做一些特殊的处理，比如记录日志等等都可以使用动态代理的方式。但是动态代理只支持接口层面，而无法做到类层面的动态代理。</p>
+<h4 id="四、动态代理处理流程"><a href="#四、动态代理处理流程" class="headerlink" title="四、动态代理处理流程"></a>四、动态代理处理流程</h4><p>接下来通过debug代码的方式，首先看一下代理类怎么生成，从我们的函数调用入口跟进去：<br><img src="https://s11.mogucdn.com/mlcdn/c45406/180112_59797kdg6fba5a3041311e39hjf5k_1149x474.png" alt="调用入口"><br>跟进来可以看到具体的实现如下图：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_3h7lg29daekk2c1ih7125gif8bfa0_1422x805.png" alt="代码具体细节"><br>可以看到实际上是通过反射的方式生成了一个实例，而这个实例的参数就是之前定义的InvocationHandler。<br>而在执行方法的时候，实际上执行的就是就是我们的InvocationHandler的invoke方法：<br><img src="https://s3.mogucdn.com/mlcdn/c45406/180112_5k7ffhke9eha7a6j15j174dl4l1c9_1297x250.png" alt="实际执行方法"></p>
 
           
         
@@ -442,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -488,7 +445,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
